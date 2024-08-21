@@ -11,7 +11,8 @@ class ExampleController extends Controller
      */
     public function index()
     {
-        return view('exampleCRUD.index');
+        return view('admin.dashboard.index');
+//        return view('exampleCRUD.index');
     }
 
     /**

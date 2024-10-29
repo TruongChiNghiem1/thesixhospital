@@ -8,7 +8,7 @@ function duplicate ($username, $id = null) {
 
     global $conn;
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':username',$username, PDO::PARAM_STR);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {

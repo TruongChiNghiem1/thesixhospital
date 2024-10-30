@@ -27,20 +27,20 @@
                 </div>
 
                 <div class="list-group mt-4">
-                    <a href="index.php?page=home" class="list-group-item list-group-item-action bg-dark text-light fs-4">
+                    <a href="BacSiDD.php?page=home" class="list-group-item list-group-item-action bg-dark text-light fs-4">
                         <i class="bi bi-house-fill fs-4"></i> Trang Chủ
                     </a>
-                    <a href="index.php?page=appointments"
+                    <a href="BacSiDD.php?page=appointments"
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="bi bi-calendar-check-fill"></i> Xem lịch hẹn tư vấn
                     </a>
-                    <a href="index.php?page=menu" class="list-group-item list-group-item-action bg-dark text-light">
+                    <a href="BacSiDD.php?page=menu" class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="bi bi-list-ul"></i> Quản lý thực đơn dinh dưỡng
                     </a>
-                    <a href="index.php?page=users" class="list-group-item list-group-item-action bg-dark text-light">
+                    <a href="BacSiDD.php?page=users" class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="bi bi-person-fill"></i> Quản lý thông tin bệnh nhân
                     </a>
-                    <a href="index.php?page=request" class="list-group-item list-group-item-action bg-dark text-light">
+                    <a href="BacSiDD.php?page=request" class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="bi bi-file-earmark-text-fill"></i> Gửi Đơn Xin Nghỉ/Công Tác
                     </a>
                 </div>
@@ -50,7 +50,7 @@
             <div class="col-md-9">
                 <header class="d-flex justify-content-between align-items-center bg-white text-dark p-3">
                     <div class="logo">
-                        <a href="index.php?page=home">
+                        <a href="BacSiDD.php?page=home">
                             <img src="..\assets\images\logo.jpg" alt="Logo" style="width: 80px; height: auto;">
                         </a>
                     </div>

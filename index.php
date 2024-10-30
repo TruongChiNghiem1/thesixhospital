@@ -23,10 +23,11 @@ if (!isset($_SESSION["admin"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
+    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
 
@@ -49,7 +50,8 @@ if (!isset($_SESSION["admin"])) {
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center" href="/thesixhospital/index.php">
+            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center"
+                href="/thesixhospital/index.php">
                 <span class="d-none d-sm-flex flex-shrink-0 text-primary rtl-flip me-2">
                     <img src="assets/images/logo.jpg" width="100px">
                 </span>
@@ -59,7 +61,8 @@ if (!isset($_SESSION["admin"])) {
                 <div class="offcanvas-body pt-2 pb-4 py-lg-0 mx-lg-auto">
                     <ul class="navbar-nav position-relative">
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link active" aria-current="page" href="/thesixhospital/index.php" about="">Trang chủ</a>
+                            <a class="nav-link active" aria-current="page" href="/thesixhospital/index.php"
+                                about="">Trang chủ</a>
                         </li>
                         <li class="nav-item dropdown position-static py-lg-2 me-lg-n1 me-xl-0">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
@@ -76,7 +79,7 @@ if (!isset($_SESSION["admin"])) {
                                 khỏe</a>
                         </li>
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link " href="/thesixhospital/index.php?m=service" >Dịch vụ</a>
+                            <a class="nav-link " href="/thesixhospital/index.php?m=service">Dịch vụ</a>
                         </li>
                     </ul>
                 </div>
@@ -94,7 +97,7 @@ if (!isset($_SESSION["admin"])) {
             </div>
 
             <div class="d-flex gap-sm-1 m-2">
-                <a class="btn btn-primary animate-scale mr-2" href="#">
+                <a class="btn btn-primary animate-scale mr-2" href="login.php">
                     <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
                 </a>
             </div>
@@ -197,9 +200,9 @@ if (!isset($_SESSION["admin"])) {
         </div>
     </footer>
 </body>
-<script src="/thesixhospital/assets/js/jquery-3.7.1.min.js"
-        crossorigin="anonymous"></script>
+<script src="/thesixhospital/assets/js/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
 <script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="assets/js/myscript.js"></script>
+
 </html>

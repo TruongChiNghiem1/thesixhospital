@@ -26,10 +26,10 @@
                                      
                         
                     <div class="list-group b4-bordor mt-3">
-                        <a href="index.php" class="list-group-item list-group-item-action">Dashboard</a>
-                        <a href="Add.php" class="list-group-item list-group-item-action">Personnel Management</a>
-                        <a href="index.php" class="list-group-item list-group-item-action">Schedule</a>
-                        <a href="index.php" class="list-group-item list-group-item-action">Approve leave</a>
+                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Trang chủ</a>
+                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>
+                        <a href="../view/view_schedule.php"  class="list-group-item list-group-item-action">Phân lịch ca trực</a>
+                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Duyệt đơn nghỉ phép</a>
                     </div>
 
 
@@ -54,12 +54,50 @@
                         </thead>
                         <tbody>
                             <tr class="">
-                                <td style="border: 2px solid #ffff;">Personnel Management</td>
+                                <td style="border: 2px solid #ffff;">Thêm nhân sự</td>
                             </tr>
                             <tr>
-                                <?php
-                                include_once("../view/admin.php")
-                                ?>
+                            <div class="container">
+        <form action="#" method="post" enctype="multipart/form-data">
+            <table class="table table-bordered">
+                <tr>
+                    <td><label for="txtUserID">Mã nhân viên</label></td>
+                    <td><input type="text" name="txtUserID" class="form-control" placeholder="Mã nhân viên" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtHoTen">Họ và tên</label></td>
+                    <td><input type="text" name="txtHoTen" class="form-control" placeholder="Họ và tên" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtEmail">Email</label></td>
+                    <td><input type="email" name="txtEmail" class="form-control" placeholder="Email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtSDT">Số điện thoại</label></td>
+                    <td><input type="text" name="txtSDT" class="form-control" placeholder="Số điện thoại" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtNgaySinh">Ngày sinh</label></td>
+                    <td><input type="date" name="txtNgaySinh" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="chonChucVu">Chức vụ</label></td>
+                    <td>
+                        <select name="chonChucVu" class="form-control">
+                            <?php
+                                include_once("optionChucVu.php");
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="btnSubmit" class="btn btn-primary" value="Lưu">
+                    </td>
+                </tr>
+            </table>
+        </form>
                             </tr>
                         </tbody>
                     </table>

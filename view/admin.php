@@ -1,5 +1,5 @@
 <?php 
-    include_once("../modules/admin/list.php");
+    include_once("../controller/admin/list.php");
 
     $p = new selectInfomationBS();
 
@@ -10,10 +10,10 @@
             echo "<table class='table' border='1'>";
             echo "<tr>";
             echo "<th>ID</th>";
-            echo "<th>Name</th>";
-            echo "<th>Phone</th>";
+            echo "<th>Tên</th>";
+            echo "<th>Số điện thoại</th>";
             echo "<th>Email</th>";
-            echo "<th>Action</th>";
+            echo "<th>Hoạt động</th>";
             echo "</tr>";
             while($row = mysqli_fetch_array($result)){
                 echo "<tr>";
@@ -23,8 +23,7 @@
                 echo "<td>" . $row['email'] . "</td>";
 
                 echo"<td>
-                        <button id='btn-view' type='button' class='btn btn-outline-primary'>View</button>
-                        <button id='btn-add' type='button' class='btn btn-outline-primary'>Add</button>
+                        <a href='index.php?action=hrm&view=nhanVien&id=".$row['id']."'><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
                         <button id='btn-rm' type='button' class='btn btn-outline-primary'>Remove</button>
                     </td>";
                 echo "</tr>";
@@ -35,6 +34,7 @@
         else {
             echo "No records matching your query were found.";
         }
+        
     }
         
 ?>

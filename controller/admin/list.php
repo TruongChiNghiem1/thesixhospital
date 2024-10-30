@@ -7,5 +7,11 @@
             $result = $p->selectInfomationBS();
             return $result;
         }
+
+        function selectIDInfomationBS($id){
+            $p = new modalAdmin();
+            $result = $p->selectIDInfomationBS($id);
+            return $result;
+        }
     }
 ?>

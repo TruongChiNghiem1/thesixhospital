@@ -12,6 +12,9 @@ require_once 'config/functional.php';
 if (!isset($_SESSION["admin"])) {
     header("location:login.php");
     exit();
+} else if(isset($_GET["m"]) && $_GET["m"] == 'admin') {
+    header("Location:adminIndex.php");
+    exit();
 }
 
 ?>
@@ -178,6 +181,7 @@ if (!isset($_SESSION["admin"])) {
                 case 'service':
                     include 'modules/service/index.php';
                     break;
+
                 default:
                     include 'modules/dashboard/index.php';
             }

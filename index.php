@@ -26,11 +26,8 @@ if (!isset($_SESSION["admin"])) {
     <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
     <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/theme.min.css" id="theme-styles">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
 </head>
 
@@ -47,7 +44,7 @@ if (!isset($_SESSION["admin"])) {
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center" href="index.php">
+            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center" href="/thesixhospital/index.php">
                 <span class="d-none d-sm-flex flex-shrink-0 text-primary rtl-flip me-2">
                     <img src="assets/images/logo.jpg" width="100px">
                 </span>
@@ -57,8 +54,7 @@ if (!isset($_SESSION["admin"])) {
                 <div class="offcanvas-body pt-2 pb-4 py-lg-0 mx-lg-auto">
                     <ul class="navbar-nav position-relative">
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link active" aria-current="page" href="#" role="button"
-                                data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Trang chủ</a>
+                            <a class="nav-link active" aria-current="page" href="/thesixhospital/index.php" about="">Trang chủ</a>
                         </li>
                         <li class="nav-item dropdown position-static py-lg-2 me-lg-n1 me-xl-0">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
@@ -75,14 +71,13 @@ if (!isset($_SESSION["admin"])) {
                                 khỏe</a>
                         </li>
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
-                                data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">Dịch vụ</a>
+                            <a class="nav-link " href="/thesixhospital/index.php?m=service" >Dịch vụ</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <div class="d-flex gap-sm-1">
+            <div class="d-flex gap-sm-1 m-2">
                 <a class="btn btn-primary animate-scale mr-2" href="#">
                     <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
                 </a>
@@ -126,7 +121,7 @@ if (!isset($_SESSION["admin"])) {
     </div>
 
     <!-- Page footer -->
-    <footer class="footer bg-body border-top" data-bs-theme="dark">
+    <footer class="footer bg-body border-top mt-5" data-bs-theme="dark">
         <div class="container pb-md-2">
             <div class="d-md-flex align-items-center py-4 pt-sm-5 mt-3 mt-sm-0">
                 <div class="d-flex gap-2 gap-sm-3 justify-content-center ms-md-auto mb-4 mb-md-0 order-md-2">
@@ -137,11 +132,10 @@ if (!isset($_SESSION["admin"])) {
             </div>
         </div>
     </footer>
-
 </body>
-<script src="/thesixhospital/assets/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+<script src="/thesixhospital/assets/js/jquery-3.7.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="assets/js/myscript.js"></script>
-
 </html>

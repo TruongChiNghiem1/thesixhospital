@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once 'config/app.php';
 require_once 'config/connect.php';
@@ -35,6 +35,7 @@ if (isset($_POST["login"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,22 +44,23 @@ if (isset($_POST["login"])) {
     <link rel="stylesheet" href="assets/css/style.css">
     <script type="text/javascript" src="assets/js/myscript.js"></script>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="header"></div>
 
         <div class="content">
-        <h1 class="title">Login</h1>
+            <h1 class="title">Login</h1>
 
-        <?php if (!empty($errors)) { ?>
-        <div class="error">
-            <?php 
-            foreach ($errors as $errors) {
-                echo "<li>$errors</li>";
-            } 
-            ?>
-        </div>
-        <?php } ?>
+            <?php if (!empty($errors)) { ?>
+            <div class="error">
+                <?php
+                    foreach ($errors as $errors) {
+                        echo "<li>$errors</li>";
+                    }
+                    ?>
+            </div>
+            <?php } ?>
 
             <form action="" method="post">
                 <table>
@@ -81,4 +83,5 @@ if (isset($_POST["login"])) {
         <div class="footer"></div>
     </div>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 .container {
-<<<<<<< HEAD
+
     display: flex;
     flex-wrap: wrap;
     height: 100vh;
@@ -55,11 +55,6 @@
 }
 
 
-=======
-  display: flex;
-  flex-wrap: wrap;
-  height: 100vh;
-}
 .menu {
   border-right: 1.5px solid rgb(235, 235, 235);
   width: 21%;
@@ -78,7 +73,7 @@
 
 .profile-title {
   font-weight: 500;
-  color: #161c2d;
+  color: white;
   font-size: 22px;
   margin: 0;
   text-align: left;
@@ -87,7 +82,7 @@
 
 .profile-subtitle {
   font-weight: 300;
-  color: #8492a6;
+  color: white;
   font-size: 15px;
   margin: 0;
   text-align: left;

@@ -4,32 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xem Lịch Hẹn Bệnh Nhân</title>
+    <title>Quản lý thông tin bệnh nhân</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <style>
         .table-responsive {
             margin-top: 20px;
         }
-
+        
         .badge-status {
             font-weight: bold;
         }
-
+        
         .badge-danger {
             background-color: #f44336;
             color: white;
         }
-
+        
         .badge-success {
             background-color: #4caf50;
             color: white;
         }
-
+        
         .hidden {
             display: none;
         }
-
+        
         .dropdown-menu {
             min-width: 200px;
         }
@@ -40,17 +40,6 @@
 
     <div class="container mt-5">
         <h1 class="text-center">Quản lý thông tin bệnh nhân</h1>
-
-        <!-- <div class="row mb-4">
-            <div class="col-md-6">
-                <label for="fromDate">Từ ngày:</label>
-                <input type="date" class="form-control" id="fromDate">
-            </div>
-            <div class="col-md-6">
-                <label for="toDate">Đến ngày:</label>
-                <input type="date" class="form-control" id="toDate">
-            </div>
-        </div> -->
 
         <div class="table-responsive">
             <table class="table table-bordered" id="appointmentTable">
@@ -83,8 +72,8 @@
                                     <i class="bi bi-three-dots"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Xem hồ sơ bệnh án</a>
-                                    <a class="dropdown-item" href="#">Thêm thực đơn dinh dưỡng</a>
+                                    <a class="dropdown-item" href="index.php?page=medical_records">Xem hồ sơ bệnh án</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addNutritionMenuModal">Thêm thực đơn dinh dưỡng cho bệnh nhân</a>
                                 </div>
                             </div>
                         </td>
@@ -100,14 +89,14 @@
                         <td>Bắc Kinh</td>
                         <td>
                             <div class="dropdown">
-                            <button class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                                 <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#">Xem hồ sơ bệnh án</a>
-                                    <a class="dropdown-item" href="#">Thêm thực đơn dinh dưỡng</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addNutritionMenuModal">Thêm thực đơn dinh dưỡng</a>
                                 </div>
                             </div>
                         </td>
@@ -132,10 +121,42 @@
         </div>
     </div>
 
+    <!-- Nutrition Menu Modal -->
+    <div class="modal fade" id="addNutritionMenuModal" tabindex="-1" role="dialog" aria-labelledby="addNutritionMenuModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNutritionMenuModalLabel">Thêm thực đơn dinh dưỡng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form nội dung thêm thực đơn -->
+                    <form>
+                        <div class="form-group">
+                            <label for="menuName">Mã thực đơn</label>
+                            <input type="text" class="form-control" id="menuName" placeholder="Nhập tên thực đơn">
+                        </div>
+                        <div class="form-group">
+                            <label for="menuDescription">Mô tả</label>
+                            <textarea class="form-control" id="menuDescription" rows="3" placeholder="Nhập mô tả thực đơn"></textarea>
+                        </div>
+                        <!-- Thêm các trường nhập khác nếu cần -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thực đơn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
     <script>
         let currentPage = 0;
         const rowsPerPage = 5;

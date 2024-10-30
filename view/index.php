@@ -85,6 +85,9 @@
                         case 'request':
                             include 'submit_request.php';
                             break;
+                        case 'medical_records':
+                            include 'vMedical_Records.php';
+                            break;
                         default:
                             include 'dashboard.php';
                             break;

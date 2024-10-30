@@ -72,7 +72,7 @@
                                     <i class="bi bi-three-dots"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="index.php?page=medical_records">Xem hồ sơ bệnh án</a>
+                                    <a class="dropdown-item" href="BacSiDD.php?page=medical_records">Xem hồ sơ bệnh án</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addNutritionMenuModal">Thêm thực đơn dinh dưỡng cho bệnh nhân</a>
                                 </div>
                             </div>

@@ -26,6 +26,7 @@ if (!isset($_SESSION["admin"])) {
     <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
     <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
+    <link rel="stylesheet" href="/thesixhospital/assets/css/dataTables.bootstrap5.css" id="theme-styles">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="/thesixhospital/assets/css/styleAdminService.css" id="theme-styles">
@@ -72,7 +73,7 @@ if (!isset($_SESSION["admin"])) {
 
             </div>
         </div>
-        <div class="col py-3 border-5 bg-color-main h-100vh">
+        <div class="col py-3 border-5 bg-color-main h-100">
             <div class="content">
                 <div class="p-3 bg-white border-main">
                     <div class="d-flex justify-content-end align-items-center">
@@ -103,14 +104,8 @@ if (!isset($_SESSION["admin"])) {
                         case 'list':
                             include 'modules/adminService/list.php';
                             break;
-                        case 'product':
-                            include 'modules/product/index.php';
-                            break;
-                        case 'user':
-                            include 'modules/user/index.php';
-                            break;
-                        case 'service':
-                            include 'modules/service/index.php';
+                        case 'create':
+                            include 'modules/adminService/create.php';
                             break;
                         default:
                             include 'modules/dashboard/index.php';
@@ -127,9 +122,9 @@ if (!isset($_SESSION["admin"])) {
 
 
 </body>
-<script src="/thesixhospital/assets/js/jquery-3.7.1.min.js"
-        crossorigin="anonymous"></script>
-<script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-</script>
+<script src="/thesixhospital/assets/js/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+<script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="/thesixhospital/assets/js/dataTables.js"></script>
+<script src="/thesixhospital/assets/js/dataTables.bootstrap5.js"></script>
 <script type="text/javascript" src="assets/js/myscript.js"></script>
 </html>

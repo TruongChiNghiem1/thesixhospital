@@ -122,7 +122,48 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary">Tiếp tục</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDatLich">Tiếp tục</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalDatLich" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chọn ngày lịch khám dịch vụ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group mb-3">
+                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn bác sĩ</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Chọn bác sĩ</option>
+                                        <option value="1">Trương Chí Nghiệm</option>
+                                        <option value="2">Cao Thanh Việt</option>
+                                        <option value="3">Nguyễn Nhật Tùng</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn ngày khám <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0123456789...">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn thời gian <span class="text-danger">*</span></label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Chọn thời gian</option>
+                                        <option value="1">Buổi sáng </option>
+                                        <option value="2">Buổi chiều</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="hideModalThongTin">Đóng</button>
+                            <button type="button" class="btn btn-primary">Đặt lịch</button>
                         </div>
                     </div>
                 </div>

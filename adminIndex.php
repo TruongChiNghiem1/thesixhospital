@@ -61,11 +61,11 @@ if (!isset($_SESSION["admin"])) {
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100 d-flex align-items-center ms-3">
                                 <img src="/thesixhospital/assets/images/service/completed-task.png" width="25px" class="me-2">
-                                <a href="#" class="nav-link px-0 color-text-menu">Danh sách dịch vụ</a>
+                                <a href="/thesixhospital/adminIndex.php?m=services&a=list" class="nav-link px-0 color-text-menu">Danh sách dịch vụ</a>
                             </li>
                             <li class="w-100 d-flex align-items-center ms-3">
                                 <img src="/thesixhospital/assets/images/service/schedule.png" width="25px" class="me-2">
-                                <a href="#" class="nav-link px-0 color-text-menu">Lịch đặt dịch vụ</a>
+                                <a href="/thesixhospital/adminIndex.php?m=services&a=list-calendar" class="nav-link px-0 color-text-menu">Lịch đặt dịch vụ</a>
                             </li>
                         </ul>
                     </li>
@@ -101,11 +101,23 @@ if (!isset($_SESSION["admin"])) {
                     $m = $_GET["m"];
 
                     switch ($m) {
-                        case 'list':
-                            include 'modules/adminService/list.php';
-                            break;
-                        case 'create':
-                            include 'modules/adminService/create.php';
+                        case 'services':
+                            if (isset($_GET["a"])) {
+                                $a = $_GET["a"];
+                                switch ($a) {
+                                    case 'list':
+                                        include 'modules/adminService/list.php';
+                                        break;
+                                    case 'create':
+                                        include 'modules/adminService/create.php';
+                                        break;
+                                    case 'list-calendar':
+                                        include 'modules/adminService/listCalendar.php';
+                                        break;
+                                    default:
+                                        include 'modules/adminService/list.php';
+                                }
+                            }
                             break;
                         default:
                             include 'modules/dashboard/index.php';

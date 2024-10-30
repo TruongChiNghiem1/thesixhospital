@@ -1,5 +1,9 @@
 <?php
 //echo phpinfo();
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
 session_start();
 require_once 'config/app.php';
 require_once 'config/connect.php';
@@ -19,6 +23,8 @@ if (!isset($_SESSION["admin"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="/thesixhospital/assets/css/theme.min.css" id="theme-styles">
@@ -41,7 +47,7 @@ if (!isset($_SESSION["admin"])) {
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0" href="index.php">
+            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center" href="index.php">
                 <span class="d-none d-sm-flex flex-shrink-0 text-primary rtl-flip me-2">
                     <img src="assets/images/logo.jpg" width="100px">
                 </span>
@@ -77,7 +83,7 @@ if (!isset($_SESSION["admin"])) {
             </nav>
 
             <div class="d-flex gap-sm-1">
-                <a class="btn btn-primary animate-scale" href="#">
+                <a class="btn btn-primary animate-scale mr-2" href="#">
                     <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
                 </a>
             </div>
@@ -106,6 +112,9 @@ if (!isset($_SESSION["admin"])) {
                     break;
                 case 'user':
                     include 'modules/user/index.php';
+                    break;
+                case 'service':
+                    include 'modules/service/index.php';
                     break;
                 default:
                     include 'modules/dashboard/index.php';

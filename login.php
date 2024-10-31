@@ -1,38 +1,3 @@
-<?php
-session_start();
-require_once 'config/app.php';
-require_once 'config/connect.php';
-
-$errors = array();
-
-if (isset($_POST["login"])) {
-    if (empty($_POST["username"])) {
-        $errors[] = "Please enter username";
-    }
-
-    if (empty($_POST["password"])) {
-        $errors[] = "Please enter password";
-    }
-
-    if (empty($errors)) {
-        $username = $_POST["username"];
-        $password = md5($_POST["password"]);
-
-        $stmt = $conn->prepare("SELECT * FROM user WHERE username = :username AND password = :password AND level = 1");
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-        $stmt->execute();
-        if ($stmt->rowCount() == 1) {
-            $_SESSION["admin"] = $username;
-            header("location:index.php");
-            exit();
-        } else {
-            $errors[] = "Member doesn't exist or you aren't admin";
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,7 +74,6 @@ if (isset($_POST["login"])) {
                 </tr>
                 </form>
             </table>
-
         </div>
     </center>
 </body>

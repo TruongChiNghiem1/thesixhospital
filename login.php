@@ -8,14 +8,19 @@
     <link rel="stylesheet" href="/thesixhospital/assets/css/animations.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/main.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/login.css">
-
     <title>Đăng nhập</title>
-
-
-
 </head>
 
 <body>
+    <?php if (!empty($errors)) { ?>
+        <div class="error">
+            <?php
+            foreach ($errors as $errors) {
+                echo "<li>$errors</li>";
+            }
+            ?>
+        </div>
+    <?php } ?>
     <center>
         <div class="container">
             <table border="0" style="margin: 0;padding: 0;width: 60%;">
@@ -25,40 +30,39 @@
                     </td>
                 </tr>
                 <div class="form-body">
-
-                    <tr>
-                        <form action="" method="POST">
+                    <form action="" method="POST">
+                        <tr>
                             <td class="label-td">
-                                <label for="useremail" class="form-label">Email: </label>
+                                <label for="username" class="form-label">Email: </label>
                             </td>
-                    </tr>
-                    <tr>
-                        <td class="label-td">
-                            <input type="email" name="useremail" class="input-text" placeholder="Nhập email" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-td">
-                            <label for="userpassword" class="form-label">Mật khẩu: </label>
-                        </td>
-                    </tr>
+                        </tr>
+                        <tr>
+                            <td class="label-td">
+                                <input type="text" name="username" class="input-text" placeholder="Nhập email" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-td">
+                                <label for="password" class="form-label">Mật khẩu: </label>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td class="label-td">
-                            <input type="Password" name="userpassword" class="input-text" placeholder="Nhập mật khẩu"
-                                required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><br>
+                        <tr>
+                            <td class="label-td">
+                                <input type="password" name="password" class="input-text" placeholder="Nhập mật khẩu"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><br>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" value="Đăng nhập" class="login-btn btn-primary btn">
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" name="login" value="Đăng nhập">
+                            </td>
+                        </tr>
                 </div>
                 <tr>
                     <td>
@@ -70,7 +74,6 @@
                 </tr>
                 </form>
             </table>
-
         </div>
     </center>
 </body>

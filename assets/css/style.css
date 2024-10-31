@@ -78,6 +78,7 @@ h1.title {
   font-weight: bold;
   color: #009879;
 }
+<<<<<<< HEAD
 /* Bác sĩ sức khỏe */
 /* Vide call */
 .video-container {
@@ -101,4 +102,11 @@ h1.title {
 }
 .btn {
   background-color: rgba(255, 255, 255, 0.8);
+=======
+
+
+/*Nghiem*/
+.h_400px{
+  height: 400px;
+>>>>>>> 4129e64d176ff5d8e02e9e7588996ecc4b89e946
 }

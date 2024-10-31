@@ -13,7 +13,7 @@
                             </div>
                             <hr class="d-sm-none m-0">
                         </div>
-                        <button type="submit" class="btn btn-lg btn-primary">Tìm kiếm</button>
+                        <button type="submit" class="btn btn-lg btn-primary fs-6 w-25">Tìm kiếm</button>
                     </div>
                 </form>
 

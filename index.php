@@ -2,13 +2,13 @@
 //echo phpinfo();
 session_start();
 require_once 'config/app.php';
-require_once 'config/connect.php';
-require_once 'config/functional.php';
+//require_once 'config/connect.php';
+//require_once 'config/functional.php';
 
-if (!isset($_SESSION["admin"])) {
-    header("location:login.php");
-    exit();
-}
+//if (!isset($_SESSION["admin"])) {
+ //   header("location:login.php");
+  //  exit();
+//
 
 ?>
 
@@ -25,7 +25,8 @@ if (!isset($_SESSION["admin"])) {
     <link rel="stylesheet" href="/thesixhospital/assets/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
+        <link rel="stylesheet" href="/thesixhospital/assets/css/style.css?v=2" id="theme-styles">
+
 </head>
 
 <body>
@@ -106,6 +107,9 @@ if (!isset($_SESSION["admin"])) {
                     break;
                 case 'user':
                     include 'modules/user/index.php';
+                    break;
+                case 'doctor':
+                    include 'modules/doctor/index.php';
                     break;
                 default:
                     include 'modules/dashboard/index.php';

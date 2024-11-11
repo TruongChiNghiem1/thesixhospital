@@ -17,6 +17,7 @@
             <tr>
                 <th class="text-center">Mã lịch</th>
                 <th>Tên bệnh nhân</th>
+                <th>Số điện thoại</th>
                 <th>Dịch vụ khám</th>
                 <th>Tổng</th>
                 <th>Ngày khám</th>
@@ -29,7 +30,8 @@
             <?php for($i = 1; $i < 50; $i++) { ?>
                 <tr>
                     <td class="text-center"><?php echo $i ?></td>
-                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=create-calendar">Trương Chí Nghiệm <?php echo $i ?></a></td>
+                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=detail-calendar">Trương Chí Nghiệm <?php echo $i ?></a></td>
+                    <td>0859774418</td>
                     <td>Dịch vụ khám sức khỏe lái xe</td>
                     <td>250.000 VNĐ</td>
                     <td>31/10/2024</td>
@@ -37,6 +39,7 @@
                     <td><span class="text-danger">Đang chờ bác sĩ</span></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPhanCong<?php echo $i ?>">Phân công</button>
+                        <button type="button" class="btn btn-danger">Từ chối</button>
                     </td>
                 </tr>
 

@@ -159,6 +159,10 @@
                                         <option value="2">Buổi chiều</option>
                                     </select>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label class="d-flex mb-2" for="exampleInputEmail1">Ghi chú <span class="text-danger">*</span></label>
+                                    <textarea type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="10"></textarea>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">

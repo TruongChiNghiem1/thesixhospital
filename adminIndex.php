@@ -14,6 +14,7 @@ if (!isset($_SESSION["admin"])) {
     exit();
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -102,22 +103,7 @@ if (!isset($_SESSION["admin"])) {
 
                     switch ($m) {
                         case 'services':
-                            if (isset($_GET["a"])) {
-                                $a = $_GET["a"];
-                                switch ($a) {
-                                    case 'list':
-                                        include 'modules/adminService/list.php';
-                                        break;
-                                    case 'create':
-                                        include 'modules/adminService/create.php';
-                                        break;
-                                    case 'list-calendar':
-                                        include 'modules/adminService/listCalendar.php';
-                                        break;
-                                    default:
-                                        include 'modules/adminService/list.php';
-                                }
-                            }
+                            include 'modules/adminService/index.php';
                             break;
                         default:
                             include 'modules/dashboard/index.php';

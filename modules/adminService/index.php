@@ -1,23 +1,23 @@
-<?php 
-include 'model/user.php';
+<?php
+//include 'model/adminService.php';
 
 if (isset($_GET["a"])) {
     $a = $_GET["a"];
-
     switch ($a) {
-        case 'detail':
-            include 'modules/service/detail.php';
+        case 'list':
+            include 'modules/adminService/list.php';
             break;
-        case 'edit':
-            include 'modules/service/edit.php';
+        case 'create':
+            include 'modules/adminService/create.php';
             break;
-        case 'delete':
-            include 'modules/service/delete.php';
+        case 'list-calendar':
+            include 'modules/adminService/listCalendar.php';
+            break;
+        case 'detail-calendar':
+            include 'modules/adminService/detailCalendar.php';
             break;
         default:
-            include 'modules/service/list.php';
+            include 'modules/adminService/list.php';
     }
-} else {
-    include 'modules/service/list.php';
 }
 ?>

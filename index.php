@@ -29,15 +29,9 @@ if (!isset($_SESSION["admin"])) {
     <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
 </head>
 
 <body>
@@ -87,11 +81,11 @@ if (!isset($_SESSION["admin"])) {
                     </ul>
                 </div>
             </nav>
-            <div class="d-flex gap-sm-1 p-2">
-                <a class="" href="/thesixhospital/modules/patient/profile.php">
-                    <i class="fa-solid fa-user btn"></i>
-                </a>
-            </div>
+<!--            <div class="d-flex gap-sm-1 p-2">-->
+<!--                <a class="" href="/thesixhospital/modules/patient/profile.php">-->
+<!--                    <i class="fa-solid fa-user btn"></i>-->
+<!--                </a>-->
+<!--            </div>-->
             <div class="d-flex gap-sm-1 p-2">
                 <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal" href="#">
                     <span class="d-none d-xl-inline ms-1">Đặt
@@ -99,12 +93,31 @@ if (!isset($_SESSION["admin"])) {
                 </a>
             </div>
 
-            <div class="d-flex gap-sm-1 m-2">
-                <a class="btn btn-primary animate-scale mr-2" href="login.php">
-                    <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
-                </a>
-            </div>
+            <?php
+            if (isset($_SESSION["admin"])) {
+            ?>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user btn"></i>
+                    </button>
 
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/thesixhospital/modules/patient/profile.php">Tài khoản của tôi</a></li>
+                        <li><a class="dropdown-item" href="/thesixhospital/adminIndex.php?m=services&a=list">Trang quản trị</a></li>
+                        <li><a class="dropdown-item text-danger" href="logout.php">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="d-flex gap-sm-1 m-2">
+                    <a class="btn btn-primary animate-scale mr-2" href="login.php">
+                        <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
+                    </a>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </header>
     <div class="modal fade" id="myModal">

@@ -2,7 +2,7 @@
 // Lấy danh sách dịch vụ từ cơ sở dữ liệu
 function get_services() {
 global $conn;
-$stmt = $conn->prepare("SELECT * FROM service ORDER BY created_at DESC");
+$stmt = $conn->prepare("SELECT * FROM dich_vu ORDER BY created_at DESC");
 $stmt->execute();
 return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -45,14 +45,14 @@ $services = get_services();
             <tbody>
             <?php foreach ($services as $service) { ?>
                 <tr>
-                    <td class="text-center"><?php echo $service['id']; ?></td>
-                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=detail&id=<?php echo $service['id']; ?>"><?php echo $service['name']; ?></a></td>
-                    <td><?php echo number_format($service['original_price'], 0, ',', '.') . ' VNĐ'; ?></td>
-                    <td><?php echo number_format($service['discount_price'], 0, ',', '.') . ' VNĐ'; ?></td>
+                    <td class="text-center"><?php echo $service['id_dich_vu']; ?></td>
+                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=detail&id=<?php echo $service['id_dich_vu']; ?>"><?php echo $service['ten_dich_vu']; ?></a></td>
+                    <td><?php echo number_format($service['gia_goc'], 0, ',', '.') . ' VNĐ'; ?></td>
+                    <td><?php echo number_format($service['gia_giam'], 0, ',', '.') . ' VNĐ'; ?></td>
                     <td><?php echo date('d/m/Y', strtotime($service['created_at'])); ?></td>
                     <td class="text-center">
-                        <a href="/thesixhospital/adminIndex.php?m=services&a=edit&id=<?php echo $service['id']; ?>" class="btn btn-warning">Sửa</a>
-                        <button type="button" class="btn btn-danger" onclick="confirmDelete(<?php echo $service['id']; ?>)">Xóa</button>
+                        <a href="/thesixhospital/adminIndex.php?m=services&a=edit&id=<?php echo $service['id_dich_vu']; ?>" class="btn btn-warning">Sửa</a>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete(<?php echo $service['id_dich_vu']; ?>)">Xóa</button>
                     </td>
                 </tr>
             <?php } ?>

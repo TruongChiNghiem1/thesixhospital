@@ -86,15 +86,11 @@ if (isset($_POST["create"])) {
                     <button type="submit" class="btn btn-primary" name="create">Lưu <i class="fa-solid fa-floppy-disk ms-2"></i></button>
                 </div>
                 <?php if (!empty($errors)) { ?>
-                    <div class="error text-danger mb-3">
-                        <ul>
-                            <?php
-                            foreach ($errors as $error) {
-                                echo "<li>$error</li>";
-                            }
-                            ?>
-                        </ul>
-                    </div>
+                    <?php
+                    foreach ($errors as $error) {
+                        echo "<div class='alert alert-danger' role='alert'>$error</div>";
+                    }
+                    ?>
                 <?php } ?>
                 <div class="form-group mb-3">
                     <label class="d-flex mb-2" for="ten_dich_vu">Tên dịch vụ <span class="text-danger">*</span></label>
@@ -129,24 +125,5 @@ if (isset($_POST["create"])) {
 </div>
 
 <?php
-function duplicate_service($name) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM dich_vu WHERE ten_dich_vu = :name");
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->execute();
-    return $stmt->rowCount() === 0; // Trả về true nếu không trùng lặp
-}
 
-function create_service($data) {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO dich_vu (ten_dich_vu, gia_goc, gia_giam, chi_tiet, mo_ta, created_at, hinh_anh) VALUES (:ten_dich_vu, :gia_goc, :gia_giam, :chi_tiet, :mo_ta, :created_at, :hinh_anh)");
-    $stmt->bindParam(':ten_dich_vu', $data["ten_dich_vu"]);
-    $stmt->bindParam(':gia_goc', $data["gia_goc"]);
-    $stmt->bindParam(':gia_giam', $data["gia_giam"]);
-    $stmt->bindParam(':chi_tiet', $data["chi_tiet"]);
-    $stmt->bindParam(':mo_ta', $data["mo_ta"]);
-    $stmt->bindParam(':created_at', $data["created_at"]);
-    $stmt->bindParam(':hinh_anh', $data["hinh_anh"]);
-    $stmt->execute();
-}
 ?>

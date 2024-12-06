@@ -1,45 +1,50 @@
 <?php
-$errors = array();
+function delete($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM dich_vu WHERE id_dich_vu = :id");
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    return $stmt->execute();
+}
 
-if (isset($_POST["create"])) {
-    if (empty($_POST["service_name"])) {
-        $errors[] = "Vui lòng nhập tên dịch vụ";
-    }
+function get_service_by_id($id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM dich_vu WHERE id_dich_vu = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
-    if (empty($_POST["original_price"])) {
-        $errors[] = "Vui lòng nhập giá gốc";
-    }
+function update_service($id, $data) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE dich_vu SET ten_dich_vu = :ten_dich_vu, gia_goc = :gia_goc, gia_giam = :gia_giam, chi_tiet = :chi_tiet, mo_ta = :mo_ta, hinh_anh = :hinh_anh WHERE id_dich_vu = :id");
+    $stmt->bindParam(':ten_dich_vu', $data["ten_dich_vu"]);
+    $stmt->bindParam(':gia_goc', $data["gia_goc"]);
+    $stmt->bindParam(':gia_giam', $data["gia_giam"]);
+    $stmt->bindParam(':chi_tiet', $data["chi_tiet"]);
+    $stmt->bindParam(':mo_ta', $data["mo_ta"]);
+    $stmt->bindParam(':hinh_anh', $data["hinh_anh"]);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+}
 
-    if (empty($_POST["discount_price"])) {
-        $errors[] = "Vui lòng nhập giá giảm";
-    }
+function duplicate_service($name) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM dich_vu WHERE ten_dich_vu = :name");
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->rowCount() === 0; // Trả về true nếu không trùng lặp
+}
 
-    if (empty($_POST["service_details"])) {
-        $errors[] = "Vui lòng nhập chi tiết dịch vụ";
-    }
-
-    if (empty($_POST["description"])) {
-        $errors[] = "Vui lòng nhập mô tả";
-    }
-
-    if (empty($errors)) {
-        $service["name"] = check_input($_POST["service_name"]);
-        $service["original_price"] = check_input($_POST["original_price"]);
-        $service["discount_price"] = check_input($_POST["discount_price"]);
-        $service["service_details"] = check_input($_POST["service_details"]);
-        $service["description"] = check_input($_POST["description"]);
-        $service["created_at"] = date(DATETIME);
-
-        // Giả sử có hàm kiểm tra trùng lặp
-        $result = duplicate_service($service["name"]);
-
-        if ($result) {
-            create_service($service);
-            header("location:adminIndex.php?m=services&a=list&message=Thêm dịch vụ thành công");
-            exit();
-        } else {
-            $errors[] = "Dịch vụ đã tồn tại. Vui lòng nhập dịch vụ khác.";
-        }
-    }
+function create_service($data) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO dich_vu (ten_dich_vu, gia_goc, gia_giam, chi_tiet, mo_ta, created_at, hinh_anh) VALUES (:ten_dich_vu, :gia_goc, :gia_giam, :chi_tiet, :mo_ta, :created_at, :hinh_anh)");
+    $stmt->bindParam(':ten_dich_vu', $data["ten_dich_vu"]);
+    $stmt->bindParam(':gia_goc', $data["gia_goc"]);
+    $stmt->bindParam(':gia_giam', $data["gia_giam"]);
+    $stmt->bindParam(':chi_tiet', $data["chi_tiet"]);
+    $stmt->bindParam(':mo_ta', $data["mo_ta"]);
+    $stmt->bindParam(':created_at', $data["created_at"]);
+    $stmt->bindParam(':hinh_anh', $data["hinh_anh"]);
+    $stmt->execute();
 }
 ?>

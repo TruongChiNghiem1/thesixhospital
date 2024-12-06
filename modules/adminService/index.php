@@ -1,5 +1,5 @@
 <?php
-//include 'model/adminService.php';
+include 'model/adminService.php';
 
 if (isset($_GET["a"])) {
     $a = $_GET["a"];
@@ -15,6 +15,12 @@ if (isset($_GET["a"])) {
             break;
         case 'detail-calendar':
             include 'modules/adminService/detailCalendar.php';
+            break;
+        case 'delete':
+            include 'modules/adminService/delete.php';
+            break;
+        case 'edit':
+            include 'modules/adminService/edit.php';
             break;
         default:
             include 'modules/adminService/list.php';

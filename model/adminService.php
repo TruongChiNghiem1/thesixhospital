@@ -47,4 +47,33 @@ function create_service($data) {
     $stmt->bindParam(':hinh_anh', $data["hinh_anh"]);
     $stmt->execute();
 }
+
+function getListCalendar() {
+    global $conn;
+    $query = "
+        SELECT 
+            lh.id_lich_hen,
+            bn.ten_benh_nhan,
+            bn.so_dien_thoai,
+            dv.ten_dich_vu,
+            dv.gia_goc,
+            lh.ngay_gio,
+            nv.ho_ten AS bac_si,
+            lh.trang_thai
+        FROM 
+            lich_hen lh
+        LEFT JOIN 
+            benh_nhan bn ON lh.id_benh_nhan = bn.id_benh_nhan
+        LEFT JOIN 
+            dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
+        LEFT JOIN 
+            nhan_vien nv ON lh.id_nhan_vien = nv.id
+        ORDER BY 
+            lh.ngay_gio DESC
+    ";
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>

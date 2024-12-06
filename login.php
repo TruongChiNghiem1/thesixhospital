@@ -18,7 +18,9 @@ if (isset($_POST["login"])) {
         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
         $stmt->execute();
         if ($stmt->rowCount() == 1) {
+            $getUser = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION["admin"] = $username;
+            $_SESSION["user_id"] = $getUser['id'];
             header("location:index.php");
             exit();
         } else {

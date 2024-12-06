@@ -1,42 +1,57 @@
+<?php
+if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
+    $id = $_GET["id"];
+    $service = get_service_by_id($id);
+
+    if (!$service) {
+        echo "Dịch vụ không tồn tại.";
+        exit;
+    }
+
+    $indexExId = indexExId($id);
+}
+
+?>
+
 <div class="container mt-3" >
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/thesixhospital/index.php">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/thesixhospital/index.php?m=service">Dịch vụ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Dịch vụ khám sức khỏe lái xe</li>
+            <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($service['ten_dich_vu']); ?></li>
         </ol>
     </nav>
     <div class="row">
         <div class="col-6 h_400px">
             <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
+<!--                <div class="carousel-indicators">-->
+<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>-->
+<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
+<!--                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+<!--                </div>-->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/thesixhospital/assets/images/service/kham-suc-khoe-lai-xe-2048x1365.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $service['hinh_anh'] ?? 'assets/images/logo.jpg'; ?>" class="card-img-top" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="/thesixhospital/assets/images/service/1.jpg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="/thesixhospital/assets/images/service/2.png" class="card-img-top" alt="...">
-                    </div>
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="/thesixhospital/assets/images/service/1.jpg" class="card-img-top" alt="...">-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="/thesixhospital/assets/images/service/2.png" class="card-img-top" alt="...">-->
+<!--                    </div>-->
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">-->
+<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                    <span class="visually-hidden">Previous</span>-->
+<!--                </button>-->
+<!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">-->
+<!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                    <span class="visually-hidden">Next</span>-->
+<!--                </button>-->
             </div>
         </div>
         <div class="col-6">
-            <h3>Dịch vụ khám sức khỏe lái xe</h3>
+            <h3><?php echo htmlspecialchars($service['ten_dich_vu']); ?></h3>
             <div class="d-flex align-items-center mt-3">
                 <div class="me-2">
                     <i class="fa-solid fa-star text-warning"></i>
@@ -50,8 +65,8 @@
                 <div>32 đánh giá</div>
             </div>
             <div class="d-flex w-75 mt-4">
-                <p class="text-decoration-line-through me-2">440.000 VNĐ</p>
-                <h3 class="text-danger pl-3">250.000 VNĐ</h3>
+                <p class="text-decoration-line-through me-2"><?php echo htmlspecialchars($service['gia_goc']); ?> VNĐ</p>
+                <h3 class="text-danger pl-3"><?php echo htmlspecialchars($service['gia_giam']); ?> VNĐ</h3>
             </div>
             <div class="mt-3" style="display: flex; flex-direction: column; gap: 8px;">
                 <div class="WidgetTitle__WidgetTitleStyled-sc-12sadap-1 bPRVIq">Chi tiết</div>
@@ -173,18 +188,18 @@
                 </div>
             </div>
         </div>
-        <div class="mt-5">
+        <div class="mt-5 mb-5">
             <h4>Mô tả</h4>
-
+            <?php echo $service['mo_ta']; ?>
         </div>
 
-        <?php for($i = 0; $i < 4; $i++) { ?>
+        <?php foreach($indexExId as $indexExI) { ?>
             <div class="col-sm-3 pb-4 mb-sm-0">
                 <a class="text-decoration-none" href="/thesixhospital/index.php?m=service&a=detail">
                     <div class="card" style="width: 18rem;">
-                        <img src="/thesixhospital/assets/images/service/kham-suc-khoe-lai-xe-2048x1365.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $indexExI['hinh_anh'] ?? 'assets/images/logo.jpg'; ?>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Dịch vụ khám sức khỏe lái xe</h5>
+                            <h5 class="card-title"><?php echo htmlspecialchars($indexExI['ten_dich_vu']); ?></h5>
                             <!--                    <p class="card-text">Khám sức khỏe lái xe là thủ tục bắt buộc khi muốn học, thi và đổi bằng lái ô tô...</p>-->
                             <div style="">
                                 <i class="fa-solid fa-star text-warning"></i>
@@ -196,8 +211,8 @@
                             </div>
                             <div class="d-flex justify-content-end w-100 mt-3">
                                 <div class="d-flex justify-content-between w-75">
-                                    <p class="text-decoration-line-through">440.000 VNĐ</p>
-                                    <p class="text-danger pl-3">250.000 VNĐ</p>
+                                    <p class="text-decoration-line-through"><?php echo htmlspecialchars($indexExI['gia_goc']); ?> VNĐ</p>
+                                    <p class="text-danger pl-3"><?php echo htmlspecialchars($indexExI['gia_giam']); ?> VNĐ</p>
                                 </div>
                             </div>
                         </div>

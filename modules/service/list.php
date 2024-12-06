@@ -30,7 +30,7 @@ $services = index(); // Giả định hàm này trả về danh sách dịch v�
             <div class="col-sm-3 pb-4 mb-sm-0">
                 <a class="text-decoration-none" href="/thesixhospital/index.php?m=service&a=detail&id=<?php echo $service['id_dich_vu']; ?>">
                     <div class="card" style="width: 18rem;">
-                        <img src="<?php echo $service['hinh_anh'] ?? 'assets/images/logo.jpg'; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($service['ten_dich_vu']); ?>">
+                        <img src="<?php echo $service['hinh_anh'] ?? 'assets/images/logo.jpg'; ?>" class="card-img-top" height="214px" alt="<?php echo htmlspecialchars($service['ten_dich_vu']); ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($service['ten_dich_vu']); ?></h5>
                             <div>

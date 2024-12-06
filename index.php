@@ -9,13 +9,13 @@ require_once 'config/app.php';
 require_once 'config/connect.php';
 require_once 'config/functional.php';
 
-if (!isset($_SESSION["admin"])) {
-    header("location:login.php");
-    exit();
-} else if(isset($_GET["m"]) && $_GET["m"] == 'admin') {
-    header("Location:adminIndex.php");
-    exit();
-}
+//if (!isset($_SESSION["admin"])) {
+//    header("location:login.php");
+//    exit();
+//} else if(isset($_GET["m"]) && $_GET["m"] == 'admin') {
+//    header("Location:adminIndex.php");
+//    exit();
+//}
 
 ?>
 

@@ -22,6 +22,11 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
         </ol>
     </nav>
     <div class="row">
+        <?php if (isset($_GET['message'])) { ?>
+            <?php
+            echo "<div class='alert alert-success' role='alert'>" . $_GET['message'] . "</div>";
+            ?>
+        <?php } ?>
         <div class="col-6 h_400px">
             <div id="carouselExampleIndicators" class="carousel slide">
 <!--                <div class="carousel-indicators">-->
@@ -94,54 +99,64 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
                 </div>
             </div>
             <div class="d-flex mt-4">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Đặt lịch ngay</button>
+                <?php
+                if (!isset($_SESSION["admin"])) {
+                ?>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='login.php'">Đặt lịch ngay</button>
+                <?php
+                } else {
+                ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDatLich">Đặt lịch ngay</button>
+                <?php
+                }
+                ?>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Thông tin cá nhân</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Họ và tên <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nguyễn Văn A...">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                                        <label class="form-check-label" for="inlineRadio1">Nam</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Nữ</label>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Số điện thoại <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0123456789...">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Email <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="a@gmail.com...">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Địa chỉ <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDatLich">Tiếp tục</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                <div class="modal-dialog modal-dialog-centered modal-lg">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                            <h5 class="modal-title" id="exampleModalLabel">Thông tin cá nhân</h5>-->
+<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!--                            <form>-->
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <label class="d-flex mb-2" for="exampleInputEmail1">Họ và tên <span class="text-danger">*</span></label>-->
+<!--                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nguyễn Văn A...">-->
+<!--                                </div>-->
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <div class="form-check form-check-inline">-->
+<!--                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>-->
+<!--                                        <label class="form-check-label" for="inlineRadio1">Nam</label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check form-check-inline">-->
+<!--                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">-->
+<!--                                        <label class="form-check-label" for="inlineRadio2">Nữ</label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <label class="d-flex mb-2" for="exampleInputEmail1">Số điện thoại <span class="text-danger">*</span></label>-->
+<!--                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0123456789...">-->
+<!--                                </div>-->
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <label class="d-flex mb-2" for="exampleInputEmail1">Email <span class="text-danger">*</span></label>-->
+<!--                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="a@gmail.com...">-->
+<!--                                </div>-->
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <label class="d-flex mb-2" for="exampleInputEmail1">Địa chỉ <span class="text-danger">*</span></label>-->
+<!--                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        <div class="modal-footer">-->
+<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>-->
+<!--                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDatLich">Tiếp tục</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!-- Modal -->
             <div class="modal fade" id="modalDatLich" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,42 +167,44 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action="/thesixhospital/index.php?m=service&a=booking-service" method="POST">
+                                <input type="hidden" name="id_dich_vu" value="<?php echo $id; ?>"/>
                                 <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn bác sĩ</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Chọn bác sĩ</option>
+                                    <label class="d-flex mb-2" for="doctor">Chọn bác sĩ</label>
+                                    <select class="form-select" name="doctor_id" id="doctor" required>
+                                        <option selected disabled>Chọn bác sĩ</option>
                                         <option value="1">Trương Chí Nghiệm</option>
                                         <option value="2">Cao Thanh Việt</option>
                                         <option value="3">Nguyễn Nhật Tùng</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn ngày khám <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0123456789...">
+                                    <label class="d-flex mb-2" for="date">Chọn ngày khám <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" name="date" id="date" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Chọn thời gian <span class="text-danger">*</span></label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Chọn thời gian</option>
-                                        <option value="1">Buổi sáng </option>
-                                        <option value="2">Buổi chiều</option>
+                                    <label class="d-flex mb-2" for="time">Chọn thời gian <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="time" id="time" required>
+                                        <option selected disabled>Chọn thời gian</option>
+                                        <option value="morning">Buổi sáng</option>
+                                        <option value="afternoon">Buổi chiều</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label class="d-flex mb-2" for="exampleInputEmail1">Ghi chú <span class="text-danger">*</span></label>
-                                    <textarea type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="10"></textarea>
+                                    <label class="d-flex mb-2" for="notes">Ghi chú <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="notes" id="notes" rows="10" required></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="hideModalThongTin">Đóng</button>
+                                    <button type="submit" class="btn btn-primary">Đặt lịch</button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="hideModalThongTin">Đóng</button>
-                            <button type="button" class="btn btn-primary">Đặt lịch</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="mt-5 mb-5">
             <h4>Mô tả</h4>
             <?php echo $service['mo_ta']; ?>

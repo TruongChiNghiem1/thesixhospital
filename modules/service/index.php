@@ -14,6 +14,9 @@ if (isset($_GET["a"])) {
         case 'delete':
             include 'modules/service/delete.php';
             break;
+        case 'booking-service':
+            include 'modules/service/process_booking.php';
+            break;
         default:
             include 'modules/service/list.php';
     }

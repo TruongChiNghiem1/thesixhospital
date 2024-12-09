@@ -1,12 +1,64 @@
 <?php 
-    include_once("../controller/admin/list.php");
+    include_once("../controller/admin.php");
 
-    $p = new selectInfomationBS();
+    $p = new controllerAdmin();
 
-    $result = $p->selectInfomationBS();
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $limit = 5;
 
-    if ($result){
-        if(mysqli_num_rows($result) > 0){
+    $tblNhanVien = $p->getNhanVienByPage($page, $limit);
+
+    $totalNhanVien = $p->getCountNhanVien();
+    $totalPages = ceil($totalNhanVien / $limit);
+
+    if (isset($_GET['delete']) && $_GET['delete'] == 'nhanVien' && isset($_GET['id'])) {
+        $userId = $_GET['id'];
+        $deleteResult = $p->deleteNhanVienByID($userId);
+    
+        if ($deleteResult) {
+            echo "<script>alert('Xóa nhân viên thành công');</script>";
+            echo "<script>window.location.href = 'index.php?action=hrm';</script>";
+        } else {
+            echo "<script>alert('Xóa nhân viên thất bại');</script>";
+        }
+    }
+
+    // $result = $p->selectInfomationBS();
+
+    if ($tblNhanVien){
+        if(mysqli_num_rows($tblNhanVien) > 0){
+            echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css'\n            integrity='sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==' \n            crossorigin='anonymous' referrerpolicy='no-referrer' />";
+
+            echo "<style>
+                .pagination {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                .pagination a {
+                    color: #999;
+                    text-decoration: none;
+                    padding: 2px 10px;
+                    font-size: 15px;
+                }
+                .pagination a.active {
+                    color: #000;
+                    font-weight: bold;
+                }
+                .pagination .next {
+                    font-size: 20px;
+                    color: #999;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 10px;
+                }
+            </style>";
+
             echo "<table class='table' border='1'>";
             echo "<tr>";
             echo "<th>ID</th>";
@@ -15,21 +67,46 @@
             echo "<th>Email</th>";
             echo "<th>Hoạt động</th>";
             echo "</tr>";
-            while($row = mysqli_fetch_array($result)){
+            while($row = mysqli_fetch_array($tblNhanVien)){
                 echo "<tr>";
                 echo "<td>" . $row['id'] . "</td>";
-                echo "<td>" . $row['name'] . "</td>";
-                echo "<td>" . $row['phone'] . "</td>";
+                echo "<td>" . $row['ho_ten'] . "</td>";
+                echo "<td>" . $row['so_dien_thoai'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
 
                 echo"<td>
                         <a href='index.php?action=hrm&view=nhanVien&id=".$row['id']."'><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
-                        <button id='btn-rm' type='button' class='btn btn-outline-primary'>Remove</button>
+                        <a href='index.php?action=hrm&delete=nhanVien&id=".$row['id']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Remove</button></a>
+                        <a href='index.php?action=hrm&update=nhanVien&id=".$row['id']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Update</button></a>
+                        
                     </td>";
                 echo "</tr>";
             }
             echo "</table>";
-            mysqli_free_result($result);
+
+            // Hiển thị phân trang
+            echo "<div class='pagination' style='margin-top: 10px;'>";
+
+            // Hiển thị nút "Trang trước"
+            if ($page > 1) {
+                $prevPage = $page - 1;
+                echo "<a href='index.php?action=hrm&page=$prevPage' class='prev'><i class='fa-solid fa-arrow-left-long'></i></a>";
+            }
+
+            // Hiển thị các số trang
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $activeClass = ($i == $page) ? 'active' : '';
+                echo "<a href='index.php?action=hrm&page=$i' class='$activeClass'>$i</a>";
+            }
+
+            // Hiển thị nút "Trang tiếp theo"
+            if ($page < $totalPages) {
+                $nextPage = $page + 1;
+                echo "<a href='index.php?action=hrm&page=$nextPage' class='next'><i class='fa-solid fa-arrow-right-long'></i></a>";
+            }
+
+            echo "</div>";
+            // mysqli_free_result($result);
         }
         else {
             echo "No records matching your query were found.";

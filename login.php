@@ -1,31 +1,75 @@
 <?php
-session_start();
-require_once 'config/app.php';
-require_once 'config/connect.php';
-$errors = array();
-if (isset($_POST["login"])) {
-    if (empty($_POST["username"])) {
-        $errors[] = "Please enter username";
+    // error_reporting(0);
+    require_once 'config/connect.php';
+    include_once("controller/admin.php");
+    session_start();
+
+    if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true){
+        if (strpos($_SESSION['loai_nhan_vien'], 1) !== false) {
+            header("location: admin/index.php");
+        } elseif (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
+            header("Location: BSSucKhoe.php");
+        } elseif(strpos($_SESSION['loai_nhan_vien'], 3) !== false){
+            header("Location: view/BacSiDD.php");
+        }
+        exit;
     }
-    if (empty($_POST["password"])) {
-        $errors[] = "Please enter password";
-    }
-    if (empty($errors)) {
-        $username = $_POST["username"];
-        $password = md5($_POST["password"]);
-        $stmt = $conn->prepare("SELECT * FROM nhan_vien WHERE username = :username AND password = :password AND level = 1");
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-        $stmt->execute();
-        if ($stmt->rowCount() == 1) {
-            $_SESSION["admin"] = $username;
-            header("location:index.php");
-            exit();
-        } else {
-            $errors[] = "Member doesn't exist or you aren't admin";
+
+
+    if(isset($_POST['login'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $p = new controllerAdmin();
+        $account = $p->loginUser($username, $password);
+        // echo $account;
+        if($account){
+            $_SESSION['isLoggedIn'] = true;
+            $_SESSION['id'] = $account['id'];
+            $_SESSION['username'] = $account['username'];
+            $_SESSION['ho_ten'] = $account['ho_ten'];
+            $_SESSION['loai_nhan_vien'] = $account['loai_nhan_vien'];
+       
+            if (strpos($account['loai_nhan_vien'], 1) !== false) {
+                header("Location: admin/index.php");
+            } elseif (strpos($account['loai_nhan_vien'], 2) !== false) {
+                header("Location: BacSiSK.php");
+            } elseif(strpos($account['loai_nhan_vien'], 3) !== false){
+                header("Location: view/BacSiDD.php");
+            }
+            exit;
+        }
+        else{
+            echo "Đăng nhập sai";
         }
     }
-}
+// require_once 'config/app.php';
+// require_once 'config/connect.php';
+// $errors = array();
+// if (isset($_POST["login"])) {
+//     if (empty($_POST["username"])) {
+//         $errors[] = "Please enter username";
+//     }
+//     if (empty($_POST["password"])) {
+//         $errors[] = "Please enter password";
+//     }
+//     if (empty($errors)) {
+//         $username = $_POST["username"];
+//         $password = md5($_POST["password"]);
+//         $stmt = $conn->prepare("SELECT * FROM nhan_vien WHERE username = :username AND password = :password AND level = 1");
+//         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+//         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+//         $stmt->execute();
+//         if ($stmt->rowCount() == 1) {
+//             $_SESSION["admin"] = $username;
+//             header("location:index.php");
+//             exit();
+//         } else {
+//             $errors[] = "Member doesn't exist or you aren't admin";
+//         }
+//     }
+// }
+
 ?>
 
 <!DOCTYPE html>

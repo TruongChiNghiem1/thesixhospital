@@ -1,7 +1,7 @@
 <?php 
-    include_once("../controller/admin/list.php");
+    include_once("../controller/admin.php");
 
-    $p = new selectInfomationBS();
+    $p = new controllerAdmin();
 
     
     if (isset($_GET['id'])) {
@@ -10,6 +10,15 @@
     
     if ($nhanVien && mysqli_num_rows($nhanVien) > 0) {
         $row = mysqli_fetch_assoc($nhanVien);
+        if ($row["loai_nhan_vien"] == 1) {
+            $chucVu = 'Quản Trị';
+        } elseif($row["loai_nhan_vien"] == 2) {
+            $chucVu = 'Bác sĩ sức khoẻ';
+        }
+        else{
+            $chucVu = 'Bác sĩ dinh dưỡng';
+        }
+        
         echo "<style>
                 .custom-card {
                     display: flex;
@@ -36,12 +45,15 @@
         echo "<div class='card-body text-center'>"; 
         echo "<h4 class='card-title'>Thông tin chi tiết nhân viên</h4>";
         echo "<p class='card-text'><strong>ID:</strong> " . $row["id"] . "</p>";
-        echo "<p class='card-text'><strong>Họ tên:</strong> " . $row["name"] . "</p>";
+        echo "<p class='card-text'><strong>Mã nhân viên:</strong> " . $row["code"] . "</p>";
+        echo "<p class='card-text'><strong>Họ tên:</strong> " . $row["ho_ten"] . "</p>";
         echo "<p class='card-text'><strong>Email:</strong> " . $row["email"] . "</p>";
-        echo "<p class='card-text'><strong>Số điện thoại:</strong> " . $row["phone"] . "</p>";
-        echo "<p class='card-text'><strong>Giới tính:</strong> " . ($row['sex'] == 'Nam' ? 'Nam' : 'Nữ') . "</p>";
-        echo "<p class='card-text'><strong>Ngày sinh:</strong> " . $row["birthday"] . "</p>";
-        echo "<p class='card-text'><strong>Chức vụ:</strong> " . ($row["staffType"] == 1 ? 'Bác sĩ dinh dưỡng' : 'Bác sĩ sức khoẻ') . "</p>";
+        echo "<p class='card-text'><strong>Username:</strong> " . $row["username"] . "</p>";
+        echo "<p class='card-text'><strong>Password:</strong> " . $row["password"] . "</p>";
+        echo "<p class='card-text'><strong>Số điện thoại:</strong> " . $row["so_dien_thoai"] . "</p>";
+        echo "<p class='card-text'><strong>Giới tính:</strong> " . ($row['gioi_tinh'] == 1 ? 'Nam' : 'Nữ') . "</p>";
+        echo "<p class='card-text'><strong>Ngày sinh:</strong> " . $row["ngay_sinh"] . "</p>";
+        echo "<p class='card-text'><strong>Chức vụ:</strong> " . $chucVu . "</p>";
         echo "</div>"; 
         echo "</div>"; 
         echo "</div>"; 

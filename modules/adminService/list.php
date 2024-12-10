@@ -22,11 +22,9 @@ $services = get_services();
             <h3>Danh sách dịch vụ</h3>
         </div>
         <?php if (isset($_GET['message'])) { ?>
-            <div class="error text-success mb-3">
                 <?php
-                echo "<li>" . $_GET['message'] . "</li>";
+                echo "<div class='alert alert-success' role='alert'>" . $_GET['message'] . "</div>";
                 ?>
-            </div>
         <?php } ?>
         <div class="d-flex justify-content-end">
             <a type="button" class="btn btn-primary" href="/thesixhospital/adminIndex.php?m=services&a=create">Thêm mới <i class="fa-solid fa-plus"></i></a>
@@ -35,6 +33,7 @@ $services = get_services();
             <thead>
             <tr>
                 <th class="text-center">Mã dịch vụ</th>
+                <th>Hình ảnh</th>
                 <th>Tên dịch vụ</th>
                 <th>Giá gốc</th>
                 <th>Giá giảm</th>
@@ -46,6 +45,7 @@ $services = get_services();
             <?php foreach ($services as $service) { ?>
                 <tr>
                     <td class="text-center"><?php echo $service['id_dich_vu']; ?></td>
+                    <td><img src="<?php echo $service['hinh_anh'] ?? 'assets/images/logo.jpg'; ?>" alt="<?php echo $service['ten_dich_vu']; ?>" width="100px"/></td>
                     <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=detail&id=<?php echo $service['id_dich_vu']; ?>"><?php echo $service['ten_dich_vu']; ?></a></td>
                     <td><?php echo number_format($service['gia_goc'], 0, ',', '.') . ' VNĐ'; ?></td>
                     <td><?php echo number_format($service['gia_giam'], 0, ',', '.') . ' VNĐ'; ?></td>
@@ -63,7 +63,8 @@ $services = get_services();
 
 <script>
     function confirmDelete(id) {
-        if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
+        if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?"))
+        {
             window.location.href = "/thesixhospital/adminIndex.php?m=services&a=delete&id=" + id;
         }
     }

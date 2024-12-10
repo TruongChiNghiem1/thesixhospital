@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @import url('font-inter.css');
 :root {
     --primarycolor: #0A76D8;
@@ -145,7 +145,8 @@ body {
 .btn-in-text {
     font-size: 15px;
     letter-spacing: 0.5px;
-=======
+}
+
 @import url("font-inter.css");
 :root {
   --primarycolor: #0a76d8;
@@ -154,18 +155,6 @@ body {
   --btnnicetext: #1b62b3;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  border-spacing: 0;
-  font-family: "Inter", sans-serif;
-}
-
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
 
 /*------custom-scroll-bar - from w3schools.com------------------*/
 /* width */
@@ -245,9 +234,29 @@ body {
   border-radius: 5px;
   font-family: "Inter", sans-serif;
 }
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 50%;
+}
+.btn-danger:hover {
+  color: #fff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+.btn-danger:focus,
+.btn-danger.focus {
+  color: #fff;
+  background-color: #c82333;
+  border-color: #bd2130;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.5);
+}
 
 .btn:hover {
-  background-color: var(--primarycolorhover);
+  background-color: #dc3545;
   box-shadow: none;
   transition: all 0.5s;
   font-family: "Inter", sans-serif;
@@ -280,14 +289,14 @@ body {
 .btn-in-text {
   font-size: 15px;
   letter-spacing: 0.5px;
->>>>>>> 8df180c3803446fb511223e280359148b6aa9b30
+
 }
 
 .non-style-link:link,
 .non-style-link:visited,
 .non-style-link:hover,
 .non-style-link:active {
-<<<<<<< HEAD
+
     text-decoration: none;
     color: rgb(43, 43, 43);
 }
@@ -469,7 +478,7 @@ input[type=search]:focus {
 .menu-btn:hover {
     background-color: var(--btnice);
     color: var(--primarycolor);
-=======
+
   text-decoration: none;
   color: rgb(43, 43, 43);
 }
@@ -651,13 +660,12 @@ input[type="search"]:focus {
 .menu-btn:hover {
   background-color: var(--btnice);
   color: var(--primarycolor);
->>>>>>> 8df180c3803446fb511223e280359148b6aa9b30
+
 }
 
 .non-style-link-menu:link,
 .non-style-link-menu:visited,
 .non-style-link-menu:active {
-<<<<<<< HEAD
     text-decoration: none;
     color: #3b3b3b;
 }
@@ -669,11 +677,7 @@ input[type="search"]:focus {
   text-decoration: none;
   color: #3b3b3b;
 }
-.non-style-link-menu:hover {
-  text-decoration: none;
-  color: var(--primarycolor);
->>>>>>> 8df180c3803446fb511223e280359148b6aa9b30
-}
+
 
 .non-style-link-menu-active:link,
 .non-style-link-menu-active:visited,
@@ -914,12 +918,6 @@ input[type="search"]:focus {
 =======
   text-decoration: none;
   color: var(--primarycolor);
-}
-
-.HSBA {
-  border: 2px solid #c9cbce9f;
-  border-radius: 7px;
-  padding: 15px;
 }
 
 .dashboard-items {

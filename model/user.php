@@ -1,9 +1,9 @@
 <?php 
 function duplicate ($username, $id = null) {
     if (is_null($id)) {
-        $sql = "SELECT * FROM user WHERE username = :username";
+        $sql = "SELECT * FROM nhan_vien WHERE username = :username";
     } else {
-        $sql = "SELECT * FROM user WHERE username = :username AND id != $id";
+        $sql = "SELECT * FROM nhan_vien WHERE username = :username AND id != $id";
     }
 
     global $conn;
@@ -20,7 +20,7 @@ function duplicate ($username, $id = null) {
 
 function create ($data) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO user (username, password, level, created_at) VALUES (:username, :password, :level, :created_at)");
+    $stmt = $conn->prepare("INSERT INTO nhan_vien (username, password, level, created_at) VALUES (:username, :password, :level, :created_at)");
     $stmt->bindParam(':username', $data["username"], PDO::PARAM_STR);
     $stmt->bindParam(':password', $data["password"], PDO::PARAM_STR);
     $stmt->bindParam(':level', $data["level"], PDO::PARAM_STR);
@@ -30,14 +30,14 @@ function create ($data) {
 
 function index () {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM user ORDER BY created_at DESC");
+    $stmt = $conn->prepare("SELECT * FROM nhan_vien ORDER BY created_at DESC");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function detail ($id) {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM user WHERE id = :id");
+    $stmt = $conn->prepare("SELECT * FROM nhan_vien WHERE id = :id");
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ function detail ($id) {
 
 function edit ($data) {
     global $conn;
-    $stmt = $conn->prepare("UPDATE user SET username = :username, updated_at = :updated_at WHERE id = :id");
+    $stmt = $conn->prepare("UPDATE nhan_vien SET username = :username, updated_at = :updated_at WHERE id = :id");
     $stmt->bindParam(":id", $data["id"], PDO::PARAM_INT);
     $stmt->bindParam(':username', $data["username"], PDO::PARAM_STR);
     $stmt->bindParam(':updated_at', $data["updated_at"], PDO::PARAM_STR);
@@ -55,7 +55,7 @@ function edit ($data) {
 
 function delete ($id) {
     global $conn;
-    $stmt = $conn->prepare("DELETE FROM user WHERE id = :id");
+    $stmt = $conn->prepare("DELETE FROM nhan_vien WHERE id = :id");
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     return $stmt->execute();
 }

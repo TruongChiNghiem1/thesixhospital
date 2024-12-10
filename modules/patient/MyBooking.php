@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/thesixhospital/assets/css/animations.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/main.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/admin.css">
+    <link rel="stylesheet" href="/thesixhospital/assets/css/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <title>Lịch sử đặt lịch</title>
     <style>
     .popup {
@@ -24,24 +26,25 @@
 
 <body>
     <div class="container">
-        <div class="menu">
+        <div class="menu" style="background-color: #343a40;">
             <table class="menu-container" border="0">
                 <tr>
                     <td style="padding:10px" colspan="2">
                         <table border="0" class="profile-container">
                             <tr>
                                 <td width="30%" style="padding-left:20px">
-                                    <img src="/thesixhospital/img/user.png" alt="" width="100%"
+                                    <img src="/thesixhospital/assets/images/logo.jpg" alt="" width="100%"
                                         style="border-radius:50%">
                                 </td>
                                 <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title">Cao Dương Quốc Việt</p>
-                                    <p class="profile-subtitle">Caoviet@edoc.com</p>
+                                    <p class="profile-title" style="color: white;">Cao Dương Quốc Việt</p>
+                                    <p class="profile-subtitle " style="color: white;">Caoviet@edoc.com</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href=""><input type="button" value="Log out" class="btn btn-danger"></a>
+                                    <a href="/thesixhospital/login.php"><input type="button" value="Đăng xuất"
+                                            class="btn btn-danger"></a>
                                 </td>
                             </tr>
                         </table>
@@ -49,9 +52,9 @@
 
                 </tr>
                 <tr class="menu-row">
-                    <td class="menu-btn">
+                    <td class="">
                         <div>
-                            <a href="profile.php" class="non-style-link-menu ">
+                            <a href="profile.php" class="non-style-link-menu " style="color: white;">
                                 <i class="fa-solid fa-user menu-icon"></i>
                                 <p class="menu-text">Thông tin cá nhân</p>
                             </a>
@@ -59,9 +62,9 @@
                     </td>
                 </tr>
                 <tr class="menu-row">
-                    <td class="menu-btn menu-active ">
+                    <td class="menu-active ">
                         <div>
-                            <a href="#" class="non-style-link-menu  non-style-link-menu-active">
+                            <a href="#" class="non-style-link-menu-active " style="color: white;">
                                 <i class="fa-solid fa-bookmark menu-icon"></i>
                                 <p class="menu-text">Lịch sử đặt lịch</p>
                             </a>
@@ -69,36 +72,15 @@
                     </td>
                 </tr>
                 <tr class="menu-row">
-                    <td class="menu-btn menu-icon-doctor">
+                    <td class="">
                         <div>
-                            <a href="MedicalRecords.php" class="non-style-link-menu">
+                            <a href="MedicalRecords.php" class="non-style-link-menu" style="color: white;">
                                 <i class="fa-solid fa-book-medical menu-icon"></i>
                                 <p class="menu-text">Hồ sơ bệnh án</p>
                             </a>
                         </div>
                     </td>
                 </tr>
-
-                <tr class="menu-row">
-                    <td class="menu-btn menu-icon-session">
-                        <a href="schedule.php" class="non-style-link-menu">
-                            <div>
-                                <p class="menu-text">Scheduled Sessions</p>
-                            </div>
-                        </a>
-                    </td>
-                </tr>
-                <tr class="menu-row">
-                    <td class="menu-btn menu-icon-appoinment">
-                        <div>
-                            <a href="appointment.php" class="non-style-link-menu">
-
-                                <p class="menu-text">My Bookings</p>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
             </table>
         </div>
         <div class="dash-body">
@@ -121,7 +103,8 @@
                             2024-10-29 </p>
                     </td>
                     <td width="10%">
-                        <button class="btn-label"><img src="/thesixhospital/img/calendar.svg" width="100%"></button>
+                        <button class="btn-label"><img src="/thesixhospital/assets/images/calendar.svg"
+                                width="100%"></button>
                     </td>
 
 
@@ -146,13 +129,10 @@
                                 <br>
                                 <br>
                                 <table width="93%" class="sub-table scrolldown" border="0" style="border:none">
-
                                     <tbody>
-
                                         <tr>
                                             <td style="width: 25%;">
                                                 <div class="dashboard-items search-items">
-
                                                     <div style="width:100%;">
                                                         <div class="h3-search">
                                                             Ngày đặt lịch: 29/10/2024<br>
@@ -178,7 +158,8 @@
                                                         <a><button class="btn-primary-soft btn ">
                                                                 <font class="tn-in-text">Hủy lịch</font>
                                                             </button></a>
-                                                        <a><button class="login-btn btn-primary-soft btn ">
+                                                        <a href="#myModal"><button
+                                                                class="login-btn btn-primary-soft btn ">
                                                                 <font class="tn-in-text">Thay đổi lịch</font>
                                                             </button></a>
                                                     </div>
@@ -215,7 +196,8 @@
                                                         <a><button class="btn-primary-soft btn ">
                                                                 <font class="tn-in-text">Hủy lịch</font>
                                                             </button></a>
-                                                        <a><button class="login-btn btn-primary-soft btn ">
+                                                        <a href="#myModal"><button
+                                                                class="login-btn btn-primary-soft btn ">
                                                                 <font class="tn-in-text">Thay đổi lịch</font>
                                                             </button></a>
                                                     </div>
@@ -250,7 +232,8 @@
                                                         <a><button class="btn-primary-soft btn">
                                                                 <font class="tn-in-text">Hủy lịch</font>
                                                             </button></a>
-                                                        <a><button class="btn-primary-soft btn">
+                                                        <a href="#myModal"><button
+                                                                class="login-btn btn-primary-soft btn ">
                                                                 <font class="tn-in-text">Thay đổi lịch</font>
                                                             </button></a>
                                                     </div>
@@ -266,14 +249,43 @@
                         </center>
                     </td>
                 </tr>
-
-
-
             </table>
         </div>
     </div>
+    <div id="myModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Sửa lịch khám</h3>
+                    <a href="#" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</a>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <label for="txtDate">Ngày đặt lịch</label>
+                        <input type="date" class="form-control" id="txtDate" />
+                        <span id="tbDate" class="text-danger">*</span>
+                    </div>
 
-
+                    <div class="col-sm-12">
+                        <label for="txtChuyenKhoa" class="mt-3">Thời gian</label>
+                        <select id="txtChuyenKhoa" class="form-select">
+                            <option value="" hidden selected>Chọn thời gian</option>
+                            <option value="8h">8h</option>
+                            <option value="10h">10h</option>
+                            <option value="13h">13h</option>
+                            <option value="15h">15h</option>
+                            <option value="17h">17h</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger col-sm-12" data-bs-dismiss="modal" id="btnSave">
+                        Xác nhận thay đổi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+
+<?php
+error_reporting(0);
+// require_once 'config/connect.php';
+include_once("controller/admin.php");
+    session_start();
+    if(!isset($_SESSION['isLoggedIn'])){
+        header("Location: ../login.php");
+    }else{
+        if (strpos($_SESSION['loai_nhan_vien'], 1) !== false) {
+            header("location: ../admin/index.php");
+        } elseif (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
+            header("Location: BSSucKhoe.php");
+        }
+    }
+?>
+
+<!doctype html>
 <html lang="vi">
 
 <head>
@@ -107,7 +124,19 @@
                     <button type="button" class="btn btn-danger w-75 mt-3">
                         Đăng Xuất
                     </button>
+                    <form action="" method="post">
+
+                        <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>
+                    </form>
+
                 </div>
+
+                <?php
+                            if (isset($_POST['btnLogout'])) {
+                                echo "logout";
+                                include_once("../logout.php");
+                            }
+                    ?>
 
                 <div class="list-group mt-4">
                     <a href="BacSiDD.php?page=home"

@@ -1,26 +1,26 @@
 <?php 
-include 'model/user.php';
+include 'model/service.php';
 
 if (isset($_GET["a"])) {
     $a = $_GET["a"];
 
     switch ($a) {
-        case 'create':
-            include 'modules/user/create.php';
+        case 'detail':
+            include 'modules/service/detail.php';
             break;
         case 'edit':
-            include 'modules/user/edit.php';
+            include 'modules/service/edit.php';
             break;
         case 'delete':
-            include 'modules/user/delete.php';
+            include 'modules/service/delete.php';
             break;
-        case 'list':
-            include 'modules/user/list.php';
+        case 'booking-service':
+            include 'modules/service/process_booking.php';
             break;
         default:
-            include 'modules/user/list.php';
+            include 'modules/service/list.php';
     }
 } else {
-    include 'modules/user/list.php';
+    include 'modules/service/list.php';
 }
 ?>

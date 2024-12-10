@@ -1,15 +1,14 @@
 <?php 
-function check_id ($module) {
-    if (!isset($_GET["id"])) {
-        header("location:index.php?m=$module");
-        exit();
+function check_id($module) {
+    if(!isset($_GET['id'])) {
+        header("location:adminIndex.php?m=$module");
+        exit;
     }
-    
-    $id = $_GET["id"];
-    
-    if (!is_numeric($id)) {
-        header("location:index.php?m=$module");
-        exit();
+
+    $id = $_GET['id'];
+    if(!is_numeric($id)) {
+        header("location:adminIndex.php?m=$module");
+        exit;
     }
 
     return $id;

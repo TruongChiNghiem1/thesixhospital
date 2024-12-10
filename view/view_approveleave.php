@@ -26,7 +26,7 @@
                                      
                         
                     <div class="list-group b4-bordor mt-3">
-                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Trang chủ</a>
+                        <a href="view_dashboard.php" class="list-group-item list-group-item-action">Trang chủ</a>
                         <a href="../admin/index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>
                         <a href="view_schedule.php" class="list-group-item list-group-item-action">Phân lịch ca trực</a>
                         <a href="view_approveleave.php" class="list-group-item list-group-item-action">Duyệt đơn nghỉ phép</a>
@@ -61,43 +61,20 @@
                             </tr>
                             <tr>
                                 <table class="table " border='1' >
-                                    <tr>
-                                        <th>Mã duyệt</th>
-                                        <th>Tên</th>
-                                        <th>Nội dung</th>
-                                        <th>Trạng thái</th>
-                                        <th>Hoạt động</th>
-                                    </tr>
 
                                     <tr>
-                                        <td>01</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>Xin phép đi đám cưới người thân.</td>
-                                        <td><button type="button" class="btn btn-success">Đã duyệt</button></td>
-                                        <td>
-                                        <a href="check_approveleave.php"><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>Duyệt đơn</button></a>
-                                        </td>
+                                        <?php
+                                        if(isset($_GET['approveApplication']) && $_GET['approveApplication'] == 'nhanVien' && isset($_GET['id'])){
+                                            $userId = $_GET['id'];
+                                            include_once("check_approveleave.php");
+                                        }
+                                        else{
+
+                                            include_once("../view/view_approveleave_management.php");
+                                        }
+                                        ?>
                                     </tr>
 
-                                    <tr>
-                                        <td>02</td>
-                                        <td>Nguyễn Thị B</td>
-                                        <td>Xin phép đi ăn sinh nhật.</td>
-                                        <td><button type="button" class="btn btn-danger">Từ chối duyệt</button></td>
-                                        <td>
-                                        <a href="check_approveleave.php"><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>Duyệt đơn</button></a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>03</td>
-                                        <td>Nguyễn Thanh C</td>
-                                        <td>Xin phép đi du lịch.</td>
-                                        <td><button type="button" class="btn btn-secondary">Chờ duyệt</button></td>
-                                        <td>
-                                        <a href="check_approveleave.php"><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>Duyệt đơn</button></a>
-                                        </td>
-                                    </tr>
                                 </table>
                             </tr>
                         </tbody>

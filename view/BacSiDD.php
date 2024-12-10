@@ -121,9 +121,6 @@ include_once("controller/admin.php");
                     </a>
                     <h4>ThanhTong</h4>
                     <h6 class="text-muted">bsdd@gmail.com</h6>
-                    <button type="button" class="btn btn-danger w-75 mt-3">
-                        Đăng Xuất
-                    </button>
                     <form action="" method="post">
 
                         <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>

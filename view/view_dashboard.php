@@ -26,10 +26,10 @@
                                      
                         
                     <div class="list-group b4-bordor mt-3">
-                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Trang chủ</a>
+                        <a href="" class="list-group-item list-group-item-action">Trang chủ</a>
                         <a href="../admin/index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>
                         <a href="../view/view_schedule.php"  class="list-group-item list-group-item-action">Phân lịch ca trực</a>
-                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Duyệt đơn nghỉ phép</a>
+                        <a href="view_approveleave.php" class="list-group-item list-group-item-action">Duyệt đơn nghỉ phép</a>
                     </div>
 
 

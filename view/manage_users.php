@@ -54,69 +54,7 @@ if (!$data) {
 
 
         <?php if ($data && mysqli_num_rows($data) > 0): ?>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="appointmentTable">
-                <thead class="thead-light">
-                    <tr>
-                        <th>#</th>
-                        <th>Khách hàng</th>
-                        <th>Điện thoại</th>
-                        <th>Ngày sinh</th>
-                        <th>Giới tính</th>
-                        <th>Địa chỉ</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Tòng cute</td>
-                        <td>0982954794</td>
-                        <td>30/10/2024</td>
-                        <td>
-                            <span class="badge badge-danger">Nam</span>
-                        </td>
-                        <td>Quảng Ninh</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-three-dots"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="BacSiDD.php?page=medical_records">Xem hồ sơ bệnh án</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addNutritionMenuModal">Thêm thực đơn dinh dưỡng cho bệnh nhân</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Lê Thị Hương</td>
-                        <td>0499751594</td>
-                        <td>30/10/2024</td>
-                        <td>
-                            <span class="badge badge-success">Nữ</span>
-                        </td>
-                        <td>Bắc Kinh</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-three-dots"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Xem hồ sơ bệnh án</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addNutritionMenuModal">Thêm thực đơn dinh dưỡng</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    
 
 
             <div class="text-right mb-3">

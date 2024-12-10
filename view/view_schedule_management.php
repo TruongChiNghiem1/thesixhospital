@@ -5,29 +5,30 @@
 
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $limit = 5;
-
-    $tblNhanVien = $p->getNhanVienByPage($page, $limit);
-
+    
+    $tblNhanVien = $p->selectScheduleByPage($page, $limit);
+    
+    
     $totalNhanVien = $p->getCountNhanVien();
     $totalPages = ceil($totalNhanVien / $limit);
 
     if (isset($_GET['delete']) && $_GET['delete'] == 'nhanVien' && isset($_GET['id'])) {
         $userId = $_GET['id'];
-        $deleteResult = $p->deleteNhanVienByID($userId);
+        $deleteResult = $p->deleteScheduleById($userId);
     
         if ($deleteResult) {
-            echo "<script>alert('Xóa nhân viên thành công');</script>";
-            echo "<script>window.location.href = 'index.php?action=hrm';</script>";
+            echo "<script>alert('Xóa lịch trực thành công');</script>";
+            echo "<script>window.location.href = 'view_schedule.php?action=hrm';</script>";
         } else {
-            echo "<script>alert('Xóa nhân viên thất bại');</script>";
+            echo "<script>alert('Xóa lịch trực thất bại');</script>";
         }
     }
-
-
+    
+    
     if ($tblNhanVien){
         if(mysqli_num_rows($tblNhanVien) > 0){
             echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css'\n            integrity='sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==' \n            crossorigin='anonymous' referrerpolicy='no-referrer' />";
-
+            
             echo "<style>
                 .pagination {
                     display: flex;
@@ -60,22 +61,35 @@
 
             echo "<table class='table' border='1'>";
             echo "<tr>";
+            echo "<th>Mã nhân viên</th>";
             echo "<th>Tên</th>";
-            echo "<th>Số điện thoại</th>";
-            echo "<th>Email</th>";
+            echo "<th>ngay_lam</th>";
+            echo "<th>ca_lam</th>";
             echo "<th>Hoạt động</th>";
             echo "</tr>";
-            while($row = mysqli_fetch_array($tblNhanVien)){
+            while($row = mysqli_fetch_assoc($tblNhanVien)){
                 echo "<tr>";
+                echo "<td>" . $row['code'] . "</td>";
                 echo "<td>" . $row['ho_ten'] . "</td>";
-                echo "<td>" . $row['so_dien_thoai'] . "</td>";
-                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['ngay_lam'] . "</td>";
 
+
+                
+                if ($row["ca_lam"] == 1) {
+                    $caLam = 'Ca sáng';
+                } elseif($row["ca_lam"] == 2) {
+                    $caLam = 'Ca chiều';
+                }elseif($row["ca_lam"] == 3) {
+                    $caLam = 'Ca tối';
+                }
+                else{
+                    $caLam = 'OT';
+                }
+
+                echo "<td>" . $caLam . "</td>";
                 echo"<td>
-                        <a href='index.php?action=hrm&view=nhanVien&id=".$row['id']."'><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
-                        <a href='index.php?action=hrm&delete=nhanVien&id=".$row['id']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Remove</button></a>
-                        <a href='index.php?action=hrm&update=nhanVien&id=".$row['id']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Update</button></a>
-                        
+                        <a href='view_schedule.php?action=hrm&delete=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Remove</button></a>
+                        <a href='view_schedule.php?action=hrm&update=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Update</button></a>    
                     </td>";
                 echo "</tr>";
             }
@@ -87,19 +101,19 @@
             // Hiển thị nút "Trang trước"
             if ($page > 1) {
                 $prevPage = $page - 1;
-                echo "<a href='index.php?action=hrm&page=$prevPage' class='prev'><i class='fa-solid fa-arrow-left-long'></i></a>";
+                echo "<a href='view_schedule.php?action=hrm&page=$prevPage' class='prev'><i class='fa-solid fa-arrow-left-long'></i></a>";
             }
 
             // Hiển thị các số trang
             for ($i = 1; $i <= $totalPages; $i++) {
                 $activeClass = ($i == $page) ? 'active' : '';
-                echo "<a href='index.php?action=hrm&page=$i' class='$activeClass'>$i</a>";
+                echo "<a href='view_schedule.php?action=hrm&page=$i' class='$activeClass'>$i</a>";
             }
 
             // Hiển thị nút "Trang tiếp theo"
             if ($page < $totalPages) {
                 $nextPage = $page + 1;
-                echo "<a href='index.php?action=hrm&page=$nextPage' class='next'><i class='fa-solid fa-arrow-right-long'></i></a>";
+                echo "<a href='view_schedule.php?action=hrm&page=$nextPage' class='next'><i class='fa-solid fa-arrow-right-long'></i></a>";
             }
 
             echo "</div>";

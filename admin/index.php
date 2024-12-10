@@ -97,7 +97,7 @@ include_once("controller/admin.php");
                         </tr>
                         <tr>
                             <?php
-                                    if(isset($_GET['view']) && $_GET['view'] == 'nhanVien' && isset($_GET['id'])){
+                                if(isset($_GET['view']) && $_GET['view'] == 'nhanVien' && isset($_GET['id'])){
                                     $userId = $_GET['id'];
                                     include_once("../view/view_personnel.php");
                                 }elseif(isset($_GET['update']) && $_GET['update'] == 'nhanVien' && isset($_GET['id'])){

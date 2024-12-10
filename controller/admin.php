@@ -69,5 +69,37 @@
             $user = $p->loginUser($username, $password);
             return $user;
         }
+
+        public function selectApproveleaveByPage($page, $limit){
+            $model = new modalAdmin();
+            return $model->selectApproveleaveByPage($page, $limit);
+        }
+
+        public function selectApproveleaveById($idApproveleave) {
+            $model = new modalAdmin();
+            return $model->selectApproveleaveById($idApproveleave);
+        }
+
+        public function updateApproveleaveStatus($idApproveleave, $trangThai) {
+            $model = new modalAdmin();
+            return $model->updateApproveleaveStatus($idApproveleave, $trangThai);
+        }
+        
+        public function selectScheduleByPage($page, $limit){
+            $model = new modalAdmin();
+            return $model->selectScheduleByPage($page, $limit);
+        }
+
+        public function selectscheduleById($idApproveleave) {
+            $model = new modalAdmin();
+            return $model->selectscheduleById($idApproveleave);
+        }
+
+        public function deleteScheduleById($userId){
+            $p = new modalAdmin();
+            $result = $p->deleteScheduleById($userId);
+            return $result;
+        }
+        
     }
 ?>

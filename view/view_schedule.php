@@ -26,7 +26,7 @@
                                      
                         
                     <div class="list-group b4-bordor mt-3">
-                        <a href="../admin/index.php" class="list-group-item list-group-item-action">Trang chủ</a>
+                        <a href="view_dashboard.php" class="list-group-item list-group-item-action">Trang chủ</a>
                         <a href="../admin/index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>
                         <a href="view_schedule.php" class="list-group-item list-group-item-action">Phân lịch ca trực</a>
                         <a href="view_approveleave.php" class="list-group-item list-group-item-action">Duyệt đơn nghỉ phép</a>
@@ -61,34 +61,17 @@
                             </tr>
                             <tr>
                                 <table class="table " border='1' >
-                                    <tr>
-                                        <th>Phiên làm việc</th>
-                                        <th>Tên</th>
-                                        <th>Ngày trực</th>
-                                        <th>Giờ trực</th>
-                                        <th>Hoạt động</th>
-                                    </tr>
 
                                     <tr>
-                                        <td>01</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>1/11/2025</td>
-                                        <td>01:15</td>
-                                        <td>
-                                        <a href=""><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
-                                        <button id='btn-rm' type='button' class='btn btn-outline-primary'>Remove</button>
-                                        </td>
-                                    </tr>
+                                        <?php
+                                            if(isset($_GET['update']) && $_GET['update'] == 'nhanVien' && isset($_GET['id'])){
+                                                $userId = $_GET['id'];
+                                                include_once("../view/update_personnel.php");
+                                            }else{
+                                                include_once("view_schedule_management.php");
 
-                                    <tr>
-                                        <td>02</td>
-                                        <td>Nguyễn Thị B</td>
-                                        <td>2/11/2030</td>
-                                        <td>11:45</td>
-                                        <td>
-                                        <a href=""><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
-                                        <button id='btn-rm' type='button' class='btn btn-outline-primary'>Remove</button>
-                                        </td>
+                                            }
+                                        ?>
                                     </tr>
                                 </table>
                             </tr>

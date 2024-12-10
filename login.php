@@ -12,7 +12,6 @@
         } elseif(strpos($_SESSION['loai_nhan_vien'], 3) !== false){
             header("Location: view/BacSiDD.php");
         }
-        exit;
     }
 
 
@@ -37,7 +36,6 @@
             } elseif(strpos($account['loai_nhan_vien'], 3) !== false){
                 header("Location: view/BacSiDD.php");
             }
-            exit;
         }
         else{
             echo "Đăng nhập sai";

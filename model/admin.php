@@ -100,38 +100,33 @@
         
             if ($conn) {
 
-                // Kiểm tra code trùng
                 $sql = "SELECT * FROM nhan_vien WHERE code = '$code'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                    return 'code'; // Trùng code
+                    return 'code';
                 }
 
-                // Kiểm tra email trùng
                 $sql = "SELECT * FROM nhan_vien WHERE email = '$email'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                    return 'email'; // Trùng email
+                    return 'email';
                 }
         
-                // Kiểm tra số điện thoại trùng
                 $sql = "SELECT * FROM nhan_vien WHERE so_dien_thoai = '$sdt'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                    return 'phone'; // Trùng số điện thoại
+                    return 'phone'; 
                 }
         
-                // Kiểm tra username trùng
                 $sql = "SELECT * FROM nhan_vien WHERE username = '$username'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                    return 'username'; // Trùng username
+                    return 'username';
                 }
         
-                // Không có giá trị nào trùng
                 return false;
             } else {
-                return false; // Kết nối thất bại
+                return false;
             }
         }
         
@@ -201,17 +196,134 @@
             return false;
         }
 
-        public function selectSchedule() {
+        public function selectApproveleaveByPage($page, $limit) {
+            $p = new connect();
+            $conn = $p->connectDB();
+        
+            if ($conn) {
+                $start = ($page - 1) * $limit;
+
+                $stmt = $conn->prepare("
+                    SELECT nhan_vien.*, don_xin_nghi.*
+                    FROM don_xin_nghi
+                    LEFT JOIN nhan_vien ON don_xin_nghi.id_nhan_vien = nhan_vien.id
+                    LIMIT ?, ?
+                ");
+        
+                if ($stmt) {
+                    $stmt->bind_param("ii", $start, $limit);
+        
+                    $stmt->execute();
+
+                    $result = $stmt->get_result();
+
+                    $stmt->close();
+                    $p->closeDB($conn);
+        
+                    return $result;
+                } else {
+                    $p->closeDB($conn);
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        
+        public function selectApproveleaveById($idApproveleave) {
+            $p = new connect();
+            $conn = $p->connectDB();
+        
+            if ($conn) {
+                $string = "SELECT nhan_vien.*, don_xin_nghi.*
+                            FROM don_xin_nghi
+                            LEFT JOIN nhan_vien ON don_xin_nghi.id_nhan_vien = nhan_vien.id
+
+                            WHERE don_xin_nghi.id_don_xin_nghi = '$idApproveleave'";
+                $table = mysqli_query($conn, $string);
+                $p->closeDB($conn);
+                return $table;
+            } else {
+                return false; 
+            }
+        }
+
+        public function updateApproveleaveStatus($idApproveleave, $trangThai) {
+            $p = new connect();
+            $conn = $p->connectDB();
+        
+            if ($conn) {
+                $string = "UPDATE don_xin_nghi SET trang_thai = '$trangThai' WHERE id_don_xin_nghi = '$idApproveleave'";
+                $result = mysqli_query($conn, $string);
+                $p->closeDB($conn);
+                return $result;
+            } else {
+                return false; 
+            }
+        }
+
+        public function selectScheduleByPage($page, $limit) {
+            $p = new connect();
+            $conn = $p->connectDB();
+        
+            if ($conn) {
+                $start = ($page - 1) * $limit;
+
+                $stmt = $conn->prepare("
+                    SELECT nhan_vien.*, lich_lam_viec.*
+                    FROM lich_lam_viec
+                    LEFT JOIN nhan_vien ON lich_lam_viec.id_nhan_vien = nhan_vien.id
+                    LIMIT ?, ?
+                ");
+        
+                if ($stmt) {
+                    $stmt->bind_param("ii", $start, $limit);
+        
+                    $stmt->execute();
+
+                    $result = $stmt->get_result();
+
+                    $stmt->close();
+                    $p->closeDB($conn);
+        
+                    return $result;
+                } else {
+                    $p->closeDB($conn);
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        public function selectScheduleById($idschedule) {
+            $p = new connect();
+            $conn = $p->connectDB();
+        
+            if ($conn) {
+                $string = "SELECT nhan_vien.*, lich_lam_viec.*
+                            FROM lich_lam_viec
+                            LEFT JOIN nhan_vien ON lich_lam_viec.id_nhan_vien = nhan_vien.id
+
+                            WHERE lich_lam_viec.id_lich_lam_viec = '$idschedule'";
+                $table = mysqli_query($conn, $string);
+                $p->closeDB($conn);
+                return $table;
+            } else {
+                return false; 
+            }
+        }
+
+        function deleteScheduleById($userId){
             $p = new connect();
             $conn = $p->connectDB();
 
-            if ($conn){
-                $sql = "SELECT * FROM schedule";
-                $result = mysqli_query($conn, $sql);
+            if($conn){
+                $string = "DELETE FROM lich_lam_viec WHERE id = '$userId'";
+                $kq = mysqli_query($conn, $string);
                 $p->closeDB($conn);
-                return $result;
-            }
-            else {
+                return $kq;
+            } else {
                 return false;
             }
         }

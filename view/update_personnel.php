@@ -12,14 +12,6 @@
 
     if ($nhanVien && mysqli_num_rows($nhanVien) > 0) {
         $row = mysqli_fetch_assoc($nhanVien);
-        if ($row["loai_nhan_vien"] == 1) {
-            $chucVu = 'Quản Trị';
-        } elseif($row["loai_nhan_vien"] == 2) {
-            $chucVu = 'Bác sĩ sức khoẻ';
-        }
-        else{
-            $chucVu = 'Bác sĩ dinh dưỡng';
-        }
     }
     echo '<form action="" method="post" enctype="multipart/form-data">';
     echo '<table class="table table-bordered">';
@@ -46,7 +38,7 @@
 
     echo '<tr>';
     echo '<td><label for="txtPass">Mật khẩu</label></td>';
-    echo '<td><input type="text" name="txtPass" class="form-control" value="'.$row['password'].'" placeholder="Mật khẩu" required></td>';
+    echo '<td><input type="password" name="txtPass" class="form-control" value="********" placeholder="Mật khẩu" required></td>';
     echo '</tr>';
 
     echo '<tr>';
@@ -67,13 +59,13 @@
     echo '</select>';
     echo '</td>';
     echo '</tr>';
-
+    
     echo '<tr>';
     echo '<td colspan="2">';
     echo '<input type="submit" name="btnSubmit" class="btn btn-primary" value="Cập nhật nhân viên">';
     echo '</td>';
     echo '</tr>';
-
+    
     echo '</table>';
     echo '</form>';
 

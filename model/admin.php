@@ -230,7 +230,7 @@
             $p = new connect();
             $conn = $p->connectDB();
 
-            $hashPass = md5($passNV);
+            $hashPass = $passNV;
 
             if($conn){
                 $query = "INSERT INTO nhan_vien (code, ho_ten, email, so_dien_thoai, ngay_sinh, loai_nhan_vien, username, password) 

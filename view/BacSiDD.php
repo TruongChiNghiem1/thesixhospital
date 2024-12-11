@@ -6,9 +6,7 @@ include_once("controller/admin.php");
     if(!isset($_SESSION['isLoggedIn'])){
         header("Location: ../login.php");
     }else{
-        if (strpos($_SESSION['loai_nhan_vien'], 1) !== false) {
-            header("location: ../admin/index.php");
-        } elseif (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
+        if (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
             header("Location: BSSucKhoe.php");
         }
     }

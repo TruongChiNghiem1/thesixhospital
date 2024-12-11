@@ -138,8 +138,6 @@
             } else {
                 echo "<div class='alert alert-danger mt-3'>Trùng $result đã tồn tại</div>";
             }
-
-
         }
 
       ?>

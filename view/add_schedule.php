@@ -58,28 +58,41 @@
                             </tr>
                             <tr>
                             <div class="container">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
                 <tr>
-                    <td><label for="txtUserID">Tên Phiên Ca Trực</label></td>
-                    <td><input type="text" name="txtUserID" class="form-control" placeholder="Tên Phiên" required></td>
+                    <td><label for="chonTenNV">Tên nhân viên</label></td>
+                    <td>
+                        <select name="chonTenNV" class="form-control">
+                            <?php
+                                include("optionTenNV.php");
+                            ?>
+                        </select>
+                    </td>
+                </tr>    
+                <tr>
+                    <td><label for="txtNgayTruc">Ngày trực</label></td>
+                    <td><input type="date" name="txtNgayTruc" class="form-control" required></td>
                 </tr>
                 <tr>
-                    <td><label for="txtHoTen">Tên Bác Sĩ</label></td>
-                    <td><input type="text" name="txtHoTen" class="form-control" placeholder="Họ và tên" required></td>
+                    <td><label for="chonCaTruc">Ca trực</label></td>
+                        <td>
+                            <select name="chonCaTruc" class="form-control">
+                                <?php
+                                    include("optionCaTruc.php");
+                                ?>
+                            </select>
+                        </td>
+                        <tr>
+                            <td><label for="txtGhiChu">Ghi chú</label></td>
+                            <td><input type="text" name="txtGhiChu" class="form-control" required></td>
+                        </tr>
                 </tr>
-                <tr>
-                    <td><label for="txtEmail">Phiên Ngày</label></td>
-                    <td><input type="date" name="txtdate" class="form-control" required></td>
-                </tr>
-                <tr>
-                    <td><label for="txtSDT">Phiên Giờ</label></td>
-                    <td><input type="time" name="txtTime" class="form-control" placeholder="00:00 00" required></td>
-                </tr>
+
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="btnSubmit" class="btn btn-primary" value="Lưu">
+                        <input type="submit" name="btnSubmit" class="btn btn-primary" value="Thêm ca trực">
                     </td>
                 </tr>
             </table>
@@ -90,6 +103,30 @@
                 </div>
             </div>
       </div>
+
+      <?php
+    include_once("../controller/admin.php");
+    $p = new controllerAdmin();
+
+    if (isset($_POST['btnSubmit'])) {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $selectedId = isset($_POST['chonTenNV']) ? $_POST['chonTenNV'] : null;
+            $ngayTruc = $_POST['txtNgayTruc'];
+            $caTruc = $_POST['chonCaTruc'];
+            $ghiChu = $_POST['txtGhiChu'];
+
+            if ($selectedId && $ngayTruc && $caTruc) {
+                if ($p->insertSchedule($selectedId, $ngayTruc, $caTruc, $ghiChu)) {
+                    echo "<div class='alert alert-success mt-3'>Thêm lịch trực thành công</div>";
+                } else {
+                    echo "<div class='alert alert-danger mt-3'>Thêm lịch trực thất bại</div>";
+                }
+            } else {
+                echo "<div class='alert alert-warning mt-3'>Vui lòng điền đầy đủ thông tin.</div>";
+            }
+        }
+    }
+    ?>
     
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

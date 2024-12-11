@@ -12,7 +12,6 @@ include_once("controller/admin.php");
         }
     }
 
-
 ?>
 
 
@@ -105,7 +104,6 @@ include_once("controller/admin.php");
                                     include_once("../view/update_personnel.php");
                                 }else{
                                     include_once("../view/admin.php");
-
                                 }
                                 ?>
                         </tr>

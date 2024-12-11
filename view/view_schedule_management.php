@@ -9,7 +9,7 @@
     $tblNhanVien = $p->selectScheduleByPage($page, $limit);
     
     
-    $totalNhanVien = $p->getCountNhanVien();
+    $totalNhanVien = $p->getCountSchedule();
     $totalPages = ceil($totalNhanVien / $limit);
 
     if (isset($_GET['delete']) && $_GET['delete'] == 'nhanVien' && isset($_GET['id'])) {
@@ -63,8 +63,8 @@
             echo "<tr>";
             echo "<th>Mã nhân viên</th>";
             echo "<th>Tên</th>";
-            echo "<th>ngay_lam</th>";
-            echo "<th>ca_lam</th>";
+            echo "<th>Ngày Làm</th>";
+            echo "<th>Ca Trực</th>";
             echo "<th>Hoạt động</th>";
             echo "</tr>";
             while($row = mysqli_fetch_assoc($tblNhanVien)){

@@ -105,7 +105,7 @@ if (isset($_POST['btnSubmit'])) {
     $ngay_an = $_POST['ngay_an'];
     $buoi_an = $_POST['buoi_an'];
     $id_ho_so_benh_an = $_POST['id_ho_so_benh_an'];
-    $id_nhan_vien = $_session['id_nhan_vien'];
+    $id_nhan_vien = $_SESSION['id'];
     // $id_monan = $_POST['id_monan'];
 
     $inforUser = new InforUser();

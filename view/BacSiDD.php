@@ -30,7 +30,10 @@ include_once("../model/mInfoNhanVien.php");
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/thesixhospital/assets/css/styleAdminService.css" id="theme-styles">
+
 </head>
 
 <style>
@@ -48,9 +51,11 @@ include_once("../model/mInfoNhanVien.php");
         }
 </style>
 
-<body class="bg-light">
+<body class="row flex-nowrap">
     <!-- Button trigger modal -->
-
+    <?php
+    include '../leftMenu.php';
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -235,6 +240,8 @@ include_once("../model/mInfoNhanVien.php");
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>

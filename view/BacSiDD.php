@@ -28,7 +28,10 @@ include_once("../model/mInfoNhanVien.php");
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/thesixhospital/assets/css/styleAdminService.css" id="theme-styles">
+
 </head>
 
 <style>
@@ -46,9 +49,11 @@ include_once("../model/mInfoNhanVien.php");
         }
 </style>
 
-<body class="bg-light">
+<body class="row flex-nowrap">
     <!-- Button trigger modal -->
-
+    <?php
+    include '../leftMenu.php';
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -117,57 +122,57 @@ include_once("../model/mInfoNhanVien.php");
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 bg-dark text-white vh-100 p-4">
-                <div class="text-center mb-4">
-                    <a>
-                        <img src="..\assets\images\bacsi.png" alt="Logo" class="rounded-circle mb-1"
-                            style="width: 100px; height: 100px" data-toggle="modal" data-target="#modelId" />
-                    </a>
-                    <h4>ThanhTong</h4>
-                    <h6 class="text-muted">bsdd@gmail.com</h6>
-                    <form action="" method="post">
-
-                        <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>
-                    </form>
-
-                </div>
-
-                <?php
-                            if (isset($_POST['btnLogout'])) {
-                                // echo "logout";
-                                include_once("../logout.php");
-                            }
-                ?>
-
-                <div class="list-group mt-4">
-                    <a href="BacSiDD.php?page=home"
-                        class="list-group-item list-group-item-action bg-dark text-light fs-4">
-                        <i class="bi bi-house-fill fs-4"></i> Trang Chủ
-                    </a>
-                    <a href="BacSiDD.php?page=appointments"
-                        class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="bi bi-calendar-check-fill"></i> Xem lịch hẹn tư vấn
-                    </a>
-                    <a href="BacSiDD.php?page=menu" class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="bi bi-list-ul"></i> Quản lý thực đơn dinh dưỡng
-                    </a>
-                    <a href="BacSiDD.php?page=users" class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="bi bi-person-fill"></i> Quản lý thông tin bệnh nhân
-                    </a>
-                    <a href="BacSiDD.php?page=request"
-                        class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="bi bi-file-earmark-text-fill"></i> Gửi Đơn Xin Nghỉ/Công
-                        Tác
-                    </a>
-                    <a href="BacSiDD.php?page=add_medical_records"
-                        class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="bi bi-file-earmark-medical-fill"></i> Tạo hồ sơ bệnh án
-                    </a>
-                </div>
-            </div>
+<!--            <div class="col-md-3 bg-dark text-white vh-100 p-4">-->
+<!--                <div class="text-center mb-4">-->
+<!--                    <a>-->
+<!--                        <img src="..\assets\images\bacsi.png" alt="Logo" class="rounded-circle mb-1"-->
+<!--                            style="width: 100px; height: 100px" data-toggle="modal" data-target="#modelId" />-->
+<!--                    </a>-->
+<!--                    <h4>ThanhTong</h4>-->
+<!--                    <h6 class="text-muted">bsdd@gmail.com</h6>-->
+<!--                    <form action="" method="post">-->
+<!---->
+<!--                        <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>-->
+<!--                    </form>-->
+<!---->
+<!--                </div>-->
+<!---->
+<!--                --><?php
+//                            if (isset($_POST['btnLogout'])) {
+//                                // echo "logout";
+//                                include_once("../logout.php");
+//                            }
+//                ?>
+<!---->
+<!--                <div class="list-group mt-4">-->
+<!--                    <a href="BacSiDD.php?page=home"-->
+<!--                        class="list-group-item list-group-item-action bg-dark text-light fs-4">-->
+<!--                        <i class="bi bi-house-fill fs-4"></i> Trang Chủ-->
+<!--                    </a>-->
+<!--                    <a href="BacSiDD.php?page=appointments"-->
+<!--                        class="list-group-item list-group-item-action bg-dark text-light">-->
+<!--                        <i class="bi bi-calendar-check-fill"></i> Xem lịch hẹn tư vấn-->
+<!--                    </a>-->
+<!--                    <a href="BacSiDD.php?page=menu" class="list-group-item list-group-item-action bg-dark text-light">-->
+<!--                        <i class="bi bi-list-ul"></i> Quản lý thực đơn dinh dưỡng-->
+<!--                    </a>-->
+<!--                    <a href="BacSiDD.php?page=users" class="list-group-item list-group-item-action bg-dark text-light">-->
+<!--                        <i class="bi bi-person-fill"></i> Quản lý thông tin bệnh nhân-->
+<!--                    </a>-->
+<!--                    <a href="BacSiDD.php?page=request"-->
+<!--                        class="list-group-item list-group-item-action bg-dark text-light">-->
+<!--                        <i class="bi bi-file-earmark-text-fill"></i> Gửi Đơn Xin Nghỉ/Công-->
+<!--                        Tác-->
+<!--                    </a>-->
+<!--                    <a href="BacSiDD.php?page=add_medical_records"-->
+<!--                        class="list-group-item list-group-item-action bg-dark text-light">-->
+<!--                        <i class="bi bi-file-earmark-medical-fill"></i> Tạo hồ sơ bệnh án-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!-- Main Content -->
-            <div class="col-md-9">
+            <div class="col">
                 <header class="d-flex justify-content-between align-items-center bg-white text-dark p-3">
                     <div class="logo">
                         <a href="BacSiDD.php?page=home">
@@ -233,6 +238,8 @@ include_once("../model/mInfoNhanVien.php");
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>

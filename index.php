@@ -6,23 +6,10 @@ header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 session_start();
 require_once 'config/app.php';
-//require_once 'config/connect.php';
-//require_once 'config/functional.php';
+require_once 'config/connect.php';
+require_once 'config/functional.php';
 
-<<<<<<< HEAD
-//if (!isset($_SESSION["admin"])) {
- //   header("location:login.php");
-  //  exit();
-//
-=======
-if (!isset($_SESSION["admin"])) {
-    header("location:login.php");
-    exit();
-} else if(isset($_GET["m"]) && $_GET["m"] == 'admin') {
-    header("Location:adminIndex.php");
-    exit();
-}
->>>>>>> 4129e64d176ff5d8e02e9e7588996ecc4b89e946
+
 
 ?>
 

@@ -1,5 +1,5 @@
 <?php 
-include 'model/user.php';
+include 'model/service.php';
 
 if (isset($_GET["a"])) {
     $a = $_GET["a"];
@@ -13,6 +13,9 @@ if (isset($_GET["a"])) {
             break;
         case 'delete':
             include 'modules/service/delete.php';
+            break;
+        case 'booking-service':
+            include 'modules/service/process_booking.php';
             break;
         default:
             include 'modules/service/list.php';

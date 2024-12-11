@@ -58,11 +58,11 @@
                             </tr>
                             <tr>
                             <div class="container">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
                 <tr>
-                    <td><label for="txtUserID">Mã nhân viên</label></td>
-                    <td><input type="text" name="txtUserID" class="form-control" placeholder="Mã nhân viên" required></td>
+                    <td><label for="txtCodeID">Mã nhân viên</label></td>
+                    <td><input type="text" name="txtCodeID" class="form-control" placeholder="Mã nhân viên" required></td>
                 </tr>
                 <tr>
                     <td><label for="txtHoTen">Họ và tên</label></td>
@@ -71,6 +71,14 @@
                 <tr>
                     <td><label for="txtEmail">Email</label></td>
                     <td><input type="email" name="txtEmail" class="form-control" placeholder="Email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtUser">Tên đăng nhập</label></td>
+                    <td><input type="text" name="txtUser"class="form-control" placeholder="Tên đăng nhập" required></td>
+                </tr>
+                <tr>
+                    <td><label for="txtPass">Mật Khẩu</label></td>
+                    <td><input type="text" name="txtPass"class="form-control" placeholder="Mật Khẩu" required></td>
                 </tr>
                 <tr>
                     <td><label for="txtSDT">Số điện thoại</label></td>
@@ -85,15 +93,14 @@
                     <td>
                         <select name="chonChucVu" class="form-control">
                             <?php
-                                include_once("optionChucVu.php");
+                                include("optionChucVu.php");
                             ?>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
                     <td>
-                        <input type="submit" name="btnSubmit" class="btn btn-primary" value="Lưu">
+                        <input type="submit" name="btnSubmit" class="btn btn-primary" value="Thêm nhân viên">
                     </td>
                 </tr>
             </table>
@@ -105,6 +112,36 @@
             </div>
       </div>
     
+
+      <?php
+        //error_reporting(0);
+
+        if(isset($_POST['btnSubmit'])){
+            $code = $_POST['txtCodeID'];
+            $name = $_POST['txtHoTen'];
+            $email = $_POST['txtEmail'];
+            $user = $_POST['txtUser'];
+            $pass = $_POST['txtPass'];
+            $phone = $_POST['txtSDT'];
+            $date = $_POST['txtNgaySinh'];
+            $loaiNV = $_POST['chonChucVu'];
+            
+
+            $result = $p->checkUserName($name, $email, $phone, $user);
+
+            if ($result === false) {
+                if (!$p->insertNhanVien($code, $name, $email, $user, $pass, $phone, $date, $loaiNV)) {
+                    echo "<div class='alert alert-success mt-3'>Thêm nhân viên thành công</div>";
+                } else {
+                    echo "<div class='alert alert-danger mt-3'>Thêm nhân viên thất bại</div>";
+                }
+            } else {
+                echo "<div class='alert alert-danger mt-3'>Trùng $result đã tồn tại</div>";
+            }
+        }
+
+      ?>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

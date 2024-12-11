@@ -10,6 +10,9 @@
   justify-content: center;
   align-items: center;
 }
+.css-xwws3d {
+  display: none !important;
+}
 
 .modal-content {
   background-color: white;

@@ -1,3 +1,8 @@
+<?php
+$results = getListCalendar();
+
+?>
+
 <nav class="ms-2 mt-3" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -17,6 +22,7 @@
             <tr>
                 <th class="text-center">Mã lịch</th>
                 <th>Tên bệnh nhân</th>
+                <th>Số điện thoại</th>
                 <th>Dịch vụ khám</th>
                 <th>Tổng</th>
                 <th>Ngày khám</th>
@@ -26,22 +32,24 @@
             </tr>
             </thead>
             <tbody>
-            <?php for($i = 1; $i < 50; $i++) { ?>
+            <?php foreach ($results as $row): ?>
                 <tr>
-                    <td class="text-center"><?php echo $i ?></td>
-                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=create-calendar">Trương Chí Nghiệm <?php echo $i ?></a></td>
-                    <td>Dịch vụ khám sức khỏe lái xe</td>
-                    <td>250.000 VNĐ</td>
-                    <td>31/10/2024</td>
-                    <td><span class="text-danger">Chưa có bác sĩ</span></td>
-                    <td><span class="text-danger">Đang chờ bác sĩ</span></td>
+                    <td class="text-center"><?php echo $row['id_lich_hen']; ?></td>
+                    <td><a class="text-decoration-none" href="/thesixhospital/adminIndex.php?m=services&a=detail-calendar&id=<?php echo $row['id_lich_hen']; ?>"><?php echo htmlspecialchars($row['ten_benh_nhan']); ?></a></td>
+                    <td><?php echo htmlspecialchars($row['so_dien_thoai']); ?></td>
+                    <td><?php echo htmlspecialchars($row['ten_dich_vu']); ?></td>
+                    <td><?php echo htmlspecialchars($row['gia_goc']); ?> VNĐ</td>
+                    <td><?php echo date('d/m/Y', strtotime($row['ngay_gio'])); ?></td>
+                    <td><?php echo $row['bac_si'] ? htmlspecialchars($row['bac_si']) : '<span class="text-danger">Chưa có bác sĩ</span>'; ?></td>
+                    <td><span class="text-danger"><?php echo htmlspecialchars($row['trang_thai']); ?></span></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPhanCong<?php echo $i ?>">Phân công</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPhanCong<?php echo $row['id_lich_hen']; ?>">Phân công</button>
+                        <button type="button" class="btn btn-danger">Từ chối</button>
                     </td>
                 </tr>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modalPhanCong<?php echo $i ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal Phân công -->
+                <div class="modal fade" id="modalPhanCong<?php echo $row['id_lich_hen']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -49,28 +57,28 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="assign_doctor.php" method="POST">
+                                    <input type="hidden" name="lich_id" value="<?php echo $row['id_lich_hen']; ?>">
                                     <div class="form-group mb-3">
-                                        <label class="d-flex mb-2" for="exampleInputEmail1">Chọn bác sĩ</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Chọn bác sĩ</option>
+                                        <label class="d-flex mb-2" for="doctor">Chọn bác sĩ</label>
+                                        <select class="form-select" name="doctor_id" id="doctor" required>
+                                            <option selected disabled>Chọn bác sĩ</option>
                                             <option value="1">Trương Chí Nghiệm</option>
                                             <option value="2">Cao Thanh Việt</option>
                                             <option value="3">Nguyễn Nhật Tùng</option>
                                         </select>
                                     </div>
-                                </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                <button type="button" class="btn btn-primary">Lưu</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php endforeach; ?>
             </tbody>
-
         </table>
     </div>
 </div>

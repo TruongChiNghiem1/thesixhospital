@@ -84,5 +84,11 @@ h1.title {
 /*Nghiem*/
 .h_400px{
   height: 400px;
+<<<<<<< HEAD
 >>>>>>> 4129e64d176ff5d8e02e9e7588996ecc4b89e946
+=======
+}
+.w_200px{
+  width: 200px;
+>>>>>>> eefcff8dac6ebf1e7d75e41b6e19f524c86955f0
 }

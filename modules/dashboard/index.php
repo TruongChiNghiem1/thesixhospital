@@ -29,7 +29,7 @@
         <div class="position-absolute top-50 start-50 translate-middle">
             <div class="d-xxl-none" style="width: 1780px"></div>
             <div class="d-none d-xxl-block" style="width: 2157px"></div>
-            <img src="assets/img/home/contractors/hero.png" alt="Image">
+<!--            <img src="/thesixhospital/assets/img/home/contractors/hero.png" alt="Image">-->
         </div>
     </section>
 
@@ -217,7 +217,7 @@
                         </div>
                         <a class="d-block position-relative z-1 pb-4 ps-xl-5 ms-lg-n3 ms-xl-0 ms-xxl-3" href="#!">
                             <div class="ratio mb-2" style="width: 324px; --fn-aspect-ratio: calc(221 / 324 * 100%)">
-                                <img src="assets/img/home/contractors/banner.png" alt="Image">
+<!--                                <img src="/thesixhospital/assets/img/home/contractors/banner.png" alt="Image">-->
                             </div>
                         </a>
                         <span class="position-absolute top-0 start-0 w-100 h-100 bg-body-secondary rounded overflow-hidden d-none-dark">
@@ -248,7 +248,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th01.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th01.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -270,7 +270,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th02.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th02.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -292,7 +292,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th03.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th03.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -314,7 +314,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th04.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th04.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -336,7 +336,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th05.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th05.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -358,7 +358,7 @@
                         <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-2">
                             <div class="flex-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 112px">
                                 <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(80 / 112 * 100%)">
-                                    <img src="assets/img/home/contractors/projects/th06.jpg" alt="Image">
+<!--                                    <img src="/thesixhospital/assets/img/home/contractors/projects/th06.jpg" alt="Image">-->
                                 </div>
                             </div>
                             <div class="pt-1 ps-3">
@@ -398,7 +398,7 @@
                     <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-3 mt-sm-0">
                         <div class="flex-sm-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 130px">
                             <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(150 / 130 * 100%)">
-                                <img src="assets/img/home/contractors/advice/01.jpg" alt="Image">
+<!--                                <img src="/thesixhospital/assets/img/home/contractors/advice/01.jpg" alt="Image">-->
                             </div>
                         </div>
                         <div class="ps-3 ps-sm-4 pe-lg-4 pe-xxl-5">
@@ -417,7 +417,7 @@
                     <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-3 mt-sm-0">
                         <div class="flex-sm-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 130px">
                             <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(150 / 130 * 100%)">
-                                <img src="assets/img/home/contractors/advice/02.jpg" alt="Image">
+<!--                                <img src="/thesixhospital/assets/img/home/contractors/advice/02.jpg" alt="Image">-->
                             </div>
                         </div>
                         <div class="ps-3 ps-sm-4 pe-lg-4 pe-xxl-5">
@@ -436,7 +436,7 @@
                     <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-3 mt-sm-0">
                         <div class="flex-sm-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 130px">
                             <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(150 / 130 * 100%)">
-                                <img src="assets/img/home/contractors/advice/03.jpg" alt="Image">
+<!--                                <img src="/thesixhospital/assets/img/home/contractors/advice/03.jpg" alt="Image">-->
                             </div>
                         </div>
                         <div class="ps-3 ps-sm-4 pe-lg-4 pe-xxl-5">
@@ -455,7 +455,7 @@
                     <article class="hover-effect-scale position-relative d-inline-flex align-items-start mt-3 mt-sm-0">
                         <div class="flex-sm-shrink-0 bg-body-tertiary rounded overflow-hidden" style="width: 130px">
                             <div class="ratio hover-effect-target" style="--fn-aspect-ratio: calc(150 / 130 * 100%)">
-                                <img src="assets/img/home/contractors/advice/04.jpg" alt="Image">
+<!--                                <img src="/thesixhospital/assets/img/home/contractors/advice/04.jpg" alt="Image">-->
                             </div>
                         </div>
                         <div class="ps-3 ps-sm-4 pe-lg-4 pe-xxl-5">
@@ -502,7 +502,7 @@
                 </div>
             </div>
         </div>
-        <img src="assets/img/home/contractors/become-pro-cta.jpg" class="position-absolute top-0 end-0 w-50 h-100 object-fit-cover d-none d-md-block" alt="Image">
+<!--        <img src="/thesixhospital/assets/img/home/contractors/become-pro-cta.jpg" class="position-absolute top-0 end-0 w-50 h-100 object-fit-cover d-none d-md-block" alt="Image">-->
     </section>
 
     <section class="container py-2 py-sm-3 py-md-4 py-lg-5 my-xxl-3">
@@ -522,7 +522,7 @@
                 <article class="card hover-effect-scale bg-transparent overflow-hidden">
                     <div class="row h-100 g-0">
                         <div class="col-sm-4 position-relative bg-body-tertiary overflow-hidden" style="min-height: 178px">
-                            <img src="assets/img/home/contractors/projects/04.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">
+<!--                            <img src="/thesixhospital/assets/img/home/contractors/projects/04.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">-->
                         </div>
                         <div class="col-sm-8 card-body d-flex flex-column align-items-start p-3 p-sm-4">
                             <h3 class="h6 mt-1 mt-sm-0 mb-2">
@@ -547,7 +547,7 @@
                 <article class="card hover-effect-scale bg-transparent overflow-hidden">
                     <div class="row h-100 g-0">
                         <div class="col-sm-4 position-relative bg-body-tertiary overflow-hidden" style="min-height: 178px">
-                            <img src="assets/img/home/contractors/projects/05.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">
+<!--                            <img src="/thesixhospital/assets/img/home/contractors/projects/05.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">-->
                         </div>
                         <div class="col-sm-8 card-body d-flex flex-column align-items-start p-3 p-sm-4">
                             <h3 class="h6 mt-1 mt-sm-0 mb-2">
@@ -572,7 +572,7 @@
                 <article class="card hover-effect-scale bg-transparent overflow-hidden">
                     <div class="row h-100 g-0">
                         <div class="col-sm-4 position-relative bg-body-tertiary overflow-hidden" style="min-height: 178px">
-                            <img src="assets/img/home/contractors/projects/06.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">
+<!--                            <img src="/thesixhospital/assets/img/home/contractors/projects/06.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">-->
                         </div>
                         <div class="col-sm-8 card-body d-flex flex-column align-items-start p-3 p-sm-4">
                             <h3 class="h6 mt-1 mt-sm-0 mb-2">
@@ -597,7 +597,7 @@
                 <article class="card hover-effect-scale bg-transparent overflow-hidden">
                     <div class="row h-100 g-0">
                         <div class="col-sm-4 position-relative bg-body-tertiary overflow-hidden" style="min-height: 178px">
-                            <img src="assets/img/home/contractors/projects/07.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">
+<!--                            <img src="/thesixhospital/assets/img/home/contractors/projects/07.jpg" class="hover-effect-target position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Image">-->
                         </div>
                         <div class="col-sm-8 card-body d-flex flex-column align-items-start p-3 p-sm-4">
                             <h3 class="h6 mt-1 mt-sm-0 mb-2">

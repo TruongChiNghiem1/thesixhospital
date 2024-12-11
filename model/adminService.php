@@ -1,13 +1,27 @@
 <?php
+
+function index() {
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
+    $query = "SELECT * FROM dich_vu ORDER BY created_at DESC";
+    $result = mysqli_query($conn, $query);
+
+    $services = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $services[] = $row;
+    }
+
+    return $services;
+}
+
 function delete($id) {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "DELETE FROM dich_vu WHERE id_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
     return mysqli_stmt_execute($stmt);
 }
 
 function get_service_by_id($id) {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "SELECT * FROM dich_vu WHERE id_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
@@ -17,7 +31,7 @@ function get_service_by_id($id) {
 }
 
 function update_service($id, $data) {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "UPDATE dich_vu SET ten_dich_vu = ?, gia_goc = ?, gia_giam = ?, chi_tiet = ?, mo_ta = ?, hinh_anh = ? WHERE id_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "ssssssi",
         $data["ten_dich_vu"],
@@ -32,7 +46,7 @@ function update_service($id, $data) {
 }
 
 function duplicate_service($name) {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "SELECT * FROM dich_vu WHERE ten_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "s", $name);
     mysqli_stmt_execute($stmt);
@@ -42,7 +56,7 @@ function duplicate_service($name) {
 }
 
 function create_service($data) {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "INSERT INTO dich_vu (ten_dich_vu, gia_goc, gia_giam, chi_tiet, mo_ta, created_at, hinh_anh) VALUES (?, ?, ?, ?, ?, ?, ?)");
     mysqli_stmt_bind_param($stmt, "sssssss",
         $data["ten_dich_vu"],
@@ -57,7 +71,7 @@ function create_service($data) {
 }
 
 function getListCalendar() {
-    global $conn;
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
     $query = "
         SELECT 
             lh.id_lich_hen,
@@ -87,3 +101,4 @@ function getListCalendar() {
     }
     return $calendar;
 }
+?>

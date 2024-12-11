@@ -1,12 +1,16 @@
 <?php
-// Lấy danh sách dịch vụ từ cơ sở dữ liệu
 function get_services() {
-global $conn;
-$stmt = $conn->prepare("SELECT * FROM dich_vu ORDER BY created_at DESC");
-$stmt->execute();
-return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
+    $query = "SELECT * FROM dich_vu ORDER BY created_at DESC";
+    $result = mysqli_query($conn, $query);
 
+    $services = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $services[] = $row;
+    }
+
+    return $services;
+}
 $services = get_services();
 ?>
 

@@ -100,7 +100,7 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
             </div>
             <div class="d-flex mt-4">
                 <?php
-                if (!isset($_SESSION["admin"])) {
+                if (!isset($_SESSION["id"])) {
                 ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='login.php'">Đặt lịch ngay</button>
                 <?php

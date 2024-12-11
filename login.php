@@ -1,46 +1,46 @@
 <?php
-    // error_reporting(0);
-    require_once 'config/connect.php';
-    include_once("controller/admin.php");
-    session_start();
+// error_reporting(0);
+require_once 'config/connect.php';
+include_once("controller/admin.php");
+session_start();
 
-    if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true){
-        if (strpos($_SESSION['loai_nhan_vien'], 1) !== false) {
-            header("location: admin/index.php");
-        } elseif (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
-            header("Location: BSSucKhoe.php");
-        } elseif(strpos($_SESSION['loai_nhan_vien'], 3) !== false){
-            header("Location: view/BacSiDD.php");
-        }
-    }
+// if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true){
+//     if (strpos($_SESSION['loai_nhan_vien'], 1) !== false) {
+//         header("location: admin/index.php");
+//     } elseif (strpos($_SESSION['loai_nhan_vien'], 2) !== false) {
+//         header("Location: BSSucKhoe.php");
+//     } elseif(strpos($_SESSION['loai_nhan_vien'], 3) !== false){
+//         header("Location: view/BacSiDD.php");
+//     }
+// }
 
 
-    if(isset($_POST['login'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+// if(isset($_POST['login'])){
+//     $username = $_POST['username'];
+//     $password = $_POST['password'];
 
-        $p = new controllerAdmin();
-        $account = $p->loginUser($username, $password);
-        // echo $account;
-        if($account){
-            $_SESSION['isLoggedIn'] = true;
-            $_SESSION['id'] = $account['id'];
-            $_SESSION['username'] = $account['username'];
-            $_SESSION['ho_ten'] = $account['ho_ten'];
-            $_SESSION['loai_nhan_vien'] = $account['loai_nhan_vien'];
-       
-            if (strpos($account['loai_nhan_vien'], 1) !== false) {
-                header("Location: admin/index.php");
-            } elseif (strpos($account['loai_nhan_vien'], 2) !== false) {
-                header("Location: BacSiSK.php");
-            } elseif(strpos($account['loai_nhan_vien'], 3) !== false){
-                header("Location: view/BacSiDD.php");
-            }
-        }
-        else{
-            echo "Đăng nhập sai";
-        }
-    }
+//     $p = new controllerAdmin();
+//     $account = $p->loginUser($username, $password);
+//     // echo $account;
+//     if($account){
+//         $_SESSION['isLoggedIn'] = true;
+//         $_SESSION['id'] = $account['id'];
+//         $_SESSION['username'] = $account['username'];
+//         $_SESSION['ho_ten'] = $account['ho_ten'];
+//         $_SESSION['loai_nhan_vien'] = $account['loai_nhan_vien'];
+
+//         if (strpos($account['loai_nhan_vien'], 1) !== false) {
+//             header("Location: admin/index.php");
+//         } elseif (strpos($account['loai_nhan_vien'], 2) !== false) {
+//             header("Location: BacSiSK.php");
+//         } elseif(strpos($account['loai_nhan_vien'], 3) !== false){
+//             header("Location: view/BacSiDD.php");
+//         }
+//     }
+//     else{
+//         echo "Đăng nhập sai";
+//     }
+// }
 // require_once 'config/app.php';
 // require_once 'config/connect.php';
 // $errors = array();
@@ -66,7 +66,49 @@
 //             $errors[] = "Member doesn't exist or you aren't admin";
 //         }
 //     }
-// }
+// }session_start();
+require_once __DIR__ . '/config/connect.php';
+
+// Kết nối đến cơ sở dữ liệu
+$database = new connect();
+$conn = $database->connectDB();
+
+// Kiểm tra kết nối
+if (!$conn) {
+    die("Kết nối không thành công. Vui lòng kiểm tra lại tệp connect.php.");
+}
+
+// Xử lý đăng nhập khi người dùng gửi form
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Truy vấn kiểm tra thông tin người dùng trong cơ sở dữ liệu
+    $sql = "SELECT * FROM nhan_vien WHERE email = '$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+        // Kiểm tra mật khẩu
+        if (password_verify($password, $row['password'])) {
+            // Đăng nhập thành công, lưu thông tin vào session
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['username'] = $row['username'];
+
+            // Chuyển hướng đến trang profile
+            header('Location: /thesixhospital/index.php');
+            exit();
+        } else {
+            // Mật khẩu không đúng
+            echo "Mật khẩu không đúng.";
+        }
+    } else {
+        // Email không tồn tại
+        echo "Email không tồn tại.";
+    }
+}
 
 ?>
 
@@ -85,13 +127,13 @@
 
 <body>
     <?php if (!empty($errors)) { ?>
-        <div class="error">
-            <?php
+    <div class="error">
+        <?php
             foreach ($errors as $errors) {
                 echo "<li>$errors</li>";
             }
             ?>
-        </div>
+    </div>
     <?php } ?>
     <center>
         <div class="container">
@@ -105,12 +147,12 @@
                     <form action="" method="POST">
                         <tr>
                             <td class="label-td">
-                                <label for="username" class="form-label">Email: </label>
+                                <label for="email" class="form-label">Email: </label>
                             </td>
                         </tr>
                         <tr>
                             <td class="label-td">
-                                <input type="text" name="username" class="input-text" placeholder="Nhập email" required>
+                                <input type="text" name="email" class="input-text" placeholder="Nhập email" required>
                             </td>
                         </tr>
                         <tr>
@@ -126,15 +168,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><br>
-
-                            </td>
+                            <td><br></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="submit" name="login" value="Đăng nhập">
                             </td>
                         </tr>
+                    </form>
                 </div>
                 <tr>
                     <td>
@@ -144,7 +185,6 @@
                         <br><br><br>
                     </td>
                 </tr>
-                </form>
             </table>
         </div>
     </center>

@@ -1,5 +1,6 @@
 <?php
 // Code by ThanhTong(2T)
+session_start();
 include_once("../controller/BSDD/cUser.php");
 $inforUser = new InforUser();
 
@@ -71,14 +72,15 @@ $monAnResult = mysqli_query($conn, $queryMonAn);
                 <tr>
                     <td><label for="id_nhan_vien">Nhân Viên</label></td>
                     <td>
-                        <select name="id_nhan_vien" class="form-control" required>
+                        <!-- <select name="id_nhan_vien" class="form-control" required>
                             <?php
                             $nhan_vien_result = mysqli_query($conn, "SELECT * FROM nhan_vien"); // Query lấy nhân viên từ bả
                             while ($row = mysqli_fetch_assoc($nhan_vien_result)) {
                                 echo "<option value='{$row['id_nhan_vien']}'>{$row['id']}</option>";
                             }
                             ?>
-                        </select>
+                        </select> -->
+                        <input type="text" name="id_nhan_vien" class="form-control" value="<?php echo $_SESSION['id']; ?>" readonly>
                     </td>
                 </tr>
                 <tr>

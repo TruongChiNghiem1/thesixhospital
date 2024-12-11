@@ -1,5 +1,10 @@
 <?php
 // Code by ThanhTong(2T)
+
+session_start();
+
+$id = $_SESSION['id'];
+// echo $id;
 include_once("../controller/BSDD/cMenu.php");
 include_once("../controller/BSDD/cNhanVien.php");
 
@@ -168,7 +173,7 @@ if ($data) {
                         <div class="form-group">
                             <label for="idNguoiTao">ID Người Tạo</label>
                             <input type="text" class="form-control" id="idNguoiTao" name="idNguoiTao" readonly
-                                value="<?php echo 1; ?>">
+                                value="<?php echo $_SESSION['id']; ?>">
                         </div>
                         <div class="form-group">
                             <label for="maThucDon">Mã Thực Đơn</label>

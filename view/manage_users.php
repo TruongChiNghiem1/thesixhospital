@@ -54,8 +54,6 @@ if (!$data) {
 
 
         <?php if ($data && mysqli_num_rows($data) > 0): ?>
-    
-
 
             <div class="text-right mb-3">
                 <a href="BacSiDD.php?page=add_thucdon" class="btn btn-primary">

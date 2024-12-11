@@ -60,7 +60,7 @@ $data = $p->select();
         <h1 class="text-center">Lịch Hẹn Bệnh Nhân</h1>
 
         <!-- Bộ lọc theo ngày -->
-        <div class="row mb-4">
+        <!-- <div class="row mb-4">
             <div class="col-md-6">
                 <label for="fromDate">Từ ngày:</label>
                 <input type="date" class="form-control" id="fromDate">
@@ -69,7 +69,7 @@ $data = $p->select();
                 <label for="toDate">Đến ngày:</label>
                 <input type="date" class="form-control" id="toDate">
             </div>
-        </div>
+        </div> -->
 
         <?php if ($data && mysqli_num_rows($data) > 0): ?>
 

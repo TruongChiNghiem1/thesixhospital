@@ -7,7 +7,7 @@ include_once("../controller/BSDD/cDonXinNghi.php");
 $donXinNghi = new DonXinNghi();
 
 if (isset($_POST['btnSubmit'])) {
-    $id_nhan_vien = $_POST['id_nhan_vien'];
+    $id_nhan_vien = $_SESSION['id'];
     $ngay_nghi = $_POST['ngay_nghi'];
     $ly_do = $_POST['ly_do_nghi'];
 
@@ -62,7 +62,7 @@ if (isset($_POST['btnSubmit'])) {
                 <tr>
                     <td><label for="id_nhan_vien">Nhân Viên</label></td>
                     <td>
-                        <input type="text" name="id_nhan_vien" class="form-control" value="<?php echo htmlspecialchars($_SESSION['id']); ?>" readonly required>
+                        <input type="text" name="id_nhan_vien" class="form-control" value="<?php echo htmlspecialchars($_SESSION['ho_ten']); ?>" readonly required>
                     </td>
                 </tr>
                 <tr>

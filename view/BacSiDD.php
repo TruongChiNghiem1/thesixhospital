@@ -1,6 +1,16 @@
 
 <?php
 session_start();
+
+$id = $_SESSION['id'];
+include_once("../controller/BSDD/cNhanVien.php");
+$nhanVienBS = new NhanVienBS();
+$nhanVien = $nhanVienBS->selectNhanVienById($id);
+$row = mysqli_fetch_array($nhanVien);
+$ten_nhan_vien = $row['ho_ten'];
+$email = $row['email'];
+
+
 error_reporting(0);
 // require_once 'config/connect.php';
 include_once("controller/admin.php");
@@ -15,7 +25,7 @@ include_once("controller/admin.php");
         }
     }
 
-include_once("../model/mInfoNhanVien.php");
+
 
 
 ?>
@@ -52,68 +62,7 @@ include_once("../model/mInfoNhanVien.php");
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Chỉnh Sửa Hồ Sơ Cá Nhân</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form">
-                        <div class="mb-3 mt-2">
-                            <label for="formFileSm" class="form-label">Ảnh Đại Diện:</label>
-                            <!-- <div class="d-flex align-items-center mt-1">
-                                <input class="form-control form-control-sm d-none" id="formFileSm" type="file" />
-                                <img src="..\assets\images\imgChoseEditProfile.png" alt="Ảnh đại diện đã chọn"
-                                    style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 1px solid #ced4da; cursor: pointer;"
-                                    onclick="document.getElementById('formFileSm').click();" />
-                            </div> -->
-                            <input type="file" name="image" id="image">
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Họ Tên:
-                            </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Vui Lòng Điền Họ Tên" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email:
-                            </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                placeholder="name@example.com" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Số Điện Thoại:
-                            </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Vui Lòng Điền SĐT" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Địa chỉ:
-                            </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Địa Chỉ" />
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <!--  -->
    
     <div class="container-fluid">
@@ -125,8 +74,8 @@ include_once("../model/mInfoNhanVien.php");
                         <img src="..\assets\images\bacsi.png" alt="Logo" class="rounded-circle mb-1"
                             style="width: 100px; height: 100px" data-toggle="modal" data-target="#modelId" />
                     </a>
-                    <h4>ThanhTong</h4>
-                    <h6 class="text-muted">bsdd@gmail.com</h6>
+                    <h4><?php echo $ten_nhan_vien ?></h4>
+                    <h6 class="text-muted"><?php echo $email ?></h6>
                     <form action="" method="post">
 
                         <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>
@@ -176,12 +125,14 @@ include_once("../model/mInfoNhanVien.php");
                             <img src="..\assets\images\logo.jpg" alt="Logo" style="width: 80px; height: auto" />
                         </a>
                     </div>
-                    <div class="input-group w-50">
-                        <input type="search" class="form-control rounded" placeholder="Tìm kiếm"
-                            aria-label="Tìm kiếm" />
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="button">Tìm</button>
-                        </div>
+                    <div class="banner">
+
+                    <!-- chữ chạy chạy -->
+                    <marquee behavior="scroll" direction="left" scrollamount="5">
+                        <h1 class="text-primary">Hệ Thống Quản Lý Dinh Dưỡng</h1>
+                    </marquee>
+                      
+                        
                     </div>
                     <div class="date-info text-dark">
                         <span>Ngày hôm nay: <?php echo date("Y-m-d"); ?></span>

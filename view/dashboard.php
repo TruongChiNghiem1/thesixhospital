@@ -1,5 +1,17 @@
+<?php
+    session_start();
+
+    $id = $_SESSION['id'];
+    include_once("../controller/BSDD/cNhanVien.php");
+    $nhanVienBS = new NhanVienBS();
+    $nhanVien = $nhanVienBS->selectNhanVienById($id);
+    $row = mysqli_fetch_array($nhanVien);
+    $ten_nhan_vien = $row['ho_ten'];
+
+?>
+
 <div class="bg-white rounded p-4 shadow-sm">
-    <h3 class="font-weight-bold text-primary">Chào mừng, Thanh Tòng!</h3>
+    <h3 class="font-weight-bold text-primary">Chào mừng, <?php echo $ten_nhan_vien; ?>!</h3>
     <p>Chúc bạn có một ngày làm việc hiệu quả và tràn đầy năng lượng!</p>
 
     <!-- Carousel/Slide with Autoplay -->

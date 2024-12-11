@@ -10,6 +10,13 @@
             $data = $nhanVien->selectNhanVien();
             return $data;
         }
+
+        public function selectNhanVienById($id)
+        {
+            $nhanVien = new NhanVien();
+            $data = $nhanVien->selectNhanVienById($id);
+            return $data;
+        }
     }
     
 ?>

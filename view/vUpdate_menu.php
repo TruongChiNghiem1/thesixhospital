@@ -1,4 +1,6 @@
 <!-- // Code by ThanhTong(2T) -->
+
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -19,6 +21,7 @@
 
 <body>
     <?php
+    session_start();
     include_once("../controller/BSDD/cMenu.php");
     $menu = new MenuBS();
     $id = $_GET['id'];
@@ -60,8 +63,8 @@
                     </div>
                     <div class="form-group">
                         <label for="idNguoiTao">ID Người Tạo</label>
-                        <input type="text" class="form-control" id="idNguoiTao" name="idNguoiTao" required 
-                               value="<?php echo htmlspecialchars($idNguoiTao); ?>">
+                        <input type="text" class="form-control" id="idNguoiTao" name="idNguoiTao" required  readonly
+                        value="<?php echo $_SESSION['id']; ?>">
                     </div>
                     <div class="form-group
                         <label for="maThucDon">Mã Thực Đơn</label>

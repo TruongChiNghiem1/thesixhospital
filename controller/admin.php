@@ -29,6 +29,30 @@
             return $count;
         }
 
+        public function getCountSchedule() {
+            $model = new modalAdmin();
+            $count = $model->countSchedule();
+            return $count;
+        }
+
+        public function getCountApproveLeave() {
+            $model = new modalAdmin();
+            $count = $model->countApproveLeave();
+            return $count;
+        }
+
+        public function countScheduleByTrangThai($trangThai) {
+            $model = new modalAdmin();
+            $count = $model->countScheduleByTrangThai($trangThai);
+            return $count;
+        }
+
+        public function countApproveLeaveByTrangThai($trangThai) {
+            $model = new modalAdmin();
+            $count = $model->countApproveLeaveByCaLam($trangThai);
+            return $count;
+        }
+
         function getAllChucVu(){
             $p = new modalAdmin();
             $tblCompany = $p->selectAllChucVu();
@@ -38,6 +62,17 @@
         function getChucVuByUserId($userId) {
             $p = new modalAdmin();
             return $p->selectChucVuByUserId($userId);
+        }
+
+        function getAllTenNV(){
+            $p = new modalAdmin();
+            $tblCompany = $p->selectAllTenNV();
+            return $tblCompany;
+        } 
+        
+        function getTenNVByUserId($userId) {
+            $p = new modalAdmin();
+            return $p->selectTenNVByUserId($userId);
         }
 
         function checkUserName($hoTen, $email, $sdt, $username){
@@ -89,15 +124,32 @@
             $model = new modalAdmin();
             return $model->selectScheduleByPage($page, $limit);
         }
+        
 
-        public function selectscheduleById($idApproveleave) {
+        public function GetAllCaTruc(){
             $model = new modalAdmin();
-            return $model->selectscheduleById($idApproveleave);
+            return $model->selectAllCaTruc();
+        }
+
+        public function selectScheduleById($idApproveleave) {
+            $model = new modalAdmin();
+            return $model->selectScheduleById($idApproveleave);
+        }
+
+        public function insertSchedule($userId, $ngayTruc, $caTruc, $ghiChu){
+            $model = new modalAdmin();
+            return $model->insertSchedule($userId, $ngayTruc, $caTruc, $ghiChu);
         }
 
         public function deleteScheduleById($userId){
             $p = new modalAdmin();
             $result = $p->deleteScheduleById($userId);
+            return $result;
+        }
+
+        public function updateSchedule($idlich, $userId, $ngayTruc, $caTruc, $ghiChu){
+            $p = new modalAdmin();
+            $result = $p->updateSchedule($idlich, $userId, $ngayTruc, $caTruc, $ghiChu);
             return $result;
         }
         

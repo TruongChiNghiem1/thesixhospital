@@ -10,7 +10,7 @@
     $tblNhanVien = $p->selectApproveleaveByPage($page, $limit);
 
 
-    $totalNhanVien = $p->getCountNhanVien();
+    $totalNhanVien = $p->getCountApproveLeave();
     $totalPages = ceil($totalNhanVien / $limit);
 
 

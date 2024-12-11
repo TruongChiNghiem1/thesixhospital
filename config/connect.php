@@ -15,6 +15,6 @@ class connect{
     function closeDB($conn){
         mysqli_close($conn);
     }
-}
+ }
 
 ?>

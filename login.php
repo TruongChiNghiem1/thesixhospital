@@ -90,22 +90,20 @@ if (isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
-        // Kiểm tra mật khẩu
         if (password_verify($password, $row['password'])) {
-            // Đăng nhập thành công, lưu thông tin vào session
+            $_SESSION['isLoggedIn'] = true;
             $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['ho_ten'] = $row['ho_ten'];
+            $_SESSION['loai_nhan_vien'] = $row['loai_nhan_vien'];
 
-            // Chuyển hướng đến trang profile
             header('Location: /thesixhospital/index.php');
             exit();
         } else {
-            // Mật khẩu không đúng
             echo "Mật khẩu không đúng.";
         }
     } else {
-        // Email không tồn tại
         echo "Email không tồn tại.";
     }
 }

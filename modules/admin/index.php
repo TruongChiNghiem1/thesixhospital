@@ -5,7 +5,7 @@ require_once 'config/app.php';
 require_once 'config/connect.php';
 require_once 'config/functional.php';
 
-if (!isset($_SESSION["admin"])) {
+if (!isset($_SESSION["id"])) {
     header("location:login.php");
     exit();
 }

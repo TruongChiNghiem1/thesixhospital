@@ -1,9 +1,10 @@
 
 <?php
+session_start();
 error_reporting(0);
 // require_once 'config/connect.php';
 include_once("controller/admin.php");
-    session_start();
+    
     if(!isset($_SESSION['isLoggedIn'])){
         header("Location: ../login.php");
     }else{
@@ -13,6 +14,10 @@ include_once("controller/admin.php");
             header("Location: BSSucKhoe.php");
         }
     }
+
+include_once("../model/mInfoNhanVien.php");
+
+
 ?>
 
 <!doctype html>
@@ -110,6 +115,7 @@ include_once("controller/admin.php");
     </div>
 
     <!--  -->
+   
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -121,9 +127,7 @@ include_once("controller/admin.php");
                     </a>
                     <h4>ThanhTong</h4>
                     <h6 class="text-muted">bsdd@gmail.com</h6>
-                    <button type="button" class="btn btn-danger w-75 mt-3">
-                        Đăng Xuất
-                    </button>
+                    
                     <form action="" method="post">
 
                         <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>
@@ -133,10 +137,10 @@ include_once("controller/admin.php");
 
                 <?php
                             if (isset($_POST['btnLogout'])) {
-                                echo "logout";
+                                // echo "logout";
                                 include_once("../logout.php");
                             }
-                    ?>
+                ?>
 
                 <div class="list-group mt-4">
                     <a href="BacSiDD.php?page=home"
@@ -216,6 +220,9 @@ include_once("controller/admin.php");
                             break;
                         case 'add_medical_records':
                             include 'add_medical_records.php';
+                            break;
+                        case 'view_BacSiDD':
+                            include 'vDonXinNghi.php';
                             break;
                         default:
                             include 'dashboard.php';

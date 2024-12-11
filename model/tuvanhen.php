@@ -1,5 +1,7 @@
 <?php
 // Code by ThanhTong(2T)
+
+session_start();
 include_once("../config/connect.php");
 
 class modelTuVanHen
@@ -12,7 +14,7 @@ class modelTuVanHen
         if ($conn) {
             $query = "SELECT * FROM lich_hen 
                       INNER JOIN benh_nhan ON lich_hen.id_benh_nhan = benh_nhan.id_benh_nhan
-                      WHERE loai_lich_hen = 2";
+                      WHERE loai_lich_hen = 2 AND id_nhan_vien = " . $_SESSION['id'];
 
             if ($fromDate && $toDate) {
                 $query .= " AND DATE(lich_hen.ngay_gio) BETWEEN '$fromDate' AND '$toDate'";

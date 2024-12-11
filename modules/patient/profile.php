@@ -1,3 +1,71 @@
+<?php
+// Kết nối tới cơ sở dữ liệu
+include('../../config/connect.php');
+
+session_start();
+$database = new connect();
+$conn = $database->connectDB();
+if (!isset($_SESSION['id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng tới trang đăng nhập
+    header("Location: /thesixhospital/login.php");
+    exit();
+}
+
+// Kiểm tra kết nối
+if (!$conn) {
+    die("Kết nối không thành công. Vui lòng kiểm tra lại tệp connect.php.");
+}
+// Lấy ID người dùng từ session
+$id = $_SESSION['id'];
+
+// Truy vấn thông tin người dùng từ cơ sở dữ liệu
+$query = "SELECT username, email, so_dien_thoai, dia_chi, ngay_sinh FROM nhan_vien WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->bind_result($username, $email, $so_dien_thoai, $dia_chi, $ngay_sinh);
+$stmt->fetch();
+$stmt->close();
+
+// Kiểm tra nếu form được gửi
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Lấy dữ liệu từ form
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $so_dien_thoai = $_POST['so_dien_thoai'];
+    $dia_chi = $_POST['dia_chi'];
+    $ngay_sinh = $_POST['ngay_sinh'];
+
+    // Cập nhật thông tin người dùng trong CSDL
+    $updateQuery = "UPDATE nhan_vien SET username = ?, email = ?, so_dien_thoai = ?, dia_chi = ?, ngay_sinh = ? WHERE id = ?";
+
+    if ($stmt = $conn->prepare($updateQuery)) {
+        // Gắn giá trị vào câu lệnh
+        $stmt->bind_param('sssssi', $username, $email, $so_dien_thoai, $dia_chi, $ngay_sinh, $id);
+
+        // Thực thi câu lệnh
+        if ($stmt->execute()) {
+            // Nếu cập nhật thành công
+            $stmt->close();
+            echo "<script>alert('Cập nhật thông tin thành công!');</script>";
+        } else {
+            // Nếu có lỗi trong quá trình cập nhật
+            echo "<script>alert('Có lỗi xảy ra khi cập nhật thông tin!');</script>";
+        }
+    } else {
+        echo "<script>alert('Không thể chuẩn bị câu lệnh SQL!');</script>";
+    }
+} else {
+    // Nếu không phải POST, thì lấy thông tin người dùng
+    $query = "SELECT username, email, so_dien_thoai, dia_chi, ngay_sinh FROM nhan_vien WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->bind_result($username, $email, $so_dien_thoai, $dia_chi, $ngay_sinh);
+    $stmt->fetch();
+    $stmt->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +76,7 @@
     <link rel="stylesheet" href="/thesixhospital/assets/css/animations.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/main.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/admin.css">
+    <link rel="stylesheet" href="/thesixhospital/assets/css/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Profile</title>
     <style>
@@ -40,13 +109,15 @@
                                         style="border-radius:50%">
                                 </td>
                                 <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title" style="color: white;">Cao Dương Quốc Việt</p>
-                                    <p class="profile-subtitle " style="color: white;">Caoviet@edoc.com</p>
+                                    <p class="profile-title" style="color: white;">
+                                        <?php echo htmlspecialchars($username); ?></p>
+                                    <p class="profile-subtitle " style="color: white;">
+                                        <?php echo htmlspecialchars($email); ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="/thesixhospital/login.php"><input type="button" value="Đăng xuất"
+                                    <a href="/thesixhospital/logout.php"><input type="button" value="Đăng xuất"
                                             class="btn btn-danger"></a>
                                 </td>
                             </tr>
@@ -138,7 +209,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    Cao Dương Quốc Việt<br><br>
+                                    <?php echo htmlspecialchars($username); ?> <br><br>
                                 </td>
 
                             </tr>
@@ -149,7 +220,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    caoviet@gmail.com<br><br>
+                                    <?php echo htmlspecialchars($email); ?> <br><br>
                                 </td>
                             </tr>
 
@@ -160,7 +231,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    0913998110<br><br>
+                                    <?php echo htmlspecialchars($so_dien_thoai); ?> <br><br>
                                 </td>
                             </tr>
                             <tr>
@@ -171,8 +242,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    Gò vấp sài gòn<br><br>
-                                </td>
+                                    <?php echo htmlspecialchars(string: $dia_chi); ?> <br><br>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
@@ -182,26 +252,72 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    22-03-2003<br><br>
+                                    <?php echo htmlspecialchars($ngay_sinh); ?> <br><br>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href=""><input type="button" value="Sửa thông tin"
+                                    <a href="#myModal"><input type="button" value="Sửa thông tin"
                                             class="login-btn btn-primary-soft btn"></a>
                                 </td>
-
                             </tr>
+
+                            <div class="">
+                                <div id="myModal" class="modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3>Sửa thông tin cá nhân</h3>
+                                                <a href="#" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">&times;</a>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Form chỉnh sửa profile -->
+                                                <form action="#" method="POST">
+                                                    <div class="mb-3">
+                                                        <label for="username" class="form-label">Tên đăng nhập</label>
+                                                        <input type="text" class="form-control" id="username"
+                                                            name="username" value="<?php echo $username; ?>" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            value="<?php echo $email; ?>" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="so_dien_thoai" class="form-label">Số điện
+                                                            thoại</label>
+                                                        <input type="text" class="form-control" id="so_dien_thoai"
+                                                            name="so_dien_thoai" value="<?php echo $so_dien_thoai; ?>"
+                                                            required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="dia_chi" class="form-label">Địa chỉ</label>
+                                                        <input type="text" class="form-control" id="dia_chi"
+                                                            name="dia_chi" value="<?php echo $dia_chi; ?>" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="ngay_sinh" class="form-label">Ngày sinh</label>
+                                                        <input type="date" class="form-control" id="ngay_sinh"
+                                                            name="ngay_sinh" value="<?php echo $ngay_sinh; ?>" required>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-danger col-sm-12"
+                                                            id="btnSave">
+                                                            Xác nhận thay đổi
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </table>
+
                     </div>
                 </center>
             </table>
-    </div>
-    <br><br>
-
-
-
-
 </body>
 
 </html>

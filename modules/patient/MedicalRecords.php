@@ -1,3 +1,30 @@
+<?php
+// Kết nối tới cơ sở dữ liệu
+include('../../config/connect.php');
+session_start();
+$database = new connect();
+$conn = $database->connectDB();
+// Kiểm tra kết nối
+if (!$conn) {
+    die("Kết nối không thành công. Vui lòng kiểm tra lại tệp connect.php.");
+}
+if (!isset($_SESSION['id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng tới trang đăng nhập
+    header("Location: /thesixhospital/login.php");
+    exit();
+}
+// Lấy ID người dùng từ session
+$id = $_SESSION['id'];
+
+// Truy vấn thông tin người dùng từ cơ sở dữ liệu
+$query = "SELECT username, email FROM nhan_vien WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->bind_result($username, $email);
+$stmt->fetch();
+$stmt->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +69,10 @@
                                         style="border-radius:50%">
                                 </td>
                                 <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title" style="color: white;">Cao Dương Quốc Việt</p>
-                                    <p class="profile-subtitle " style="color: white;">Caoviet@edoc.com</p>
+                                    <p class="profile-title" style="color: white;">
+                                        <?php echo htmlspecialchars($username); ?></p>
+                                    <p class="profile-subtitle " style="color: white;">
+                                        <?php echo htmlspecialchars($email); ?></p>
                                 </td>
                             </tr>
                             <tr>

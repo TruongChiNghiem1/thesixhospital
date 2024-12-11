@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // try {
 //     $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS, DBUTF8);
@@ -6,15 +6,16 @@
 // } catch(PDOException $e) {
 //     echo "Connection failed: " . $e->getMessage();
 // }
-class connect{
-    function connectDB(){
-        $conn = mysqli_connect("localhost", "root", "", "the_six_hospital");
+class connect
+{
+    function connectDB()
+    {
+        $conn = mysqli_connect("localhost", "root", "", "thesixhospital");
         return $conn;
     }
 
-    function closeDB($conn){
+    function closeDB($conn)
+    {
         mysqli_close($conn);
     }
 }
-
-?>

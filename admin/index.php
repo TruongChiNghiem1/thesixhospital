@@ -32,47 +32,47 @@ include_once("controller/admin.php");
 
 <body>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row flex-nowrap">
             <?php
             include '../leftMenu.php';
             ?>
-            <div class="col-md-3 border-right" style="height: 100vh">
-                <!-- <div class="d-flex justify-content-between align-items-center"> -->
-                <div class="logo d-flex justify-content-between align-items-center mt-5">
-                    <a href="index.html"><img src="..\assets\images\logo.jpg" alt="Logo" srcset=""
-                            style="width: 100px; height: 100px; border-radius: 50%; padding-right: 10px;"></a>
-                    <h4>Admintrator <span>admin@gmail.com</span></h4>
-                </div>
+<!--            <div class="col-md-3 border-right" style="height: 100vh">-->
+<!--                <!-- <div class="d-flex justify-content-between align-items-center"> -->
+<!--                <div class="logo d-flex justify-content-between align-items-center mt-5">-->
+<!--                    <a href="index.html"><img src="..\assets\images\logo.jpg" alt="Logo" srcset=""-->
+<!--                            style="width: 100px; height: 100px; border-radius: 50%; padding-right: 10px;"></a>-->
+<!--                    <h4>Admintrator <span>admin@gmail.com</span></h4>-->
+<!--                </div>-->
+<!---->
+<!--                <div style="width: 100%; display: flex; justify-content: center;">-->
+<!--                    <form method="POST" style="width: 100%; display: flex; justify-content: center;">-->
+<!--                        <button name="btnLogout" type="submit" class="btn btn-primary w-75" data-mdb-ripple-init>-->
+<!--                            Log Out-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!---->
+<!--                     --><?php
+//                            if (isset($_POST['btnLogout'])) {
+//                                echo "logout";
+//                                include_once("../logout.php");
+//                            }
+//                    ?>
+<!---->
+<!---->
+<!--                <div class="list-group b4-bordor mt-3">-->
+<!--                    <a href="../view/view_dashboard.php" class="list-group-item list-group-item-action">Trang chủ</a>-->
+<!--                    <a href="index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>-->
+<!--                    <a href="../view/view_schedule.php" class="list-group-item list-group-item-action">Phân lịch ca-->
+<!--                        trực</a>-->
+<!--                    <a href="../view/view_approveleave.php" class="list-group-item list-group-item-action">Duyêt đơn-->
+<!--                        nghỉ phép</a>-->
+<!--                </div>-->
+<!---->
+<!---->
+<!--            </div>-->
 
-                <div style="width: 100%; display: flex; justify-content: center;">
-                    <form method="POST" style="width: 100%; display: flex; justify-content: center;">
-                        <button name="btnLogout" type="submit" class="btn btn-primary w-75" data-mdb-ripple-init>
-                            Log Out
-                        </button>
-                    </form>
-                </div>
-
-                     <?php
-                            if (isset($_POST['btnLogout'])) {
-                                echo "logout";
-                                include_once("../logout.php");
-                            }
-                    ?>
-
-
-                <div class="list-group b4-bordor mt-3">
-                    <a href="../view/view_dashboard.php" class="list-group-item list-group-item-action">Trang chủ</a>
-                    <a href="index.php" class="list-group-item list-group-item-action">Quản lý nhân sự</a>
-                    <a href="../view/view_schedule.php" class="list-group-item list-group-item-action">Phân lịch ca
-                        trực</a>
-                    <a href="../view/view_approveleave.php" class="list-group-item list-group-item-action">Duyêt đơn
-                        nghỉ phép</a>
-                </div>
-
-
-            </div>
-
-            <div class="col-md-9">
+            <div class="col">
                 <table class="table">
                     <thead>
                         <tr class="d-flex">

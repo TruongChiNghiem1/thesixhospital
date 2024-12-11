@@ -17,7 +17,7 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
 
             <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a href="/thesixhospital/view/view_dashboard.php" class="nav-link align-middle px-0">
                     <img src="/thesixhospital/assets/images/service/dashboard.png" width="25px" class="me-2">
                     <span class="d-none d-sm-inline color-text-menu">Dashboard</span>
                 </a>
@@ -27,17 +27,23 @@
             if($_SESSION['loai_nhan_vien'] == 1) {
                 ?>
             <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a href="/thesixhospital/admin/index.php" class="nav-link align-middle px-0">
                     <img src="/thesixhospital/assets/images/service/medical-team.png" width="25px" class="me-2">
-                    <span class="d-none d-sm-inline color-text-menu">Danh sách bác sĩ</span>
+                    <span class="d-none d-sm-inline color-text-menu">Quản lý nhân sự</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a href="/thesixhospital/view/view_schedule.php" class="nav-link align-middle px-0">
                     <img src="/thesixhospital/assets/images/service/team.png" width="25px" class="me-2">
-                    <span class="d-none d-sm-inline color-text-menu">Danh sách bệnh nhân</span>
+                    <span class="d-none d-sm-inline color-text-menu">Phân lịch ca trực</span>
                 </a>
             </li>
+                <li class="nav-item">
+                    <a href="/thesixhospital/view/view_approveleave.php" class="nav-link align-middle px-0">
+                        <img src="/thesixhospital/assets/images/bsdd/documentation.png" width="25px" class="me-2">
+                        <span class="d-none d-sm-inline color-text-menu">Duyệt đơn nghỉ</span>
+                    </a>
+                </li>
             <?php
             }
             if($_SESSION['loai_nhan_vien'] == 2 || $_SESSION['loai_nhan_vien'] == 1) {

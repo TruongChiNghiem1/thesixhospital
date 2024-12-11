@@ -71,10 +71,10 @@ if (!isset($_SESSION["id"])) {
                             include 'modules/adminService/index.php';
                             break;
                         default:
-                            include 'modules/dashboard/index.php';
+                            include 'modules/dashboard/adminIndex.php';
                     }
                 } else {
-                    include 'modules/dashboard/index.php';
+                    include 'modules/dashboard/adminIndex.php';
                 }
                 ?>
             </div>

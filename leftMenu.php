@@ -22,6 +22,7 @@
                     <span class="d-none d-sm-inline color-text-menu">Dashboard</span>
                 </a>
             </li>
+
             <?php
             if($_SESSION['loai_nhan_vien'] == 1) {
                 ?>

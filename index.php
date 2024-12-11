@@ -102,7 +102,7 @@ require_once 'config/functional.php';
                         <?php
                         if(in_array($_SESSION['loai_nhan_vien'], [1,2,3,4])) {
                         ?>
-                        <li><a class="dropdown-item" href="/thesixhospital/adminIndex.php">Trang quản
+                        <li><a class="dropdown-item" href="/thesixhospital/view/view_dashboard.php">Trang quản
                                 trị</a></li>
                         <?php
                             }

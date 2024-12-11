@@ -127,7 +127,6 @@ include_once("../model/mInfoNhanVien.php");
                     </a>
                     <h4>ThanhTong</h4>
                     <h6 class="text-muted">bsdd@gmail.com</h6>
-                    
                     <form action="" method="post">
 
                         <button type="submit" name="btnLogout" class="btn btn-danger w-75 mt-3">Đăng Xuất</button>

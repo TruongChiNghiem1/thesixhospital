@@ -99,8 +99,14 @@ require_once 'config/functional.php';
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="/thesixhospital/modules/patient/profile.php">Tài khoản của
                                 tôi</a></li>
+                        <?php
+                        if(in_array($_SESSION['loai_nhan_vien'], [1,2,3,4])) {
+                        ?>
                         <li><a class="dropdown-item" href="/thesixhospital/adminIndex.php?m=services&a=list">Trang quản
                                 trị</a></li>
+                        <?php
+                            }
+                        ?>
                         <li><a class="dropdown-item text-danger" href="/thesixhospital/logout.php">Đăng xuất</a></li>
                     </ul>
                 </div>

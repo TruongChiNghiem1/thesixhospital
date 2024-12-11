@@ -125,12 +125,13 @@
             $phone = $_POST['txtSDT'];
             $date = $_POST['txtNgaySinh'];
             $loaiNV = $_POST['chonChucVu'];
-            
+
+            $password_hash = password_hash($pass, PASSWORD_DEFAULT);
 
             $result = $p->checkUserName($name, $email, $phone, $user);
 
             if ($result === false) {
-                if (!$p->insertNhanVien($code, $name, $email, $user, $pass, $phone, $date, $loaiNV)) {
+                if (!$p->insertNhanVien($code, $name, $email, $user, $password_hash, $phone, $date, $loaiNV)) {
                     echo "<div class='alert alert-success mt-3'>Thêm nhân viên thành công</div>";
                 } else {
                     echo "<div class='alert alert-danger mt-3'>Thêm nhân viên thất bại</div>";

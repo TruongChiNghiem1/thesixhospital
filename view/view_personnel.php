@@ -15,8 +15,10 @@
         } elseif($row["loai_nhan_vien"] == 2) {
             $chucVu = 'Bác sĩ sức khoẻ';
         }
-        else{
+        elseif($row["loai_nhan_vien"] == 3){
             $chucVu = 'Bác sĩ dinh dưỡng';
+        }elseif($row["loai_nhan_vien"] == 4){
+            $chucVu = 'Chuyên khoa';
         }
         
         echo "<style>

@@ -1,10 +1,12 @@
-// Hàm kiểm tra điều kiện cho từng trường khi mất focus (blur)
+// Function to validate the field
 function validateField(event) {
   const field = event.target;
-  const value = field.value;
   let isValid = true;
   let errorMessage = "";
 
+  const value = field.value.trim(); // Get field value
+
+  // Switch case for validation
   switch (field.name) {
     case "ho_ten":
       const hoTenPattern = /^[A-Z][a-z]*(\s[A-Z][a-z]*)+$/;
@@ -29,7 +31,6 @@ function validateField(event) {
       }
       break;
     case "dia_chi":
-      // Kiểm tra có ít nhất một chữ và một số
       const addressPattern = /^(?=.*[A-Za-z])(?=.*\d)/;
       if (!addressPattern.test(value)) {
         errorMessage = "Địa chỉ phải bao gồm cả số và chữ!";
@@ -68,9 +69,56 @@ function validateField(event) {
     errorElement.textContent = "";
     field.classList.remove("is-invalid"); // Loại bỏ lớp invalid nếu không có lỗi
   }
+
+  return isValid; // Return true or false to indicate if the field is valid
 }
 
-// Gắn sự kiện 'blur' cho tất cả các trường input
+// Function to validate the entire form on submit
+function validateForm(event) {
+  let isFormValid = true;
+
+  // Validate each input field
+  document.querySelectorAll("input").forEach((input) => {
+    if (!validateField({ target: input })) {
+      isFormValid = false; // If any field is invalid, set form as invalid
+    }
+  });
+
+  // If form is invalid, prevent submission
+  if (!isFormValid) {
+    event.preventDefault(); // Prevent form submission
+    alert("Vui lòng sửa các lỗi trong biểu mẫu!");
+  }
+}
+
+// Gắn sự kiện 'blur' cho tất cả các trường input để kiểm tra mỗi khi rời khỏi trường
 document.querySelectorAll("input").forEach((input) => {
   input.addEventListener("blur", validateField);
 });
+
+// Gắn sự kiện 'submit' cho form để kiểm tra khi người dùng nhấn submit
+const form = document.querySelector("form"); // Ensure you select the correct form
+form.addEventListener("submit", validateForm);
+
+// Lắng nghe sự kiện click trên nút submit
+document
+  .getElementById("submitButton")
+  .addEventListener("click", function (event) {
+    event.preventDefault(); // Ngừng việc gửi form tự động
+
+    // Kiểm tra tính hợp lệ của form (ở đây giả sử có hàm validateForm() để kiểm tra form)
+    if (validateForm()) {
+      // Nếu form hợp lệ, gửi form
+      const form = document.querySelector("form"); // Chọn form
+
+      // Gửi form (bạn có thể gửi form bằng AJAX hoặc gửi bình thường)
+      form.submit(); // Sử dụng form.submit() để gửi form
+
+      // Đóng modal sau khi gửi form thành công
+      var myModal = new bootstrap.Modal(document.getElementById("myModal"));
+      myModal.hide(); // Đóng modal bằng Bootstrap
+    } else {
+      // Nếu form không hợp lệ, bạn có thể thêm thông báo lỗi tại đây
+      alert("Vui lòng sửa các lỗi trong form!");
+    }
+  });

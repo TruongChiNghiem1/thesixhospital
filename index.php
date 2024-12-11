@@ -104,8 +104,10 @@ require_once 'config/functional.php';
                 </button>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/thesixhospital/modules/patient/profile.php">Tài khoản của
-                            tôi</a></li>
+                    <li><a class="dropdown-item"
+                            href="/thesixhospital/modules/patient/profile.php?id=<?php echo $_SESSION["id"]; ?>">Tài
+                            khoản của tôi</a></li>
+
                     <li><a class="dropdown-item" href="/thesixhospital/adminIndex.php?m=services&a=list">Trang quản
                             trị</a></li>
                     <li><a class="dropdown-item text-danger" href="/thesixhospital/logout.php">Đăng xuất</a></li>

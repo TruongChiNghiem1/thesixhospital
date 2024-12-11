@@ -172,7 +172,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 <tr class="menu-row">
                     <td class="">
                         <div>
-                            <a href="MyBooking.php" class="non-style-link-menu " style="color: white;">
+                            <a href="MyBooking.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu "
+                                style="color: white;">
                                 <i class="fa-solid fa-bookmark menu-icon"
                                     style="padding-top:5px; padding-bottom: 5px;"></i>
                                 <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Lịch sử đặt lịch</p>
@@ -183,7 +184,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                 <tr class="menu-row">
                     <td class="">
                         <div>
-                            <a href="MedicalRecords.php" class="non-style-link-menu" style="color: white;">
+                            <a href="MedicalRecords.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu"
+                                style="color: white;">
                                 <i class="fa-solid fa-book-medical menu-icon"
                                     style="padding-top:5px; padding-bottom: 5px;"></i>
                                 <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Hồ sơ bệnh án</p>
@@ -197,7 +199,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
             <table border="0" width="100%" style=" border-spacing: 0;margin:0;padding:0;">
                 <tr>
                     <td width="13%">
-                        <a href="/thesixhospital/index.php"><button class="btn" style="margin-left: 20px;">
+                        <a href="/thesixhospital/index.php?id=<?php echo $_SESSION["id"]; ?>"><button class="btn"
+                                style="margin-left: 20px;">
                                 <font class="tn-in-text">Trang chủ</font>
                             </button></a>
                     </td>
@@ -333,10 +336,11 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                                     value="<?php echo htmlspecialchars($ngay_sinh); ?>" required>
                                 <span class="text-danger" id="ngay_sinh_error"></span> <!-- Thông báo lỗi -->
                             </div>
+                            <!-- Nút Submit trong Modal, không dùng data-bs-dismiss -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Lưu thay
-                                    đổi</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Lưu thay đổi</button>
                             </div>
+
                         </form>
                     </div>
                 </div>

@@ -88,7 +88,8 @@ $stmt->close();
                 <tr class="menu-row">
                     <td class="menu-active">
                         <div>
-                            <a href="profile.php" class="non-style-link-menu" style="color: white;">
+                            <a href="profile.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu"
+                                style="color: white;">
                                 <i class="fa-solid fa-user menu-icon" style="padding-top:5px; padding-bottom: 5px;"></i>
                                 <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Thông tin cá nhân</p>
                             </a>
@@ -98,7 +99,8 @@ $stmt->close();
                 <tr class="menu-row">
                     <td class="">
                         <div>
-                            <a href="MyBooking.php" class="non-style-link-menu " style="color: white;">
+                            <a href="MyBooking.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu "
+                                style="color: white;">
                                 <i class="fa-solid fa-bookmark menu-icon"
                                     style="padding-top:5px; padding-bottom: 5px;"></i>
                                 <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Lịch sử đặt lịch</p>
@@ -109,7 +111,7 @@ $stmt->close();
                 <tr class="menu-row">
                     <td class="">
                         <div>
-                            <a href="MedicalRecords.php" class="non-style-link-menu" style="color: white;">
+                            <a href="#" class="non-style-link-menu" style="color: white;">
                                 <i class="fa-solid fa-book-medical menu-icon"
                                     style="padding-top:5px; padding-bottom: 5px;"></i>
                                 <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Hồ sơ bệnh án</p>
@@ -126,7 +128,8 @@ $stmt->close();
             <table border="0" width="100%" style="border-spacing: 0;margin:0;padding:0">
                 <tr>
                     <td width="13%">
-                        <a href="/thesixhospital/index.php"><button class="btn" style="margin-left: 20px;">
+                        <a href="/thesixhospital/index.php?id=<?php echo $_SESSION["id"]; ?>"><button class="btn"
+                                style="margin-left: 20px;">
                                 <font class="tn-in-text">Trang chủ</font>
                             </button></a>
                     </td>

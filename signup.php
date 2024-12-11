@@ -19,11 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ngay_sinh = $_POST['ngay_sinh'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $gioi_tinh = $_POST['gioi_tinh']; // Nhận giới tính
 
     // Kiểm tra mật khẩu xác nhận
     if ($password != $confirm_password) {
-        echo "Mật khẩu và mật khẩu xác nhận không khớp.";
+        echo '<script type="text/javascript">alert("Không khớp mật khẩu!");</script>';
     } else {
         // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
         $email_check_query = "SELECT * FROM nhan_vien WHERE email = ?";
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($result) > 0) {
-            echo "Email này đã tồn tại. Vui lòng chọn email khác.";
+            echo '<script type="text/javascript">alert("Email này đã được sử dụng!");</script>';
         } else {
             // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -47,8 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Thực thi câu lệnh
             if (mysqli_stmt_execute($stmt)) {
-                echo "Đăng ký thành công!";
-                header('Location: /thesixhospital/login.php');
+                // Hiển thị thông báo thành công trước khi chuyển hướng
+                echo '<script type="text/javascript">
+                alert("Đăng ký thành công!");
+                setTimeout(function(){
+                    window.location.href = "/thesixhospital/login.php";
+                }, 1000); // Chuyển hướng sau 3 giây
+              </script>';
                 exit(); // Thêm exit để ngăn chặn việc thực thi thêm mã sau khi chuyển hướng
             } else {
                 echo "Lỗi: " . mysqli_error($conn);

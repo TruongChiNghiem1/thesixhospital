@@ -60,138 +60,85 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/animations.css">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/main.css">
-    <link rel="stylesheet" href="/thesixhospital/assets/css/signup.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Đăng ký</title>
-    <link rel="stylesheet" href="/thesixhospital/assets/css/dataTables.bootstrap5.css" id="theme-styles">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/thesixhospital/assets/css/bootstrap.min.css"/>
     <style>
-        .container {
-            animation: transitionIn-X 0.5s;
-        }
+    .container {
+        animation: transitionIn-X 0.5s;
+    }
     </style>
 </head>
-<body>
-<center>
-    <div class="container">
-        <table border="0" style="width: 69%;">
-            <tr>
-                <td colspan="2">
-                    <p class="header-text">Đăng ký</p>
-                </td>
-            </tr>
 
+<body class="bg-light">
+    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="card p-3 shadow-sm" style="max-width: 500px; width: 100%; padding: 20px;">
+            <h2 class="text-center mb-3">Đăng ký</h2>
             <form action="" method="POST">
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="ho_ten" class="form-label">Họ và tên: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="text" name="ho_ten" class="input-text" placeholder="Nhập họ và tên" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="ho_ten" class="form-label">Họ và tên</label>
+                    <input type="text" name="ho_ten" class="form-control form-control-sm" placeholder="Nhập họ và tên"
+                        required>
+                    <span class="text-danger" id="ho_ten_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="email" class="form-label">Email: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="email" name="email" class="input-text" placeholder="Nhập Email" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control form-control-sm" placeholder="Nhập Email"
+                        required>
+                    <span class="text-danger" id="email_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="so_dien_thoai" class="form-label">Số điện thoại: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="tel" name="so_dien_thoai" class="input-text" placeholder="ex:0712345678" pattern="[0]{1}[0-9]{9}" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
+                    <input type="tel" name="so_dien_thoai" class="form-control form-control-sm"
+                        placeholder="ex:0712345678" pattern="[0]{1}[0-9]{9}" required>
+                    <span class="text-danger" id="so_dien_thoai_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="dia_chi" class="form-label">Địa chỉ: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="text" name="dia_chi" class="input-text" placeholder="Nhập địa chỉ" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="dia_chi" class="form-label">Địa chỉ</label>
+                    <input type="text" name="dia_chi" class="form-control form-control-sm" placeholder="Nhập địa chỉ"
+                        required>
+                    <span class="text-danger" id="dia_chi_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="ngay_sinh" class="form-label">Ngày sinh: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="date" name="ngay_sinh" class="input-text" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="ngay_sinh" class="form-label">Ngày sinh</label>
+                    <input type="date" name="ngay_sinh" class="form-control form-control-sm" required>
+                    <span class="text-danger" id="ngay_sinh_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="gioi_tinh" class="form-label">Giới tính: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <select name="gioi_tinh" class="input-text" required>
-                            <option value="1">Nam</option>
-                            <option value="2">Nữ</option>
-                            <option value="0">Khác</option>
-                        </select>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Tạo mật khẩu</label>
+                    <input type="password" name="password" class="form-control form-control-sm"
+                        placeholder="Nhập mật khẩu" required>
+                    <span class="text-danger" id="password_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="password" class="form-label">Tạo mật khẩu: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="password" name="password" class="input-text" placeholder="Nhập mật khẩu" required>
-                    </td>
-                </tr>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
+                    <input type="password" name="confirm_password" class="form-control form-control-sm"
+                        placeholder="Xác nhận mật khẩu" required>
+                    <span class="text-danger" id="confirm_password_error"></span> <!-- Thông báo lỗi -->
+                </div>
 
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <label for="confirm_password" class="form-label">Xác nhận mật khẩu: </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-td" colspan="2">
-                        <input type="password" name="confirm_password" class="input-text" placeholder="Xác nhận mật khẩu" required>
-                    </td>
-                </tr>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger w-100 btn-sm">Đăng ký</button>
+                </div>
 
-                <tr>
-                    <td colspan="2" style="text-align: center;">
-                        <button type="submit" class="btn-submit">Đăng ký</button>
-                    </td>
-                </tr>
+                <div class="text-center mt-3">
+                    <span>Bạn đã có tài khoản?</span>
+                    <a href="login.php" class="text-primary text-decoration-none">Đăng nhập</a>
+                </div>
             </form>
-        </table>
+        </div>
     </div>
-</center>
+    <script src="/thesixhospital/assets/js/signup.js"></script>
 </body>
-<script src="/thesixhospital/assets/js/jquery-3.7.1.js"></script>
-<script src="/thesixhospital/assets/js/sweetalert2@11.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-<script src="/thesixhospital/assets/js/bootstrap.min.js"></script>
+
 </html>

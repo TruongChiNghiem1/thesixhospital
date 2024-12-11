@@ -9,12 +9,13 @@ if (!isset($conn)) {
 }
 
 // Hàm kiểm tra email đã tồn tại hay chưa
-function isEmailExists($conn, $email) {
+function isEmailExists($conn, $email)
+{
     $stmt = $conn->prepare("SELECT email FROM dangky WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         $stmt->close();
         return true; // Email đã tồn tại

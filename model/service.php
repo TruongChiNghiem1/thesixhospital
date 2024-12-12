@@ -36,3 +36,14 @@ function indexExId($id) {
 
     return $services;
 }
+function getDoctors() {
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
+    $query = "SELECT id, ho_ten, loai_nhan_vien FROM nhan_vien WHERE loai_nhan_vien IN (2, 3, 4)";
+    $result = mysqli_query($conn, $query);
+
+    $doctors = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $doctors[] = $row;
+    }
+    return $doctors;
+}

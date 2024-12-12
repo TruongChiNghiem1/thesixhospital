@@ -19,6 +19,10 @@
 
 <body>
     <?php
+
+    session_start();
+
+   
     include_once("../controller/BSDD/cMenu.php");
     $menu = new MenuBS();
     $id = $_GET['id'];
@@ -31,7 +35,7 @@
     $maMonAn = $menuData['ma_mon_an'];
     $tenMonAn = $menuData['ten_mon_an'];
     $chiSoDinhDuong = $menuData['chi_so_dinh_duong'];
-    $idNguoiTao = $menuData['id_nguoi_tao'];
+    $idNguoiTao = $_SESSION['id'];
     $maThucDon = $menuData['ma_thuc_don'];
     $ghiChu = $menuData['ghi_chu'];
     
@@ -61,7 +65,7 @@
                     <div class="form-group">
                         <label for="idNguoiTao">ID Người Tạo</label>
                         <input type="text" class="form-control" id="idNguoiTao" name="idNguoiTao" required 
-                               value="<?php echo htmlspecialchars($idNguoiTao); ?>">
+                               value="<?php echo $_SESSION['ho_ten']; ?>">
                     </div>
                     <div class="form-group
                         <label for="maThucDon">Mã Thực Đơn</label>
@@ -95,7 +99,7 @@ if (isset($_POST['add_menu'])) {
     $maMonAn = $_POST['maMonAn'];
     $tenMonAn = $_POST['tenMonAn'];
     $chiSoDinhDuong = $_POST['chiSoDinhDuong'];
-    $idNguoiTao = $_POST['idNguoiTao'];
+    $idNguoiTao = $_SESSION['id'];
     $maThucDon = $_POST['maThucDon'];
     $ghiChu = $_POST['ghiChu'];
     // $ngayTao = date('Y-m-d H:i:s');

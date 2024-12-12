@@ -88,8 +88,8 @@
 
                 echo "<td>" . $caLam . "</td>";
                 echo"<td>
-                        <a href='view_schedule.php?action=hrm&delete=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Remove</button></a>
-                        <a href='view_schedule.php?action=hrm&update=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Update</button></a>    
+                        <a href='view_schedule.php?action=hrm&delete=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Xoá</button></a>
+                        <a href='view_schedule.php?action=hrm&update=nhanVien&id=".$row['id_lich_lam_viec']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Cập nhật</button></a>    
                     </td>";
                 echo "</tr>";
             }

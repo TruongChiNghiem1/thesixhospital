@@ -5,7 +5,6 @@
 
     if (isset($_GET['id'])) {
         $userId = $_GET['id'];
-        echo $userId;
         $nhanVien = $p->selectApproveleaveById($userId);
     
         if ($nhanVien && mysqli_num_rows($nhanVien) > 0) {
@@ -24,11 +23,11 @@
                 $btn_thatbai = "<button name='btn_tuchoi' type='submit' class='btn btn-danger'>Từ chối</button>";
             }
             elseif($row['trang_thai'] == 1){
-                $btn_thanhcong = "Đã duyệt bài";
+                $btn_thanhcong = "Đã duyệt bài thành công";
                 $btn_thatbai = "";
             }
             elseif($row['trang_thai'] == 2){
-                $btn_thatbai = "Đã từ chối duyệt bài";
+                $btn_thatbai = "Đã từ chối bài duyệt";
                 $btn_thanhcong = "";
             }
             

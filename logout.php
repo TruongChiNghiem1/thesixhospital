@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("location: /thesixhospital/login.php");
+header("location: /thesixhospital/index.php");
 exit();

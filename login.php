@@ -98,13 +98,14 @@ if (isset($_POST['login'])) {
             $_SESSION['ho_ten'] = $row['ho_ten'];
             $_SESSION['loai_nhan_vien'] = $row['loai_nhan_vien'];
 
-            header('Location: /thesixhospital/index.php');
+            header('Location: /thesixhospital/index.php?id=' . $_SESSION["id"]);
+
             exit();
         } else {
-            echo "Mật khẩu không đúng.";
+            echo '<script type="text/javascript">alert("Mật khẩu không đúng!");</script>';
         }
     } else {
-        echo "Email không tồn tại.";
+        echo '<script type="text/javascript">alert("Email không tồn tại!");</script>';
     }
 }
 
@@ -150,7 +151,10 @@ if (isset($_POST['login'])) {
                         </tr>
                         <tr>
                             <td class="label-td">
-                                <input type="text" name="email" class="input-text" placeholder="Nhập email" required>
+                                <input type="email" name="email" class="input-text form-control-sm"
+                                    placeholder="Nhập Email" required>
+                                <span class="text-danger" style="color: red;" id="email_error"></span>
+                                <!-- Thông báo lỗi -->
                             </td>
                         </tr>
                         <tr>
@@ -170,7 +174,7 @@ if (isset($_POST['login'])) {
                         </tr>
                         <tr>
                             <td>
-                                <input type="submit" name="login" value="Đăng nhập">
+                                <input type="submit" class="btn btn-danger border-0" name="login" value="Đăng nhập">
                             </td>
                         </tr>
                     </form>
@@ -186,6 +190,7 @@ if (isset($_POST['login'])) {
             </table>
         </div>
     </center>
+    <script src="/thesixhospital/assets/js/signup.js"></script>
 </body>
 
 </html>

@@ -44,10 +44,12 @@ require_once 'config/functional.php';
 
     <header class="navbar navbar-expand-lg bg-body navbar-sticky sticky-top z-fixed px-0" data-sticky-element="">
         <div class="container">
-            <button type="button" class="navbar-toggler me-3 me-lg-0" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
+            <button type="button" class="navbar-toggler me-3 me-lg-0" data-bs-toggle="offcanvas"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center" href="/thesixhospital/index.php">
+            <a class="navbar-brand py-1 py-md-2 py-xl-1 me-2 me-sm-n4 me-md-n5 me-lg-0 d-flex align-items-center"
+                href="/thesixhospital/index.php">
                 <span class="d-none d-sm-flex flex-shrink-0 text-primary rtl-flip me-2">
                     <img src="assets/images/logo.jpg" width="100px">
                 </span>
@@ -57,17 +59,21 @@ require_once 'config/functional.php';
                 <div class="offcanvas-body pt-2 pb-4 py-lg-0 mx-lg-auto">
                     <ul class="navbar-nav position-relative">
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link active" aria-current="page" href="/thesixhospital/index.php" about="">Trang chủ</a>
+                            <a class="nav-link active" aria-current="page" href="/thesixhospital/index.php"
+                                about="">Trang chủ</a>
                         </li>
                         <li class="nav-item dropdown position-static py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" aria-expanded="false">Khám chuyên khoa</a>
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
+                                data-bs-trigger="hover" aria-expanded="false">Khám chuyên khoa</a>
                         </li>
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">Khám dinh
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
+                                data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">Khám dinh
                                 dưỡng</a>
                         </li>
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
-                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">Khám sức
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
+                                data-bs-trigger="hover" data-bs-auto-close="outside" aria-expanded="false">Khám sức
                                 khỏe</a>
                         </li>
                         <li class="nav-item dropdown py-lg-2 me-lg-n1 me-xl-0">
@@ -91,33 +97,37 @@ require_once 'config/functional.php';
             <?php
             if (isset($_SESSION["id"])) {
             ?>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user btn"></i>
-                    </button>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user btn"></i>
+                </button>
 
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/thesixhospital/modules/patient/profile.php">Tài khoản của
-                                tôi</a></li>
-                        <?php
-                        if(in_array($_SESSION['loai_nhan_vien'], [1,2,3,4])) {
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item"
+                            href="/thesixhospital/modules/patient/profile.php?id=<?php echo $_SESSION["id"]; ?>">Tài
+                            khoản của tôi</a></li>
+                    <?php
+                        if (in_array($_SESSION['loai_nhan_vien'], [1, 2, 3, 4])) {
                         ?>
-                        <li><a class="dropdown-item" href="/thesixhospital/view/view_dashboard.php">Trang quản
-                                trị</a></li>
-                        <?php
-                            }
+                    <li><a class="dropdown-item" href="/thesixhospital/view/view_dashboard.php">Trang quản trị</a></li>
+                    <?php
+                        }
                         ?>
-                        <li><a class="dropdown-item text-danger" href="/thesixhospital/logout.php">Đăng xuất</a></li>
-                    </ul>
-                </div>
+                    <li><a class="dropdown-item text-danger" href="/thesixhospital/logout.php">Đăng xuất</a></li>
+                </ul>
+
+            </div>
+
             <?php
             } else {
             ?>
-                <div class="d-flex gap-sm-1 m-2">
-                    <a class="btn btn-primary animate-scale mr-2" href="login.php">
-                        <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
-                    </a>
-                </div>
+            <div class="d-flex gap-sm-1 m-2">
+                <a class="btn btn-primary animate-scale mr-2" href="login.php">
+                    <span class="d-none d-xl-inline ms-1">Đăng nhập</span>
+                </a>
+            </div>
             <?php
             }
             ?>
@@ -161,7 +171,8 @@ require_once 'config/functional.php';
                     </div>
                     <div class="col-sm-12">
                         <label for="txtTinhTrang" class="mt-3">Tình trạng</label>
-                        <textarea name="txtTinhTrang" placeholder="Tình trạng bệnh" class="form-control" id="txtTinhTrang"></textarea>
+                        <textarea name="txtTinhTrang" placeholder="Tình trạng bệnh" class="form-control"
+                            id="txtTinhTrang"></textarea>
 
                     </div>
 

@@ -18,11 +18,11 @@ if (!isset($_SESSION['id'])) {
 $id = $_SESSION['id'];
 
 // Truy vấn thông tin người dùng từ cơ sở dữ liệu
-$query = "SELECT username, email FROM nhan_vien WHERE id = ?";
+$query = "SELECT ho_ten, email FROM nhan_vien WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $id);
 $stmt->execute();
-$stmt->bind_result($username, $email);
+$stmt->bind_result($ho_ten, $email);
 $stmt->fetch();
 $stmt->close();
 ?>
@@ -56,47 +56,49 @@ $stmt->close();
     <div class="container">
         <div class="menu" style="background-color: #343a40;">
             <table class="menu-container" border="0">
-                <tr>
-                    <td style="padding:10px" colspan="2">
-                        <table border="0" class="profile-container">
-                            <tr>
-                                <td width="30%" style="padding-left:20px">
-                                    <img src="/thesixhospital/assets/images/logo.jpg" alt="" width="100%"
-                                        style="border-radius:50%">
-                                </td>
-                                <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title" style="color: white;">
-                                        <?php echo htmlspecialchars($username); ?></p>
-                                    <p class="profile-subtitle " style="color: white;">
-                                        <?php echo htmlspecialchars($email); ?></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <a href="/thesixhospital/logout.php"><input type="button" value="Đăng xuất"
-                                            class="btn btn-danger"></a>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
+                <table border="0" class="profile-container">
+                    <tr>
+                        <td width="30%" style="padding-left:20px">
+                            <img src="/thesixhospital/assets/images/logo.jpg" alt="" width="30%"
+                                style="border-radius:50%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="profile-title"
+                                style="color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; font-size: 25px;">
+                                <?php echo htmlspecialchars($ho_ten); ?></p>
+                            <p class="profile-subtitle "
+                                style="color: white; text-align: center;  padding-bottom: 10px; font-size: 17px;">
+                                <?php echo htmlspecialchars($email); ?></p>
+                        </td>
+                    </tr>
 
-                </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="/thesixhospital/logout.php"><input type="button" value="Đăng xuất"
+                                    class="btn btn-danger"></a>
+                        </td>
+                    </tr>
+                </table>
                 <tr class="menu-row">
-                    <td class="">
+                    <td class="menu-active">
                         <div>
-                            <a href="profile.php" class="non-style-link-menu " style="color: white;">
-                                <i class="fa-solid fa-user menu-icon"></i>
-                                <p class="menu-text">Thông tin cá nhân</p>
+                            <a href="profile.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu"
+                                style="color: white;">
+                                <i class="fa-solid fa-user menu-icon" style="padding-top:5px; padding-bottom: 5px;"></i>
+                                <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Thông tin cá nhân</p>
                             </a>
                         </div>
                     </td>
                 </tr>
                 <tr class="menu-row">
-                    <td class="menu-active ">
+                    <td class="">
                         <div>
-                            <a href="#" class="non-style-link-menu-active " style="color: white;">
-                                <i class="fa-solid fa-bookmark menu-icon"></i>
-                                <p class="menu-text">Lịch sử đặt lịch</p>
+                            <a href="#" class="non-style-link-menu " style="color: white;">
+                                <i class="fa-solid fa-bookmark menu-icon"
+                                    style="padding-top:5px; padding-bottom: 5px;"></i>
+                                <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Lịch sử đặt lịch</p>
                             </a>
                         </div></a>
                     </td>
@@ -104,9 +106,11 @@ $stmt->close();
                 <tr class="menu-row">
                     <td class="">
                         <div>
-                            <a href="MedicalRecords.php" class="non-style-link-menu" style="color: white;">
-                                <i class="fa-solid fa-book-medical menu-icon"></i>
-                                <p class="menu-text">Hồ sơ bệnh án</p>
+                            <a href="MedicalRecords.php?id=<?php echo $_SESSION["id"]; ?>" class="non-style-link-menu"
+                                style="color: white;">
+                                <i class="fa-solid fa-book-medical menu-icon"
+                                    style="padding-top:5px; padding-bottom: 5px;"></i>
+                                <p class="menu-text" style="padding-top:5px; padding-bottom: 5px;">Hồ sơ bệnh án</p>
                             </a>
                         </div>
                     </td>
@@ -117,7 +121,8 @@ $stmt->close();
             <table border="0" width="100%" style=" border-spacing: 0;margin:0;padding:0;margin-top:25px; ">
                 <tr>
                     <td width="13%">
-                        <a href="/thesixhospital/index.php"><button class="btn" style="margin-left:20px;">
+                        <a href="/thesixhospital/index.php?id=<?php echo $_SESSION["id"]; ?>"><button class="btn"
+                                style="margin-left:20px;">
                                 <font class="tn-in-text">Trang chủ</font>
                             </button></a>
                     </td>

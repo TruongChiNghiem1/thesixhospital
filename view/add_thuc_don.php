@@ -80,7 +80,7 @@ $monAnResult = mysqli_query($conn, $queryMonAn);
                             }
                             ?>
                         </select> -->
-                        <input type="text" name="id_nhan_vien" class="form-control" value="<?php echo $_SESSION['id']; ?>" readonly>
+                        <input type="text" name="id_nhan_vien" class="form-control" value="<?php echo $_SESSION['ho_ten']; ?>" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +105,7 @@ if (isset($_POST['btnSubmit'])) {
     $ngay_an = $_POST['ngay_an'];
     $buoi_an = $_POST['buoi_an'];
     $id_ho_so_benh_an = $_POST['id_ho_so_benh_an'];
-    $id_nhan_vien = $_POST['id_nhan_vien'];
+    $id_nhan_vien = $_SESSION['id'];
     // $id_monan = $_POST['id_monan'];
 
     $inforUser = new InforUser();

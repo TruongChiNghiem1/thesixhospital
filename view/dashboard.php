@@ -1,11 +1,22 @@
+<?php
+
+    session_start();
+
+    $id = $_SESSION['id'];
+    $ten_nhan_vien = $_SESSION['ho_ten'];
+
+  
+
+?>
+
 <div class="bg-white rounded p-4 shadow-sm">
-    <h3 class="font-weight-bold text-primary">Chào mừng, Thanh Tòng!</h3>
+    <h3 class="font-weight-bold text-primary">Chào mừng, <?php echo $ten_nhan_vien;?>!</h3>
     <p>Chúc bạn có một ngày làm việc hiệu quả và tràn đầy năng lượng!</p>
 
     <!-- Carousel/Slide with Autoplay -->
     <div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel" data-interval="2000">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndiAcators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>

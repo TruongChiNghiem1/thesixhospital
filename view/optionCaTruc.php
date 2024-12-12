@@ -16,8 +16,10 @@ if ($tblCompany) {
                 $caLam = 'Ca sáng';
             } elseif ($row["ca_lam"] == 2) {
                 $caLam = 'Ca chiều';
-            } else {
+            } elseif ($row["ca_lam"] == 3) {
                 $caLam = 'Ca tối';
+            }elseif ($row["ca_lam"] == 4) {
+                $caLam = 'OT';
             }
 
             // Kiểm tra chọn ca trực hiện tại

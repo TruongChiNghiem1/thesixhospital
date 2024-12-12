@@ -51,12 +51,12 @@ session_start();
                         <thead>
                             <tr class="d-flex">
                                 <th class="d-flex align-items-center mr-auto w-75" style="border-bottom: 2px solid #ffff;">
-                                    <input type="search" class="form-control rounded mr-2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                                    <button type="button" class="btn btn-primary" data-mdb-ripple-init>search</button>             
+                                    <input type="search" class="form-control rounded mr-2" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="search-addon" />
+                                    <button type="button" class="btn btn-primary" data-mdb-ripple-init>Tìm</button>             
                                 </th>
 
                                 <th class="d-flex align-items-center" style="border-bottom: 2px solid #ffff;">
-                                    <span class="mr-3">Today's date <br> <span>29/10/2024</span></span>
+                                    <span class="mr-3">Ngày hôm nay <br> <span>13/12/2024</span></span>
                                     <div class="border border-dark background-color rounded p-2" >
                                         <i class="bi bi-calendar-event-fill "></i>
                                     </div>

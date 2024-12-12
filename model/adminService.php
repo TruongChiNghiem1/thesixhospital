@@ -80,23 +80,22 @@ function create_service($data)
     mysqli_stmt_execute($stmt);
 }
 
-function getListCalendar()
+function getListCalendar($user_id = 0)
 {
     $conn = (new connect())->connectDB(); // Kết nối đến DB
-    $query = "
+    if($user_id == 0) {
+        $query = "
         SELECT 
             lh.id_lich_hen,
-            bn.ten_benh_nhan,
-            bn.so_dien_thoai,
+            lh.id_benh_nhan,
+            lh.id_nhan_vien,
             dv.ten_dich_vu,
             dv.gia_goc,
             lh.ngay_gio,
-            nv.loai_nhan_vien,
+            nv.ho_ten AS bac_si,
             lh.trang_thai
         FROM 
             lich_hen lh
-        LEFT JOIN 
-            benh_nhan bn ON lh.id_benh_nhan = bn.id_benh_nhan
         LEFT JOIN 
             dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
         LEFT JOIN 
@@ -104,6 +103,28 @@ function getListCalendar()
         ORDER BY 
             lh.ngay_gio DESC
     ";
+    } else {
+        $query = "
+        SELECT 
+            lh.id_lich_hen,
+            lh.id_benh_nhan,
+            lh.id_nhan_vien,
+            dv.ten_dich_vu,
+            dv.gia_goc,
+            lh.ngay_gio,
+            nv.ho_ten AS bac_si,
+            lh.trang_thai
+        FROM 
+            lich_hen lh
+        LEFT JOIN 
+            dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
+        LEFT JOIN 
+            nhan_vien nv ON lh.id_nhan_vien = nv.id
+        WHERE nv.id = ". $user_id ." 
+        ORDER BY 
+            lh.ngay_gio DESC
+    ";
+    }
 
     $result = mysqli_query($conn, $query);
     $calendar = [];
@@ -124,4 +145,15 @@ function getDoctors()
         $doctors[] = $row;
     }
     return $doctors;
+}
+
+
+function selectIDInfomationBS($id) {
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
+    $stmt = mysqli_prepare($conn, "SELECT * FROM nhan_vien WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    return mysqli_fetch_assoc($result);
 }

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date_time = $date . ' ' . ($time === 'morning' ? '08:00:00' : '14:00:00');
 
     // Lấy ID bệnh nhân từ session (giả sử đã lưu khi đăng nhập)
-    $patient_id = $_SESSION['user_id'] ?? null;
+    $patient_id = $_SESSION['id'] ?? null;
     // Kiểm tra nếu bệnh nhân đã đăng nhập
     if (isset($patient_id)) {
         global $conn;
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         echo "Vui lòng đăng nhập trước khi đặt lịch.";
-        header("location:login.php");
+        header("location: /thesixhospital/login.php");
         exit();
     }
 }

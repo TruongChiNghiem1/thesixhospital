@@ -125,7 +125,7 @@ require_once 'config/functional.php';
             ?>
             <div class="d-flex gap-sm-1 m-2">
                 <a class="btn btn-primary animate-scale mr-2" href="login.php">
-                    <span class="d-none d-xl-inline ms-1">Đăng nhập/Đăng ký</span>
+                    <span class="d-none d-xl-inline ms-1">Đăng nhập</span>
                 </a>
             </div>
             <?php

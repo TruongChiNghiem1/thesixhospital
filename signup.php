@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="ho_ten" class="form-label">Họ và tên</label>
                     <input type="text" name="ho_ten" class="form-control form-control-sm" placeholder="Nhập họ và tên"
                         required>
-                    <span class="text-danger" id="ho_ten_error"></span> <!-- Thông báo lỗi -->
+                    <span class="text-danger" id="ho_ten_error" style="display: none;"></span> <!-- Thông báo lỗi -->
                 </div>
 
                 <div class="mb-3">

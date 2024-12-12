@@ -35,43 +35,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dia_chi = $_POST['dia_chi'];
     $ngay_sinh = $_POST['ngay_sinh'];
 
-    // Kiểm tra xem email có bị trùng không
+    // Kiểm tra ràng buộc phía server
+    $errors = [];
+
+    // Kiểm tra họ và tên (phải viết hoa chữ cái đầu, có dấu)
+    if (!preg_match("/^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯỲÝỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưỳýỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯỲÝỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưỳýỵỷỹ]*)+$/", $ho_ten)) {
+        $errors[] = "Họ và tên phải viết hoa chữ cái đầu!";
+    }
+
+    // Kiểm tra email (phải có định dạng example@gmail.com)
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
+        $errors[] = "Email không hợp lệ! Chỉ chấp nhận email dạng example@gmail.com";
+    }
+
+    // Kiểm tra số điện thoại (bắt đầu bằng 0, từ 9 đến 10 chữ số)
+    if (!preg_match("/^0\d{8,9}$/", $so_dien_thoai)) {
+        $errors[] = "Số điện thoại phải bắt đầu bằng 0 và có từ 9 đến 10 chữ số!";
+    }
+
+    // Kiểm tra ngày sinh (phải trước ngày hiện tại)
+    if (strtotime($ngay_sinh) >= time()) {
+        $errors[] = "Ngày sinh phải trước ngày hiện tại!";
+    }
+
+    // Nếu có lỗi, chuyển hướng với thông báo lỗi
+    if (!empty($errors)) {
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode(implode(", ", $errors)));
+        exit(); // Dừng thực thi
+    }
+
+    // Kiểm tra email có trùng lặp không
     $checkEmailQuery = "SELECT COUNT(*) FROM nhan_vien WHERE email = ? AND id != ?";
     if ($stmt = $conn->prepare($checkEmailQuery)) {
-        $stmt->bind_param('si', $email, $id);  // Kiểm tra email khác với chính người dùng hiện tại
+        $stmt->bind_param('si', $email, $id);
         $stmt->execute();
         $stmt->bind_result($emailCount);
         $stmt->fetch();
         $stmt->close();
 
-        // Nếu email đã được sử dụng bởi người khác, hiển thị thông báo và không thực hiện cập nhật
         if ($emailCount > 0) {
             header("Location: " . $_SERVER['PHP_SELF'] . "?error=email_exists");
-            exit();  // Dừng ngay sau khi chuyển hướng
+            exit();
         }
 
-        // Tiến hành cập nhật thông tin người dùng trong CSDL nếu email không trùng
+        // Tiến hành cập nhật nếu không có lỗi
         $updateQuery = "UPDATE nhan_vien SET ho_ten = ?, email = ?, so_dien_thoai = ?, dia_chi = ?, ngay_sinh = ? WHERE id = ?";
         if ($stmt = $conn->prepare($updateQuery)) {
             $stmt->bind_param('sssssi', $ho_ten, $email, $so_dien_thoai, $dia_chi, $ngay_sinh, $id);
 
             if ($stmt->execute()) {
-                // Cập nhật thành công
                 header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-                exit();  // Dừng ngay sau khi chuyển hướng
+                exit();
             } else {
-                // Nếu không cập nhật được
                 header("Location: " . $_SERVER['PHP_SELF'] . "?error=update_failed");
-                exit();  // Dừng ngay sau khi chuyển hướng
+                exit();
             }
         } else {
             header("Location: " . $_SERVER['PHP_SELF'] . "?error=sql_error");
-            exit();  // Dừng ngay sau khi chuyển hướng
+            exit();
         }
     } else {
-        // Nếu không thể kiểm tra email
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=email_check_failed");
-        exit();  // Dừng ngay sau khi chuyển hướng
+        exit();
     }
 }
 ?>
@@ -95,7 +120,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
             echo "<script>alert('Không thể kiểm tra email trùng!');</script>";
             break;
         default:
-            echo "<script>alert('Có lỗi xảy ra!');</script>";
+            echo "<script>alert('Hãy điền đúng biểu mẫu!');</script>";
             break;
     }
 }
@@ -306,9 +331,12 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                         <!-- Form chỉnh sửa profile -->
                         <form action="" method="POST">
                             <div class="mb-3" style="padding-bottom: 10px;">
-                                <label for="ho_ten" class="form-label">Họ tên</label>
-                                <input type="text" class="form-control" id="ho_ten" name="ho_ten"
+                                <label for="ho_ten" class="form-label">Họ tên</label> <input type="text" name="ho_ten"
+                                    class="form-control form-control-sm" placeholder="Nhập họ và tên"
                                     value="<?php echo htmlspecialchars($ho_ten); ?>" required>
+                                <span class="text-danger" id="ho_ten_error"></span>
+
+
                                 <span class="text-danger" id="ho_ten_error"></span>
                                 <!-- Thông báo lỗi -->
                             </div>
@@ -338,7 +366,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                             </div>
                             <!-- Nút Submit trong Modal, không dùng data-bs-dismiss -->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" id="submitButton">Lưu thay đổi</button>
+                                <button type="submit" class="btn btn-danger w-100 btn-sm">Lưu thay đổi</button>
                             </div>
 
                         </form>
@@ -348,7 +376,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         </div>
 
     </div>
-    <script src="/thesixhospital/assets/js/signup.js"></script>
+    <!-- <script src="/thesixhospital/assets/js/signup.js"></script> -->
 </body>
 
 </html>

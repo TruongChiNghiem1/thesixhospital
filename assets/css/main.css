@@ -999,6 +999,3 @@ input[type="search"]:focus {
   background-repeat: no-repeat;
   transition: 0.5s;
 }
-.menu-row {
-  padding-top: 200px;
-}

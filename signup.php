@@ -85,62 +85,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="ho_ten" class="form-label">Họ và tên</label>
-                    <input type="text" name="ho_ten" class="form-control form-control-sm" placeholder="Nhập họ và tên"
-                        required>
-                    <span class="text-danger" id="ho_ten_error" style="display: none;"></span> <!-- Thông báo lỗi -->
+                    <input type="text" name="ho_ten" id="ho_ten" class="form-control form-control-sm"
+                        placeholder="Nhập họ và tên" required>
+                    <span class="text-danger" id="user_error"></span> <!-- Thông báo lỗi -->
                 </div>
-
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" name="email" class="form-control form-control-sm" placeholder="Nhập Email"
-                        required>
-                    <span class="text-danger" id="email_error"></span> <!-- Thông báo lỗi -->
+                        required onblur="validateEmail(this)">
+                    <p id="email-error-message" style="color: red; display: none;"></p>
                 </div>
 
                 <div class="mb-3">
                     <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
                     <input type="tel" name="so_dien_thoai" class="form-control form-control-sm"
-                        placeholder="ex:0712345678" pattern="[0]{1}[0-9]{9}" required>
-                    <span class="text-danger" id="so_dien_thoai_error"></span> <!-- Thông báo lỗi -->
+                        placeholder="ex: 0712345678" onblur="rangbuocsodienthoai(this)">
+                    <p id="phone-error-message" style="color: red; display: none;"></p>
                 </div>
+                <tr>
 
-                <div class="mb-3">
-                    <label for="dia_chi" class="form-label">Địa chỉ</label>
-                    <input type="text" name="dia_chi" class="form-control form-control-sm" placeholder="Nhập địa chỉ"
-                        required>
-                    <span class="text-danger" id="dia_chi_error"></span> <!-- Thông báo lỗi -->
-                </div>
+                    <div class="mb-3">
+                        <label for="dia_chi" class="form-label">Địa chỉ</label>
+                <tr>
+                    <td class="label-td" colspan="2">
+                        <input type="text" name="dia_chi" class="form-control form-control-sm"
+                            placeholder="Nhập địa chỉ" onblur="rangbuocdiachi(this)" required>
+                        <p id="address-error-message" style="color: red; display: none;"></p>
+                    </td>
+                </tr>
 
-                <div class="mb-3">
-                    <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                    <input type="date" name="ngay_sinh" class="form-control form-control-sm" required>
-                    <span class="text-danger" id="ngay_sinh_error"></span> <!-- Thông báo lỗi -->
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Tạo mật khẩu</label>
-                    <input type="password" name="password" class="form-control form-control-sm"
-                        placeholder="Nhập mật khẩu" required>
-                    <span class="text-danger" id="password_error"></span> <!-- Thông báo lỗi -->
-                </div>
-
-                <div class="mb-3">
-                    <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
-                    <input type="password" name="confirm_password" class="form-control form-control-sm"
-                        placeholder="Xác nhận mật khẩu" required>
-                    <span class="text-danger" id="confirm_password_error"></span> <!-- Thông báo lỗi -->
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-danger w-100 btn-sm">Đăng ký</button>
-                </div>
-
-                <div class="text-center mt-3">
-                    <span>Bạn đã có tài khoản?</span>
-                    <a href="login.php" class="text-primary text-decoration-none">Đăng nhập</a>
-                </div>
-            </form>
         </div>
+
+        <div class="mb-3">
+            <label for="ngay_sinh" class="form-label">Ngày sinh</label>
+            <input type="date" name="ngay_sinh" class="form-control form-control-sm" placeholder="Nhập ngày sinh"
+                required onblur="rangbuocngaysinh(this)">
+            <p id="date-error-message" style="color: red; display: none;"></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Tạo mật khẩu</label>
+            <tr>
+                <td class="label-td" colspan="2">
+                    <input type="password" name="password" class="form-control form-control-sm"
+                        placeholder="Nhập mật khẩu" onblur="rangbuocMatKhau(this)" required>
+                    <p id="password-error-message" style="color: red; display: none;"></p>
+                </td>
+            </tr>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
+            <input type="password" name="confirm_password" class="form-control form-control-sm"
+                placeholder="Xác nhận mật khẩu" required>
+            <span class="text-danger" id="confirm_password_error"></span> <!-- Thông báo lỗi -->
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger w-100 btn-sm">Đăng ký</button>
+        </div>
+
+        <div class="text-center mt-3">
+            <span>Bạn đã có tài khoản?</span>
+            <a href="login.php" class="text-primary text-decoration-none">Đăng nhập</a>
+        </div>
+        </form>
+    </div>
     </div>
     <script src="/thesixhospital/assets/js/signup.js"></script>
 </body>

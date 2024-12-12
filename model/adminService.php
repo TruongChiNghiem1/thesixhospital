@@ -1,6 +1,7 @@
 <?php
 
-function index() {
+function index()
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $query = "SELECT * FROM dich_vu ORDER BY created_at DESC";
     $result = mysqli_query($conn, $query);
@@ -13,14 +14,16 @@ function index() {
     return $services;
 }
 
-function delete($id) {
+function delete($id)
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "DELETE FROM dich_vu WHERE id_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
     return mysqli_stmt_execute($stmt);
 }
 
-function get_service_by_id($id) {
+function get_service_by_id($id)
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "SELECT * FROM dich_vu WHERE id_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
@@ -30,10 +33,13 @@ function get_service_by_id($id) {
     return mysqli_fetch_assoc($result);
 }
 
-function update_service($id, $data) {
+function update_service($id, $data)
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "UPDATE dich_vu SET ten_dich_vu = ?, gia_goc = ?, gia_giam = ?, chi_tiet = ?, mo_ta = ?, hinh_anh = ? WHERE id_dich_vu = ?");
-    mysqli_stmt_bind_param($stmt, "ssssssi",
+    mysqli_stmt_bind_param(
+        $stmt,
+        "ssssssi",
         $data["ten_dich_vu"],
         $data["gia_goc"],
         $data["gia_giam"],
@@ -45,7 +51,8 @@ function update_service($id, $data) {
     mysqli_stmt_execute($stmt);
 }
 
-function duplicate_service($name) {
+function duplicate_service($name)
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "SELECT * FROM dich_vu WHERE ten_dich_vu = ?");
     mysqli_stmt_bind_param($stmt, "s", $name);
@@ -55,10 +62,13 @@ function duplicate_service($name) {
     return mysqli_num_rows($result) === 0; // Trả về true nếu không trùng lặp
 }
 
-function create_service($data) {
+function create_service($data)
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $stmt = mysqli_prepare($conn, "INSERT INTO dich_vu (ten_dich_vu, gia_goc, gia_giam, chi_tiet, mo_ta, created_at, hinh_anh) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($stmt, "sssssss",
+    mysqli_stmt_bind_param(
+        $stmt,
+        "sssssss",
         $data["ten_dich_vu"],
         $data["gia_goc"],
         $data["gia_giam"],
@@ -70,7 +80,8 @@ function create_service($data) {
     mysqli_stmt_execute($stmt);
 }
 
-function getListCalendar() {
+function getListCalendar()
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $query = "
         SELECT 
@@ -80,7 +91,7 @@ function getListCalendar() {
             dv.ten_dich_vu,
             dv.gia_goc,
             lh.ngay_gio,
-            nv.ho_ten AS bac_si,
+            nv.loai_nhan_vien,
             lh.trang_thai
         FROM 
             lich_hen lh
@@ -102,7 +113,8 @@ function getListCalendar() {
     return $calendar;
 }
 
-function getDoctors() {
+function getDoctors()
+{
     $conn = (new connect())->connectDB(); // Kết nối đến DB
     $query = "SELECT id, ho_ten, loai_nhan_vien FROM nhan_vien WHERE loai_nhan_vien IN (2, 3, 4)";
     $result = mysqli_query($conn, $query);
@@ -113,4 +125,3 @@ function getDoctors() {
     }
     return $doctors;
 }
-?>

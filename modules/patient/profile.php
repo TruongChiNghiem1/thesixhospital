@@ -35,96 +35,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dia_chi = $_POST['dia_chi'];
     $ngay_sinh = $_POST['ngay_sinh'];
 
-    // Kiểm tra ràng buộc phía server
-    $errors = [];
+    // Kiểm tra email trùng lặp
+    $query_check_email = "SELECT id FROM nhan_vien WHERE email = ? AND id != ?";
+    $stmt_check_email = $conn->prepare($query_check_email);
+    $stmt_check_email->bind_param('si', $email, $id);
+    $stmt_check_email->execute();
+    $stmt_check_email->store_result();
 
-    // Kiểm tra họ và tên (phải viết hoa chữ cái đầu, có dấu)
-    if (!preg_match("/^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯỲÝỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưỳýỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯỲÝỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưỳýỵỷỹ]*)+$/", $ho_ten)) {
-        $errors[] = "Họ và tên phải viết hoa chữ cái đầu!";
-    }
-
-    // Kiểm tra email (phải có định dạng example@gmail.com)
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
-        $errors[] = "Email không hợp lệ! Chỉ chấp nhận email dạng example@gmail.com";
-    }
-
-    // Kiểm tra số điện thoại (bắt đầu bằng 0, từ 9 đến 10 chữ số)
-    if (!preg_match("/^0\d{8,9}$/", $so_dien_thoai)) {
-        $errors[] = "Số điện thoại phải bắt đầu bằng 0 và có từ 9 đến 10 chữ số!";
-    }
-
-    // Kiểm tra ngày sinh (phải trước ngày hiện tại)
-    if (strtotime($ngay_sinh) >= time()) {
-        $errors[] = "Ngày sinh phải trước ngày hiện tại!";
-    }
-
-    // Nếu có lỗi, chuyển hướng với thông báo lỗi
-    if (!empty($errors)) {
-        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode(implode(", ", $errors)));
-        exit(); // Dừng thực thi
-    }
-
-    // Kiểm tra email có trùng lặp không
-    $checkEmailQuery = "SELECT COUNT(*) FROM nhan_vien WHERE email = ? AND id != ?";
-    if ($stmt = $conn->prepare($checkEmailQuery)) {
-        $stmt->bind_param('si', $email, $id);
-        $stmt->execute();
-        $stmt->bind_result($emailCount);
-        $stmt->fetch();
-        $stmt->close();
-
-        if ($emailCount > 0) {
-            header("Location: " . $_SERVER['PHP_SELF'] . "?error=email_exists");
-            exit();
-        }
-
-        // Tiến hành cập nhật nếu không có lỗi
-        $updateQuery = "UPDATE nhan_vien SET ho_ten = ?, email = ?, so_dien_thoai = ?, dia_chi = ?, ngay_sinh = ? WHERE id = ?";
-        if ($stmt = $conn->prepare($updateQuery)) {
-            $stmt->bind_param('sssssi', $ho_ten, $email, $so_dien_thoai, $dia_chi, $ngay_sinh, $id);
-
-            if ($stmt->execute()) {
-                header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-                exit();
-            } else {
-                header("Location: " . $_SERVER['PHP_SELF'] . "?error=update_failed");
-                exit();
-            }
-        } else {
-            header("Location: " . $_SERVER['PHP_SELF'] . "?error=sql_error");
-            exit();
-        }
+    if ($stmt_check_email->num_rows > 0) {
+        // Nếu email đã tồn tại
+        echo "<script>alert('Email đã tồn tại! Vui lòng sử dụng email khác.');</script>";
     } else {
-        header("Location: " . $_SERVER['PHP_SELF'] . "?error=email_check_failed");
-        exit();
+        // Cập nhật thông tin vào cơ sở dữ liệu
+        $query_update = "UPDATE nhan_vien SET ho_ten = ?, email = ?, so_dien_thoai = ?, dia_chi = ?, ngay_sinh = ? WHERE id = ?";
+        $stmt_update = $conn->prepare($query_update);
+        $stmt_update->bind_param('sssssi', $ho_ten, $email, $so_dien_thoai, $dia_chi, $ngay_sinh, $id);
+
+        if ($stmt_update->execute()) {
+            // Hiển thị thông báo thành công
+            echo "<script>alert('Cập nhật thông tin thành công!'); window.location.href = 'profile.php';</script>";
+        } else {
+            // Hiển thị thông báo lỗi nếu cập nhật thất bại
+            echo "<script>alert('Có lỗi xảy ra khi cập nhật thông tin!');</script>";
+        }
+
+        $stmt_update->close();
     }
+
+    $stmt_check_email->close();
 }
+$conn->close();
 ?>
 
-<?php
-// Kiểm tra nếu có thông báo thành công hoặc lỗi
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    echo "<script>alert('Cập nhật thông tin thành công!');</script>";
-} elseif (isset($_GET['error'])) {
-    switch ($_GET['error']) {
-        case 'email_exists':
-            echo "<script>alert('Email này đã được sử dụng!');</script>";
-            break;
-        case 'update_failed':
-            echo "<script>alert('Có lỗi xảy ra khi cập nhật thông tin!');</script>";
-            break;
-        case 'sql_error':
-            echo "<script>alert('Không thể chuẩn bị câu lệnh SQL!');</script>";
-            break;
-        case 'email_check_failed':
-            echo "<script>alert('Không thể kiểm tra email trùng!');</script>";
-            break;
-        default:
-            echo "<script>alert('Hãy điền đúng biểu mẫu!');</script>";
-            break;
-    }
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -330,38 +273,43 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
                     <div class="modal-body">
                         <!-- Form chỉnh sửa profile -->
                         <form action="" method="POST">
-                            <div class="mb-3" style="padding-bottom: 10px;">
-                                <label for="ho_ten" class="form-label">Họ tên</label> <input type="text" name="ho_ten"
-                                    class="form-control form-control-sm" placeholder="Nhập họ và tên"
-                                    value="<?php echo htmlspecialchars($ho_ten); ?>" required>
-                                <span class="text-danger" id="ho_ten_error"></span>
-
-
-                                <span class="text-danger" id="ho_ten_error"></span>
+                            <div class="mb-3">
+                                <label for="ho_ten" class="form-label">Họ và tên</label>
+                                <input type="text" name="ho_ten" id="ho_ten" class="form-control form-control-sm"
+                                    placeholder="Nhập họ và tên"
+                                    value="<?php echo htmlspecialchars(string: $ho_ten); ?>" required>
+                                <span class="text-danger" id="user_error"></span> <!-- Thông báo lỗi -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control form-control-sm"
+                                    placeholder="Nhập Email" value=" <?php echo htmlspecialchars(string: $email); ?>"
+                                    required onblur="validateEmail(this)">
+                                <p id="email-error-message" style="color: red; display: none; margin-top: 0;"></p>
                                 <!-- Thông báo lỗi -->
                             </div>
-                            <div class="mb-3" style="padding-bottom: 10px;">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    value="<?php echo htmlspecialchars($email); ?>" required>
-                                <span class="text-danger" id="email_error"></span> <!-- Thông báo lỗi -->
-                            </div>
-                            <div class="mb-3" style="padding-bottom: 10px;">
+
+                            <div class="mb-3">
                                 <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" id="so_dien_thoai" name="so_dien_thoai"
-                                    value="<?php echo htmlspecialchars($so_dien_thoai); ?>" required>
-                                <span class="text-danger" id="so_dien_thoai_error"></span> <!-- Thông báo lỗi -->
+                                <input type="tel" name="so_dien_thoai" class="form-control form-control-sm"
+                                    placeholder="ex: 0712345678"
+                                    value="<?php echo htmlspecialchars(string: $so_dien_thoai); ?>"
+                                    onblur="rangbuocsodienthoai(this)">
+                                <p id="phone-error-message" style="color: red; display: none; margin-top: 0;"></p>
                             </div>
-                            <div class="mb-3" style="padding-bottom: 10px;">
+
+                            <div class="mb-3">
                                 <label for="dia_chi" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" id="dia_chi" name="dia_chi"
-                                    value="<?php echo htmlspecialchars($dia_chi); ?>" required>
-                                <span class="text-danger" id="dia_chi_error"></span> <!-- Thông báo lỗi -->
+                                <input type="text" name="dia_chi" class="form-control form-control-sm"
+                                    placeholder="Nhập địa chỉ" onblur="rangbuocdiachi(this)"
+                                    value="<?php echo htmlspecialchars(string: $dia_chi); ?>" required>
+                                <p id="address-error-message" style="color: red; display: none;"></p>
                             </div>
-                            <div class="mb-3" style="padding-bottom: 10px;">
+
+                            <div class="mb-3">
                                 <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh"
-                                    value="<?php echo htmlspecialchars($ngay_sinh); ?>" required>
+                                <input type="date" name="ngay_sinh" class="form-control form-control-sm"
+                                    value="<?php echo htmlspecialchars(string: $ngay_sinh); ?>" required>
                                 <span class="text-danger" id="ngay_sinh_error"></span> <!-- Thông báo lỗi -->
                             </div>
                             <!-- Nút Submit trong Modal, không dùng data-bs-dismiss -->
@@ -376,7 +324,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
         </div>
 
     </div>
-    <!-- <script src="/thesixhospital/assets/js/signup.js"></script> -->
+    <script src="/thesixhospital/assets/js/signup.js"></script>
 </body>
 
 </html>

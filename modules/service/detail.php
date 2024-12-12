@@ -9,6 +9,7 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
     }
 
     $indexExId = indexExId($id);
+    $doctors = getDoctors();
 }
 
 ?>
@@ -173,9 +174,9 @@ if (isset($_GET["a"]) && $_GET["a"] === 'detail' && isset($_GET["id"])) {
                                     <label class="d-flex mb-2" for="doctor">Chọn bác sĩ</label>
                                     <select class="form-select" name="doctor_id" id="doctor" required>
                                         <option selected disabled>Chọn bác sĩ</option>
-                                        <option value="1">Trương Chí Nghiệm</option>
-                                        <option value="2">Cao Thanh Việt</option>
-                                        <option value="3">Nguyễn Nhật Tùng</option>
+                                        <?php foreach ($doctors as $doctor): ?>
+                                            <option value="<?php echo $doctor['id']; ?>"><?php echo htmlspecialchars($doctor['ho_ten']); ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">

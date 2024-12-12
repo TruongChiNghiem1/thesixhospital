@@ -1,6 +1,6 @@
 <?php
 $results = getListCalendar();
-
+$doctors = getDoctors(); // Lấy danh sách bác sĩ
 ?>
 
 <nav class="ms-2 mt-3" aria-label="breadcrumb">
@@ -41,9 +41,30 @@ $results = getListCalendar();
                     <td><?php echo htmlspecialchars($row['gia_goc']); ?> VNĐ</td>
                     <td><?php echo date('d/m/Y', strtotime($row['ngay_gio'])); ?></td>
                     <td><?php echo $row['bac_si'] ? htmlspecialchars($row['bac_si']) : '<span class="text-danger">Chưa có bác sĩ</span>'; ?></td>
-                    <td><span class="text-danger"><?php echo htmlspecialchars($row['trang_thai']); ?></span></td>
+                    <td>
+                        <?php
+                        switch ($row['trang_thai']) {
+                            case 1:
+                                echo '<span class="text-warning">Chờ bác sĩ</span>';
+                                break;
+                            case 2:
+                                echo '<span class="text-primary">Chờ khám</span>';
+                                break;
+                            case 3:
+                                echo '<span class="text-success">Khám thành công</span>';
+                                break;
+                            case 4:
+                                echo '<span class="text-danger">Từ chối</span>';
+                                break;
+                        }
+                        ?>
+                    </td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPhanCong<?php echo $row['id_lich_hen']; ?>">Phân công</button>
+                        <?php
+                        if ($row['trang_thai'] == 1) {
+                            echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPhanCong' . $row['id_lich_hen'] . '">Phân công</button>';
+                        }
+                        ?>
                         <button type="button" class="btn btn-danger">Từ chối</button>
                     </td>
                 </tr>
@@ -57,15 +78,24 @@ $results = getListCalendar();
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="assign_doctor.php" method="POST">
+                                <form action="/thesixhospital/modules/adminService/assign_doctor.php" method="POST">
                                     <input type="hidden" name="lich_id" value="<?php echo $row['id_lich_hen']; ?>">
                                     <div class="form-group mb-3">
                                         <label class="d-flex mb-2" for="doctor">Chọn bác sĩ</label>
                                         <select class="form-select" name="doctor_id" id="doctor" required>
                                             <option selected disabled>Chọn bác sĩ</option>
-                                            <option value="1">Trương Chí Nghiệm</option>
-                                            <option value="2">Cao Thanh Việt</option>
-                                            <option value="3">Nguyễn Nhật Tùng</option>
+                                            <?php foreach ($doctors as $doctor): ?>
+                                                <option value="<?php echo $doctor['id']; ?>"><?php echo htmlspecialchars($doctor['ho_ten']); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="d-flex mb-2" for="status">Trạng thái</label>
+                                        <select class="form-select" name="status" id="status" required>
+                                            <option value="1">Chờ bác sĩ</option>
+                                            <option value="2">Chờ khám</option>
+                                            <option value="3">Khám thành công</option>
+                                            <option value="4">Từ chối</option>
                                         </select>
                                     </div>
                             </div>

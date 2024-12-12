@@ -30,13 +30,66 @@ $stmt->close();
 // -------
 
 include_once('../../model/adminService.php');
-// include_once('../../model/service.php');
-
-$results = getListCalendar();
+$result = getListCalendar();
 $doctors = getDoctors();
 
 
+
+// Kiểm tra nếu có tham số 'id' trong URL
+// Kiểm tra nếu form đã được gửi (khi người dùng nhấn nút "Hủy lịch")
+if (isset($_POST['id_lich_hen'])) {
+    $id_lich_hen = $_POST['id_lich_hen'];
+
+    // Câu lệnh SQL để xóa lịch hẹn có trạng thái "Chờ khám" (trạng thái = 2)
+    $query = "DELETE FROM lich_hen WHERE id_lich_hen = ? AND trang_thai = 2";
+
+    // Chuẩn bị câu lệnh SQL
+    $stmt = $conn->prepare($query);
+
+    // Kiểm tra nếu chuẩn bị truy vấn thành công
+    if ($stmt === false) {
+        die('Error preparing statement: ' . $conn->error);
+    }
+
+    // Liên kết tham số
+    $stmt->bind_param('i', $id_lich_hen); // 'i' cho kiểu integer
+
+    // Thực thi truy vấn
+    if ($stmt->execute()) {
+        // Nếu xóa thành công, chuyển hướng lại trang mà không cần f5
+        echo "<script>
+                alert('Lịch hẹn đã được hủy.');
+                window.location.href = ' /thesixhospital/modules/patient/MyBooking.php'; // Hoặc trang bạn muốn làm mới
+              </script>";
+        exit; // Đảm bảo dừng việc thực thi mã tiếp theo
+    } else {
+        // Nếu có lỗi
+        echo "Lỗi khi hủy lịch hẹn: " . $stmt->error;
+    }
+
+    // Đóng statement
+    $stmt->close();
+}
+
+// Đóng kết nối
+$conn->close();
+
+// include_once('../../model/service.php');
+
+
+// $results = getListCalendar_BN();
+// if (!empty($results)) {
+// foreach ($results as $item) {
+// // Hiển thị dữ liệu lịch hẹn
+// echo $item['ten_benh_nhan'] . ' - ' . $item['ten_dich_vu'] . '<br>';
+// }
+// } else {
+// echo "Không có lịch hẹn nào.";
+// }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -186,11 +239,12 @@ $doctors = getDoctors();
                                                 <th>Ngày khám</th>
                                                 <th>Bác sĩ phụ trách</th>
                                                 <th>Trạng thái</th>
-
+                                                <th>Hủy lịch đặt</th>
+                                                <th>Thay đổi lịch</th> <!-- Cột Thay đổi lịch -->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($results as $row) : ?>
+                                            <?php foreach ($result as $row) : ?>
                                             <tr>
                                                 <td class="text-center"><?php echo $row['id_lich_hen']; ?></td>
                                                 <td><?php echo htmlspecialchars($row['ten_dich_vu']); ?></td>
@@ -214,75 +268,122 @@ $doctors = getDoctors();
                                                         }
                                                         ?>
                                                 </td>
-                    </td>
 
-                    <td>
-                        <?php
-                                                switch ($row['trang_thai']) {
-                                                    case 1:
-                                                        echo '<span class="text-warning">Chờ bác sĩ</span>';
-                                                        break;
-                                                    case 2:
-                                                        echo '<span class="text-primary">Chờ khám</span>';
-                                                        break;
-                                                    case 3:
-                                                        echo '<span class="text-success">Khám thành công</span>';
-                                                        break;
-                                                    case 4:
-                                                        echo '<span class="text-danger">Từ chối</span>';
-                                                        break;
-                                                }
-                        ?>
+                                                <td>
+                                                    <?php
+                                                        switch ($row['trang_thai']) {
+                                                            case 2:
+                                                                echo '<span class="text-warning">Chờ bác sĩ</span>';
+                                                                break;
+                                                            case 3:
+                                                                echo '<span class="text-primary">Chờ khám</span>';
+                                                                break;
+                                                            case 4:
+                                                                echo '<span class="text-success">Khám thành công</span>';
+                                                                break;
+                                                            default:
+                                                                echo '<span class="text-muted">Chưa xác định</span>';
+                                                                break;
+                                                        }
+                                                        ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if ($row['trang_thai'] == 2) : // Chỉ hiển thị nút "Hủy lịch" khi trạng thái là "Chờ khám" 
+                                                        ?>
+                                                    <form method="POST" action="MyBooking.php">
+                                                        <input type="hidden" name="id_lich_hen"
+                                                            value="<?php echo $row['id_lich_hen']; ?>">
+                                                        <input type="submit" class="HL" value="Hủy lịch">
+                                                    </form>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if ($row['trang_thai'] == 2) : // Chỉ hiển thị nút "Thay đổi" khi trạng thái là "Chờ bác sĩ" 
+                                                        ?>
+                                                    <!-- Nút Thay đổi -->
+                                                    <button class="btn btn-warning TDL" id="changeButton"
+                                                        data-id="<?php echo $row['id_lich_hen']; ?>"
+                                                        data-dich-vu="<?php echo $row['ten_dich_vu']; ?>"
+                                                        data-gia="<?php echo $row['gia_goc']; ?>"
+                                                        data-ngay-gio="<?php echo $row['ngay_gio']; ?>">Thay
+                                                        đổi</button>
+
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                    <!-- Modal Thay đổi lịch -->
+
+
+                                </div>
+                            </div>
+
+
+
+                        </center>
                     </td>
                 </tr>
-                <?php endforeach; ?>
-                </tbody>
             </table>
         </div>
     </div>
-
-
-
-    </center>
-    </td>
-    </tr>
-    </table>
-    </div>
-    </div>
     <div id="myModal" class="modal">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="margin-top:200px;">
                 <div class="modal-header">
-                    <h3>Sửa lịch khám</h3>
-                    <a href="#" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</a>
+                    <h3 class="modal-title" style="text-align: center" id="changeBookingModalLabel">Thay đổi lịch
+                        hẹn</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="width: 30px;">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-sm-12">
-                        <label for="txtDate">Ngày đặt lịch</label>
-                        <input type="date" class="form-control" id="txtDate" />
-                        <span id="tbDate" class="text-danger">*</span>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <label for="txtChuyenKhoa" class="mt-3">Thời gian</label>
-                        <select id="txtChuyenKhoa" class="form-select">
-                            <option value="" hidden selected>Chọn thời gian</option>
-                            <option value="8h">8h</option>
-                            <option value="10h">10h</option>
-                            <option value="13h">13h</option>
-                            <option value="15h">15h</option>
-                            <option value="17h">17h</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger col-sm-12" data-bs-dismiss="modal" id="btnSave">
-                        Xác nhận thay đổi
-                    </button>
+                    <form method="POST" action="MyBooking.php" id="changeBookingForm">
+                        <input type="hidden" name="id_lich_hen" id="modal_id_lich_hen">
+                        <div class="form-group">
+                            <label for="ten_dich_vu">Tên dịch vụ</label>
+                            <input type="text" class="form-control" name="ten_dich_vu" id="modal_ten_dich_vu">
+                        </div>
+                        <div class="form-group">
+                            <label for="gia_goc">Giá dịch vụ</label>
+                            <input type="number" class="form-control" name="gia_goc" id="modal_gia_goc">
+                        </div>
+                        <div class="form-group">
+                            <label for="ngay_gio">Ngày giờ khám</label>
+                            <input type="datetime-local" class="form-control" name="ngay_gio" id="modal_ngay_gio">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+document.querySelectorAll('#changeButton').forEach(button => {
+    button.addEventListener('click', function() {
+        // Lấy các giá trị từ data attributes
+        const id = this.getAttribute('data-id');
+        const dichVu = this.getAttribute('data-dich-vu');
+        const gia = this.getAttribute('data-gia');
+        const ngayGio = this.getAttribute('data-ngay-gio');
+
+        // Cập nhật giá trị vào modal
+        document.getElementById('modal_id_lich_hen').value = id;
+        document.getElementById('modal_ten_dich_vu').value = dichVu;
+        document.getElementById('modal_gia_goc').value = gia;
+        document.getElementById('modal_ngay_gio').value = ngayGio;
+
+        // Mở modal
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+    });
+});
+</script>
 
 </html>

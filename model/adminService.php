@@ -112,7 +112,58 @@ function getListCalendar()
     }
     return $calendar;
 }
+function getListCalendar_BN()
+{
+    $conn = (new connect())->connectDB(); // Kết nối đến DB
 
+    // Lấy ID nhân viên từ session
+    $id = $_SESSION['id'];
+
+    // Truy vấn chỉ lấy lịch hẹn của nhân viên đăng nhập
+    $query = "
+        SELECT 
+            lh.id_lich_hen,
+            bn.ten_benh_nhan,
+            bn.so_dien_thoai,
+            dv.ten_dich_vu,
+            dv.gia_goc,
+            lh.ngay_gio,
+            nv.loai_nhan_vien,
+            lh.trang_thai
+        FROM 
+            lich_hen lh
+        LEFT JOIN 
+            benh_nhan bn ON lh.id_benh_nhan = bn.id_benh_nhan
+        LEFT JOIN 
+            dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
+        LEFT JOIN 
+            nhan_vien nv ON lh.id_nhan_vien = nv.id
+        WHERE 
+            lh.id_nhan_vien = ? -- Chỉ lấy lịch hẹn của nhân viên đăng nhập
+        ORDER BY 
+            lh.ngay_gio DESC
+    ";
+
+    // Chuẩn bị truy vấn và gán tham số
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id); // Gán giá trị $id (kiểu số nguyên)
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Xử lý kết quả truy vấn
+    $calendar = [];
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $calendar[] = $row;
+        }
+    }
+
+    // Đóng kết nối
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+
+    return $calendar; // Trả về danh sách lịch hẹn của nhân viên
+}
 function getDoctors()
 {
     $conn = (new connect())->connectDB(); // Kết nối đến DB

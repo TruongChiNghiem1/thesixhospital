@@ -68,3 +68,28 @@
 .text-danger {
   color: #dc3545;
 }
+.HL {
+  background-color: red; /* Màu nền đỏ */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  padding: 10px 20px; /* Khoảng cách trong nút */
+  cursor: pointer; /* Con trỏ chuột khi di chuyển qua */
+  border-radius: 5px; /* Bo góc */
+}
+
+.HL:hover {
+  background-color: darkred; /* Đổi màu nền khi hover */
+}
+
+.TDL {
+  background-color: blue; /* Màu nền xanh dương */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  padding: 10px 20px; /* Khoảng cách trong nút */
+  cursor: pointer; /* Con trỏ chuột khi di chuyển qua */
+  border-radius: 5px; /* Bo góc */
+}
+
+.TDL:hover {
+  background-color: darkblue; /* Đổi màu nền khi hover */
+}

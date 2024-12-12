@@ -72,9 +72,9 @@
                 echo "<td>" . $row['email'] . "</td>";
 
                 echo"<td>
-                        <a href='index.php?action=hrm&view=nhanVien&id=".$row['id']."'><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>View</button></a>
-                        <a href='index.php?action=hrm&delete=nhanVien&id=".$row['id']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Remove</button></a>
-                        <a href='index.php?action=hrm&update=nhanVien&id=".$row['id']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Update</button></a>
+                        <a href='index.php?action=hrm&view=nhanVien&id=".$row['id']."'><button id='btn-view' type='button' class='btn btn-outline-primary' name='btn_click'>Xem</button></a>
+                        <a href='index.php?action=hrm&delete=nhanVien&id=".$row['id']."'><button id='btn-delete' type='button' class='btn btn-outline-primary' name='btn_click'>Xoá</button></a>
+                        <a href='index.php?action=hrm&update=nhanVien&id=".$row['id']."'><button id='btn-update' type='button' class='btn btn-outline-primary' name='btn_click'>Cập nhật</button></a>
                         
                     </td>";
                 echo "</tr>";

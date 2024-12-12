@@ -14,6 +14,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
+
 // Lấy ID người dùng từ session
 $id = $_SESSION['id'];
 
@@ -25,7 +26,18 @@ $stmt->execute();
 $stmt->bind_result($ho_ten, $email);
 $stmt->fetch();
 $stmt->close();
+
+// -------
+
+include_once('../../model/adminService.php');
+// include_once('../../model/service.php');
+
+$results = getListCalendar();
+$doctors = getDoctors();
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +50,7 @@ $stmt->close();
     <link rel="stylesheet" href="/thesixhospital/assets/css/admin.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/thesixhospital/assets/css/lsdl.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <title>Lịch sử đặt lịch</title>
@@ -158,133 +171,83 @@ $stmt->close();
                 <tr>
                     <td colspan="4">
                         <center>
-                            <div class="abc scroll">
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <table width="93%" class="sub-table scrolldown" border="0" style="border:none">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 25%;">
-                                                <div class="dashboard-items search-items">
-                                                    <div style="width:100%;">
-                                                        <div class="h3-search">
-                                                            Ngày đặt lịch: 29/10/2024<br>
-                                                        </div>
-                                                        <div><img class="h3-img"
-                                                                src="/thesixhospital/assets/images/lovepik-professional-doctor-image-png-image_400996861_wh1200.png"
-                                                                alt=""></div>
-                                                        <div class="h1-search">
-                                                            Bác sĩ chuyên khoa<br>
-                                                        </div>
-                                                        <div class="h3-search">
-                                                            Tình trạng: Đau đầu thường xuyên
-                                                        </div>
-                                                        <br>
-                                                        <div class="h3-search">
-                                                            Bác sĩ: Cao Việt
-                                                        </div>
-                                                        <div class="h4-search">
-                                                            Giờ bắt đầu: <b>@18:00</b> (24h)
-                                                        </div>
-                                                        <br>
-                                                        <a><button class="btn-primary-soft btn ">
-                                                                <font class="tn-in-text">Hủy lịch</font>
-                                                            </button></a>
-                                                        <a href="#myModal"><button
-                                                                class="login-btn btn-primary-soft btn ">
-                                                                <font class="tn-in-text">Thay đổi lịch</font>
-                                                            </button></a>
-                                                    </div>
+                            <div class="bg-white border-main" style="padding: 0px 50px;">
+                                <div class="p-5">
+                                    <div class="d-flex justify-content-center mt-3 mb-4">
+                                        <h3 style="font-size: 30px;">Lịch đặt dịch vụ</h3>
+                                    </div>
 
+                                    <table id="adminServiceTable" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Mã lịch</th>
+                                                <th>Dịch vụ khám</th>
+                                                <th>Tổng</th>
+                                                <th>Ngày khám</th>
+                                                <th>Bác sĩ phụ trách</th>
+                                                <th>Trạng thái</th>
 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($results as $row) : ?>
+                                            <tr>
+                                                <td class="text-center"><?php echo $row['id_lich_hen']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['ten_dich_vu']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['gia_goc']); ?> VNĐ</td>
+                                                <td><?php echo date('d/m/Y', strtotime($row['ngay_gio'])); ?></td>
+                                                <td>
+                                                    <?php
+                                                        switch ($row['loai_nhan_vien']) {
+                                                            case 2:
+                                                                echo '<span class="text-warning">Bác sĩ chuyên khoa</span>';
+                                                                break;
+                                                            case 3:
+                                                                echo '<span class="text-primary">Bác sĩ sức khỏe</span>';
+                                                                break;
+                                                            case 4:
+                                                                echo '<span class="text-success">Bác sĩ dinh dưỡng</span>';
+                                                                break;
+                                                            default:
+                                                                echo '<span class="text-muted">Chưa xác định</span>';
+                                                                break;
+                                                        }
+                                                        ?>
+                                                </td>
+                    </td>
 
-                                                </div>
-                                            </td>
-                                            <td style="width: 25%;">
-                                                <div class="dashboard-items search-items">
-
-                                                    <div style="width:100%;">
-                                                        <div class="h3-search">
-                                                            Ngày đặt lịch: 29/10/2024<br>
-                                                            Mã đặt lịch: OC-000-1
-                                                        </div>
-                                                        <div><img class="h3-img"
-                                                                src="/thesixhospital/assets/images/lovepik-professional-doctor-image-png-image_400996861_wh1200.png"
-                                                                alt=""></div>
-                                                        <div class="h1-search">
-                                                            Bác sĩ sinh dưỡng<br>
-                                                        </div>
-                                                        <div class="h3-search">
-                                                            Tình trạng: Ăn hoài không mập :D
-                                                        </div>
-                                                        <br>
-                                                        <div class="h3-search">
-                                                            Bác sĩ: Cao Việt
-                                                        </div>
-                                                        <div class="h4-search">
-                                                            Giờ bắt đầu: <b>@18:00</b> (24h)
-                                                        </div>
-                                                        <br>
-                                                        <a><button class="btn-primary-soft btn ">
-                                                                <font class="tn-in-text">Hủy lịch</font>
-                                                            </button></a>
-                                                        <a href="#myModal"><button
-                                                                class="login-btn btn-primary-soft btn ">
-                                                                <font class="tn-in-text">Thay đổi lịch</font>
-                                                            </button></a>
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td style="width: 25%;">
-                                                <div class="dashboard-items search-items">
-
-                                                    <div style="width:100%;">
-                                                        <div class="h3-search">
-                                                            Ngày đặt lịch: 29/10/2024<br>
-                                                            Mã đặt lịch: OC-000-1
-                                                        </div>
-                                                        <div><img class="h3-img"
-                                                                src="/thesixhospital/assets/images/lovepik-professional-doctor-image-png-image_400996861_wh1200.png"
-                                                                alt=""></div>
-                                                        <div class="h1-search">
-                                                            Bác sĩ sức khỏe<br>
-                                                        </div>
-                                                        <div class="h3-search">
-                                                            Tình trạng: Đau đầu thường xuyên
-                                                        </div>
-                                                        <br>
-                                                        <div class="h3-search">
-                                                            Bác sĩ: Cao Việt
-                                                        </div>
-                                                        <div class="h4-search">
-                                                            Giờ bắt đầu: <b>@18:00</b> (24h)
-                                                        </div>
-                                                        <br>
-                                                        <a><button class="btn-primary-soft btn">
-                                                                <font class="tn-in-text">Hủy lịch</font>
-                                                            </button></a>
-                                                        <a href="#myModal"><button
-                                                                class="login-btn btn-primary-soft btn ">
-                                                                <font class="tn-in-text">Thay đổi lịch</font>
-                                                            </button></a>
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </center>
+                    <td>
+                        <?php
+                                                switch ($row['trang_thai']) {
+                                                    case 1:
+                                                        echo '<span class="text-warning">Chờ bác sĩ</span>';
+                                                        break;
+                                                    case 2:
+                                                        echo '<span class="text-primary">Chờ khám</span>';
+                                                        break;
+                                                    case 3:
+                                                        echo '<span class="text-success">Khám thành công</span>';
+                                                        break;
+                                                    case 4:
+                                                        echo '<span class="text-danger">Từ chối</span>';
+                                                        break;
+                                                }
+                        ?>
                     </td>
                 </tr>
+                <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
+    </div>
+
+
+
+    </center>
+    </td>
+    </tr>
+    </table>
+    </div>
     </div>
     <div id="myModal" class="modal">
         <div class="modal-dialog">

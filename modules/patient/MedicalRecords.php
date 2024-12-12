@@ -24,6 +24,28 @@ $stmt->execute();
 $stmt->bind_result($ho_ten, $email);
 $stmt->fetch();
 $stmt->close();
+
+
+// --------
+
+include("../../controller/BSDD/cUser.php");
+include_once '../model/inforuser.php';  // Đảm bảo đường dẫn từ thư mục controller
+
+$inforUser = new InforUser();
+
+$id_ho_so_benh_an = $_GET['id'] ?? null;
+
+if (!$id_ho_so_benh_an) {
+    echo "<script>alert('Không tìm thấy ID Hồ Sơ Bệnh Án!'); window.history.back();</script>";
+    exit;
+}
+
+$hoSo = $inforUser->getHoSoBenhAnById($id_ho_so_benh_an);
+
+if (!$hoSo) {
+    echo "<script>alert('Không tìm thấy Hồ Sơ Bệnh Án với ID đã chọn!'); window.history.back();</script>";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +59,7 @@ $stmt->close();
     <link rel="stylesheet" href="/thesixhospital/assets/css/admin.css">
     <link rel="stylesheet" href="/thesixhospital/assets/css/modal1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
     <title>Profile</title>
     <style>
     .dashbord-tables {
@@ -150,56 +173,59 @@ $stmt->close();
                     </td>
                 </tr>
             </table>
-            <table style="border: solid black 1px; margin-top: 20px;">
-                <tbody>
-                    <tr>
-                        <td style="width: 25%;">
-                            <div class="HSBA">
-                                <div style="width:100%;">
-                                    <div class="">
-                                        <h1 style="text-align: center;">Bệnh
-                                            Án</h1>
-                                    </div>
-                                    <hr>
-                                    <div>
-                                        <img style="width: 200px;  margin-top: 20px; margin-left: 50px;"
-                                            src="/thesixhospital/assets/images/Screenshot 2024-10-29 224352.png" alt="">
-                                        <p style="float: right; margin-right: 100px;">
-                                            Ngày lập:
-                                            10/29/2024 <br> Mã hồ sơ:
-                                            2424525</p><br> <br>
-
-                                        <p style=" margin-left: 50px;">
-                                            Họ tên:
-                                            Trương Chí
-                                            Nghiệm</p>
-                                        <p style="margin-left: 50px;">
-                                            Mã bệnh nhân:
-                                            BC1234124</p>
-                                        <p style="margin-left: 50px;">
-                                            Tình trạng bệnh án:
-                                            Đái tháo đường</p>
-                                        <p style="margin-left: 50px;">
-                                            Tên bác sĩ:
-                                            Cao Trí Kiệt</p>
-
-
-                                    </div>
-                                    <br>
-                                    <a href="#myModal"><button class="login-btn btn-primary-soft btn "
-                                            style="padding-top:11px;padding-bottom:11px;width:100%">
-                                            <font class="tn-in-text">Đánh
-                                                giá và nhận xét bác sĩ
-                                            </font>
-                                        </button></a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+            <div class="container mt-5">
+                <h2>Chi Tiết Hồ Sơ Bệnh Án</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><strong>Bệnh Nhân</strong></td>
+                            <td>
+                                <?php
+                                $benhNhan = $inforUser->getBenhNhanById($hoSo['id_benh_nhan']);
+                                echo $benhNhan ? $benhNhan['ten_benh_nhan'] : "Không xác định";
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giới Tính</strong></td>
+                            <td><?php echo $benhNhan['gioi_tinh']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày Sinh</strong></td>
+                            <td><?php echo $benhNhan['ngay_sinh']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Địa chỉ</strong></td>
+                            <td><?php echo $benhNhan['dia_chi']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mã Hồ Sơ</strong></td>
+                            <td><?php echo $hoSo['ma_ho_so_benh_an']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mô Tả</strong></td>
+                            <td><?php echo $hoSo['mo_ta']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chuẩn Đoán</strong></td>
+                            <td><?php echo $hoSo['chuan_doan']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày Khám</strong></td>
+                            <td><?php echo $hoSo['ngay_kham']; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dị Ứng</strong></td>
+                            <td><?php echo $hoSo['di_ung']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <a href="BacSiDD.php?page=users" class="btn btn-secondary mt-3">Quay Lại</a>
+            </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <br><br>
 </body>
 

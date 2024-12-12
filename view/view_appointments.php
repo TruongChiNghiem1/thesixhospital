@@ -71,7 +71,9 @@ $data = $p->select();
             </div>
         </div>
 
-        <?php if ($data && mysqli_num_rows($data) > 0): ?>
+        <?php
+
+        if ($data != 'Không có dữ liệu lịch hẹn trong phạm vi này.'){ ?>
 
         <div class="table-responsive">
             <table class="table table-bordered" id="appointmentTable">
@@ -139,9 +141,9 @@ $data = $p->select();
                 <button class="btn btn-primary btn-sm" onclick="changePage(1)" id="nextPage">Tiếp</button>
             </div>
         </div>
-        <?php else: ?>
-        <p class="text-center">Không có lịch hẹn nào.</p>
-        <?php endif; ?>
+        <?php } else { ?>
+            <p class="text-center">Không có lịch hẹn nào.</p>
+        <?php } ?>
     </div>
 
     <!-- Modal cập nhật trạng thái -->

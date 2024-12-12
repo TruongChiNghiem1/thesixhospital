@@ -86,6 +86,7 @@ if (!isset($_SESSION["id"])) {
 
 </body>
 <script src="/thesixhospital/assets/js/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+<script src="/thesixhospital/assets/js/sweetalert2@11.min.js"></script>
 <script src="/thesixhospital/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/thesixhospital/assets/js/dataTables.js"></script>
 <script src="/thesixhospital/assets/js/dataTables.bootstrap5.js"></script>

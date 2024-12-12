@@ -20,11 +20,11 @@ $doctors = getDoctors();
         <div class="d-flex justify-content-center mt-3 mb-4">
             <h3>Danh sách lịch đặt dịch vụ</h3>
         </div>
-        <div class="d-flex justify-content-end">
-            <?php if ($user_type == 1): ?>
-                <a type="button" class="btn btn-primary" href="/thesixhospital/adminIndex.php?m=services&a=create">Thêm mới <i class="fa-solid fa-plus"></i></a>
-            <?php endif; ?>
-        </div>
+<!--        <div class="d-flex justify-content-end">-->
+<!--            --><?php //if ($user_type == 1): ?>
+<!--                <a type="button" class="btn btn-primary" href="/thesixhospital/adminIndex.php?m=services&a=create">Thêm mới <i class="fa-solid fa-plus"></i></a>-->
+<!--            --><?php //endif; ?>
+<!--        </div>-->
         <table id="adminServiceTable" class="table table-striped" style="width:100%">
             <thead>
             <tr>

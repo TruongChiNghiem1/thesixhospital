@@ -67,9 +67,26 @@ $services = get_services();
 
 <script>
     function confirmDelete(id) {
-        if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?"))
-        {
-            window.location.href = "/thesixhospital/adminIndex.php?m=services&a=delete&id=" + id;
-        }
+        Swal.fire({
+            icon: "question",
+            text: "Bạn có chắc chắn muốn xóa dịch vụ này?",
+            focusConfirm: true,
+            showCancelButton: true,
+            confirmButtonText: "OK",
+            CancelButtonText: `Hủy`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: "success",
+                    text: "Xóa thành công!",
+                    focusConfirm: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/thesixhospital/adminIndex.php?m=services&a=delete&id=" + id;
+                    }
+                });
+            }
+        });
     }
 </script>

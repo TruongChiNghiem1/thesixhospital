@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Cập nhật bác sĩ và trạng thái lịch hẹn
     $conn = (new connect())->connectDB();
-    $stmt = mysqli_prepare($conn, "UPDATE lich_hen SET id_nhan_vien = ?, trang_thai = ? WHERE id_lich_hen = ?");
-    mysqli_stmt_bind_param($stmt, "iii", $doctor_id, $status, $lich_id);
+    $stmt = mysqli_prepare($conn, "UPDATE lich_hen SET id_nhan_vien = ? WHERE id_lich_hen = ?");
+    mysqli_stmt_bind_param($stmt, "iii", $doctor_id, $lich_id);
     mysqli_stmt_execute($stmt);
 
     // Chuyển hướng về danh sách lịch

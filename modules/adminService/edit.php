@@ -126,7 +126,7 @@ if (isset($_GET["a"]) && $_GET["a"] === 'edit' && isset($_GET["id"])) {
                 <div class="form-group mb-3">
                     <label class="d-flex mb-2" for="hinh_anh">Hình ảnh</label>
                     <input type="file" class="form-control" name="hinh_anh" id="hinh_anh" accept="image/*">
-                    <img src="<?php echo $service['hinh_anh']; ?>" alt="Hình ảnh dịch vụ" width="100px" class="mt-2"/>
+                    <img src="<?php echo $service['hinh_anh']; ?>" alt="Hình ảnh dịch vụ" width="300px" class="mt-2"/>
                 </div>
             </form>
         </div>

@@ -42,8 +42,25 @@ class manage extends doctor
         return $this->deletedata($sql);
     }
 
+    public function selectLich(){
+        $sql = "select * from lich_hen lh inner join benh_nhan bn on lh.id_benh_nhan = bn.id_benh_nhan where id_nhan_vien = '3' order by ngay_gio desc limit 20";
+        return $this->getdata($sql);
+    }
     
+    public function detailLich($id=''){
+        $sql = "select * from lich_hen lh inner join benh_nhan bn on lh.id_benh_nhan = bn.id_benh_nhan where id_lich_hen = '$id'";
+        return $this->getdata($sql);
+    }
 
+    public function updateLich($id='',$ngay_gio, $ten_benh_nhan, $trang_thai, $ghiChu){
+        $sql = "update lich_hen inner join benh_nhan on lich_hen.id_benh_nhan = benh_nhan.id_benh_nhan set ngay_gio = '$ngay_gio', ten_benh_nhan = '$ten_benh_nhan', trang_thai = '$trang_thai', ghiChu = '$ghiChu' where id_lich_hen = '$id'";
+        return $this->updatedata($sql);
+    }
+
+    public function searchBenhNhan($id=''){
+        $sql = "select * from benh_nhan where so_dien_thoai like '%$id%' or ten_benh_nhan like '%$id%' or email like '%$id%'";
+        return $this->getdata($sql);
+    }
 }
 
 

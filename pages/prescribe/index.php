@@ -39,14 +39,6 @@
                             <td>Giới tính</td>
                             <td>' . $result[0]["gioi_tinh"] . '</td>
                         </tr>
-                        <tr>
-                            <td>Chiều cao</td>
-                            <td>' . $result[0]["chieu_cao"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Cân nặng</td>
-                            <td>' . $result[0]["can_nang"] . '</td>
-                        </tr>
                     </table>
 
                     <h3 class="text-center">DANH SÁCH LẦN KHÁM</h3>

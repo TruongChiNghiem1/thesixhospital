@@ -23,13 +23,19 @@
         li{
             margin-top: 30px;
         }
-        
+        .left, .right{
+            min-height: 1000px;
+        }
+        .main{
+            min-height: 850px;
+            
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid bg-light">
         <div class="row">
-                <div class="col-md-2 bg-white rounded-3">
+                <div class="col-md-2 bg-white rounded-3 left">
                     <div class="logo">
                         <div class="row">
                             <div class="col-4">
@@ -42,16 +48,15 @@
                         </div>
                     </div>
                     <ul>
-                        <li><a href="index.php?pages=dashboard"><img src="/thesixhospital/assets/images/dashboard.svg" alt="" style="width:30px; height: 30px"> Bảng điều khiển</a></li>
+                        <li><a href="index.php?page=dashboard"><img src="/thesixhospital/assets/images/dashboard.svg" alt="" style="width:30px; height: 30px"> Bảng điều khiển</a></li>
                         <li><a href="index.php?page=patient"><img src="/thesixhospital/assets/images/patient.svg" alt="" style="width:30px; height: 30px"> Bệnh nhân</a></li>
                         <li><a href="index.php?page=calender"><img src="/thesixhospital/assets/images/patient.svg" alt="" style="width:30px; height: 30px"> Lịch hẹn</a></li>
                         <li><a href="index.php?page=examination"><img src="/thesixhospital/assets/images/exam.svg" alt="" style="width:30px; height: 30px"> Khám bệnh</a></li>
                         <li><a href="index.php?page=report"><img src="/thesixhospital/assets/images/statistical.svg" alt="" style="width:30px; height: 30px"> Thống kê</a></li>
-                        <li><a href="index.php?page=setting"><img src="/thesixhospital/assets/images/setting.svg" alt="" style="width:30px; height: 30px"> Cài đặt</a></li>
                         
                     </ul>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10 right">
                     <div class="row bg-white rounded-3 mx-1 py-2">
                         <div class="col-9">
 
@@ -71,4 +76,4 @@
                         </div>    
                     </div>
 
-                    <div class="row bg-white rounded-3 mx-1 py-2 mt-3">
+                    <div class="row bg-white rounded-3 mx-1 px-5 py-4 mt-3 main ">

@@ -20,13 +20,32 @@
                         <tr><th>Địa chỉ</th><td>' . $result[0]["dia_chi"] . '</td></tr>
                         <tr><th>Số điện thoại</th><td>' . $result[0]["so_dien_thoai"] . '</td></tr>
                         <tr><th>Giới tính</th><td>' . $result[0]["gioi_tinh"] . '</td></tr>
-                        <tr><th>Chiều cao</th><td>' . $result[0]["chieu_cao"] . '</td></tr>
-                        <tr><th>Cân nặng</th><td>' . $result[0]["can_nang"] . '</td></tr>
                     </table>
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class = "row">
+                <div class="col-12">
+                    <h3 class="text-center">CHẨN ĐOÁN</h3>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <th>Ngày khám</th>
+                            <th>Chẩn đoán</th>
+                            <th>Kết luận</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>' . $result[0]["ngay_kham"] . '</td>
+                                <td>' . $result[0]["chuan_doan"] . '</td>
+                                <td>' . $result[0]["mo_ta"] . '</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mt-3">
                 <div class="col-12">
                     <h3 class="text-center">KÊ ĐƠN</h3>
                     <form method="post" enctype="multipart/form-data">
@@ -43,7 +62,7 @@
                             <tbody id="medicineRows">
                                 <tr>
                                     <td>
-                                        <select class="form-control loai-thuoc" onchange="loadMedicineOptions(this)">
+                                        <select class="form-control text-center loai-thuoc" onchange="loadMedicineOptions(this)">
                                             <option value="">-- Chọn loại thuốc --</option>';
                                             foreach ($loai_thuoc as $loai) {
                                                 echo '<option value="' . $loai["id_loai_thuoc"]  . '">' . $loai["ten_loai_thuoc"] . '</option>';
@@ -51,7 +70,7 @@
                                         echo '</select>
                                     </td>
                                     <td>
-                                        <select class="form-control ten-thuoc" name="ten_thuoc[]" required>
+                                        <select class="form-control text-center ten-thuoc" name="ten_thuoc[]" required>
                                             <option value="">-- Chọn thuốc --</option>
                                         </select>
                                     </td>
@@ -75,7 +94,7 @@ function addRow() {
     var row = `
         <tr>
             <td>
-                <select class="form-control loai-thuoc" onchange="loadMedicineOptions(this)">
+                <select class="form-control text-center loai-thuoc" onchange="loadMedicineOptions(this)">
                     <option value="">-- Chọn loại thuốc --</option>`;
                     <?php foreach ($loai_thuoc as $loai) { ?>
                         row += '<option value="<?php echo $loai["id_loai_thuoc"]; ?>"><?php echo $loai["ten_loai_thuoc"]; ?></option>';
@@ -84,13 +103,13 @@ function addRow() {
                 </select>
             </td>
             <td>
-                <select class="form-control ten-thuoc" name="ten_thuoc[]" required>
+                <select class="form-control text-center ten-thuoc" name="ten_thuoc[]" required>
                     <option value="">-- Chọn thuốc --</option>
                 </select>
             </td>
             <td><input type="number" name="so_luong[]" class="form-control" required></td>
             <td><input type="text" name="ghi_chu[]" class="form-control" required></td>
-            <td><button type="button" class="btn bg-danger" onclick="removeRow(this)">Xóa</button></td>
+            <td><button type="button" class="btn border" onclick="removeRow(this)"><img src ="/thesixhospital/assets/images/trash3.svg" alt="" style="width:20px; height: 20px"></button></td>
         </tr>`;
     document.getElementById('medicineRows').insertAdjacentHTML('beforeend', row);
 }

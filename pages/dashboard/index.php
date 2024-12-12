@@ -1,110 +1,183 @@
-<?php
-    require('../model/classdatabase.php');
-    include('handle.php');
-    $obj = new doctor();
 
-    // Kiểm tra nếu có bệnh nhân (cate)
-    if ($cate) {
-        $sql = "SELECT * FROM benh_nhan bn 
-                JOIN ho_so_benh_an hs ON bn.id_benh_nhan = hs.id_benh_nhan 
-                WHERE bn.id_benh_nhan = '$cate'";
-    }
+    <div class="row-fluid">
+        <h2 class="text-center mb-4">BẢNG ĐIỂU KHIỂN</h2>
+        <div class="card bg-dark text-white" style="max-width: 100%;">
+            <img src="/thesixhospital/assets/images/slider.jpg" class="card-img mw-100 " alt=""/>
+                <div class="card-img-overlay" style="background-color: rgba(0, 0, 0, 0.3)">
+                <h5 class="card-title p-3">CHÀO MỪNG !</h5>
+                <h2 class="card-subtitle p-3">BÁC SĨ SỨC KHỎE</h2>
+                <p class="card-text p-3">
+                    Cảm ơn bạn đã tham gia cùng chúng tôi. Chúng tôi luôn cố gắng cung cấp cho bạn dịch vụ hoàn chỉnh
+                    Bạn có thể xem lịch trình hàng ngày, Đặt lịch hẹn với bệnh nhân tại nhà!
+                </p>
+                <a href="index.php?page=examination" class="btn btn-primary bg-dark rounded-2 m-3 px-5">KHÁM BỆNH</a>
+            </div>
+        </div>
+    </div>
 
-    $result = $obj->getdata($sql);
-
-    // Lấy danh sách thuốc từ bảng thuoc
-    $sql_medicines = "SELECT * FROM thuoc";
-    $medicines = $obj->getdata($sql_medicines);
-
-    if ($result) {
-        // Lấy ngày hiện tại
-        $current_date = date("Y-m-d");
-
-        echo '
-            <h3 class="text-center">THÔNG TIN BỆNH NHÂN</h3>
+    <div class="row my-4">
+        <div class="col-md-6 pl-0" >
+            <h5 class="text-center mb-3">THỐNG KÊ</h5>
             <div class="row">
-                <div class="col-12">
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <td>Họ và tên</td>
-                            <td>' . $result[0]["ten_benh_nhan"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Ngày sinh</td>
-                            <td>' . $result[0]["ngay_sinh"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Địa chỉ</td>
-                            <td>' . $result[0]["dia_chi"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Số điện thoại</td>
-                            <td>' . $result[0]["so_dien_thoai"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Giới tính</td>
-                            <td>' . $result[0]["gioi_tinh"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Chiều cao</td>
-                            <td>' . $result[0]["chieu_cao"] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Cân nặng</td>
-                            <td>' . $result[0]["can_nang"] . '</td>
-                        </tr>
-                    </table>
-                    <div class="">
-                        <h3 class="text-center mt-5">CHẨN ĐOÁN</h3>
-                        <form method="post" enctype="multipart/form-data">
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Ngày khám</th>
-                                        <th>Chẩn đoán</th>
-                                        <th>Kết luận</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <input type="number" class="form-control" name="id_benh_nhan" value="' . $result[0]["id_benh_nhan"] . '" hidden required>
-                                    <tr>
-                                        <td><input type="date" class="form-control" name="ngay_kham" value="' . $current_date . '" required></td>
-                                        <td><input type="text" class="form-control" name="chuan_doan" required></td>
-                                        <td><textarea name="mo_ta" class="form-control"></textarea></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h3 class="text-center mt-5">KÊ ĐƠN</h3>
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Mã thuốc</th>
-                                        <th>Tên thuốc</th>
-                                        <th>Số lượng</th>
-                                        <th>Cách dùng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>';
-        
+                <div class="col-md-6 mb-3">
+                    <div class="card rounded-3">
+                        <a href="#" class="btn bg-dark">
+                            <div class="card-body text-center row">
+                                
+                                <div class="col-3 text-white">
+                                    <span class="bi bi-chat-dots"> 
+                                        <?php
+                                            $obj = new doctor();
+                                            $sql = "select count(*) as total from lich_hen where id_nhan_vien='3'";
+                                            $a = $obj->getdata($sql);
+                                            echo "".$a[0]["total"];
+                                        ?>
+                                    </span>
+         
+                                </div>
 
-                                foreach ($medicines as $medicine) {
-                                    echo '
-                                        <tr>
-                                            <td><input type="checkbox" name="thuoc[' . $medicine["id_thuoc"] . '][selected]" value="1"></td>
-                                            <td>' . $medicine["ten_thuoc"] . '</td>
-                                            <td><input type="number" name="thuoc[' . $medicine["id_thuoc"] . '][so_luong]" class="form-control"></td>
-                                            <td><input type="text" name="thuoc[' . $medicine["id_thuoc"] . '][cach_dung]" class="form-control"></td>
-                                        </tr>';
-                                }
+                                <div class="col-9 text-white">
+                                    LỊCH HẸN
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
-                                echo '
-                                </tbody>
-                            </table>
-                            <input type="submit" class="btn bg-dark text-white my-4" name="btThem" value="Thêm hồ sơ" />
-                        </form>
+                <div class="col-md-6 mb-3">
+                    <div class="card rounded-3 ">
+                        <a href="#" class="btn bg-dark">
+                            <div class="card-body text-center row">
+                                <div class="col-3 text-white">
+                                    <span class="bi bi-person-heart">
+                                        <?php
+                                            $obj = new doctor();
+                                            $sql = "select count(*) as total from benh_nhan";
+                                            $a = $obj->getdata($sql);
+                                            echo "".$a[0]["total"];
+                                        ?>
+                                    </span>
+                                </div>
+
+                                <div class="col-9 text-white">
+                                    TẤT CẢ BỆNH NHÂN
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card rounded-3">
+                        <a href="#" class="btn bg-dark">
+                            <div class="card-body text-center row">
+                                <div class="col-3 text-white">
+                                    <span class="bi bi-capsule">
+                                        <?php
+                                            $obj = new doctor();
+                                            $sql = "select count(*) as total from don_thuoc";
+                                            $a = $obj->getdata($sql);
+                                            echo "".$a[0]["total"];
+                                        ?>
+                                    </span>
+                                </div>
+
+                                <div class="col-9 text-white">
+                                    ĐƠN THUỐC
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card rounded-3">
+                        <a href="#" class="btn bg-dark">
+                            <div class="card-body text-center row">
+                                <div class="col-3 text-white">
+                                    <span class="bi bi-calendar-plus"> 
+                                        <?php
+                                            $obj = new doctor();
+                                            $sql = "select count(*) as total from lich_hen where loai_lich_hen = '3'";
+                                            $a = $obj->getdata($sql);
+                                            echo "".$a[0]["total"];
+                                        ?>
+                                    </span>
+                                </div>
+
+                                <div class="col-9 text-white">
+                                    LỊCH HẸN MỚI
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-        ';
-    }
-?>
+        </div>
+        
+        <div class="col-md-6">
+            <h5 class="text-center mb-3">THÔNG BÁO MỚI NHẤT</h5>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Thời gian</th>
+                        <th scope="col">Nội dung thông báo</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>08:00, 31/10/2024</td>
+                        <td>Cuộc họp với trưởng khoa tại phòng 101.</td>
+                        <td><span class="badge badge-info">Mới</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>14:00, 30/10/2024</td>
+                        <td>Cập nhật lịch trực tuần tới.</td>
+                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>09:00, 29/10/2024</td>
+                        <td>Bổ sung hồ sơ bệnh án cho bệnh nhân A.</td>
+                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>11:30, 28/10/2024</td>
+                        <td>Thực hiện kiểm tra sức khỏe cho nhân viên.</td>
+                        <td><span class="badge badge-info">Mới</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>15:45, 27/10/2024</td>
+                        <td>Nhắc nhở về việc cập nhật thông tin bệnh nhân.</td>
+                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>10:15, 26/10/2024</td>
+                        <td>Cuộc hội thảo về các phương pháp điều trị mới.</td>
+                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>09:00, 25/10/2024</td>
+                        <td>Phát hành báo cáo tháng về hiệu suất làm việc.</td>
+                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>16:00, 24/10/2024</td>
+                        <td>Cập nhật thông tin thuốc mới cho hệ thống.</td>
+                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>

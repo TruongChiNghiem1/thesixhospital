@@ -10,9 +10,6 @@ require_once 'config/app.php';
 require_once 'config/connect.php';
 require_once 'config/functional.php';
 
-<<<<<<< HEAD
-
-=======
 // if (!isset($_SESSION["isLoggedIn"])) {
 //     header("location:login.php");
 //     exit();
@@ -20,7 +17,6 @@ require_once 'config/functional.php';
 //     header("Location:admin/index.php");
 //     exit();
 // }
->>>>>>> eefcff8dac6ebf1e7d75e41b6e19f524c86955f0
 
 ?>
 
@@ -34,22 +30,9 @@ require_once 'config/functional.php';
     <meta http-equiv="expires" content="Sun, 01 Jan 2014 00:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <title>The six hospital</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-<<<<<<< HEAD
-        <link rel="stylesheet" href="/thesixhospital/assets/css/style.css?v=2" id="theme-styles">
-=======
-=======
->>>>>>> eefcff8dac6ebf1e7d75e41b6e19f524c86955f0
     <link href="/thesixhospital/assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<<<<<<< HEAD
->>>>>>> 4129e64d176ff5d8e02e9e7588996ecc4b89e946
-
-=======
     <link rel="stylesheet" href="/thesixhospital/assets/css/style.css" id="theme-styles">
->>>>>>> eefcff8dac6ebf1e7d75e41b6e19f524c86955f0
 </head>
 
 <body>
@@ -204,16 +187,10 @@ require_once 'config/functional.php';
                 case 'user':
                     include 'modules/user/index.php';
                     break;
-<<<<<<< HEAD
-                case 'doctor':
-                    include 'modules/doctor/index.php';
-                    break;
-=======
                 case 'service':
                     include 'modules/service/index.php';
                     break;
 
->>>>>>> 4129e64d176ff5d8e02e9e7588996ecc4b89e946
                 default:
                     include 'modules/dashboard/index.php';
             }

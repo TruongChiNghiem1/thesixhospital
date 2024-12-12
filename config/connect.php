@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-<?php
-    class connect{
-        function connectDB(){
-            $conn = mysqli_connect("localhost", "root", "", "the_six_hospital");
-            return $conn;
-        }
-    
-        function closeDB($conn){
-            mysqli_close($conn);
-        }
-    }
-=======
 <?php 
 //
 // try {
@@ -30,5 +17,4 @@ class connect{
     }
  }
 
->>>>>>> eefcff8dac6ebf1e7d75e41b6e19f524c86955f0
 ?>

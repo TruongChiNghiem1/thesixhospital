@@ -97,7 +97,7 @@ function getListCalendar($user_id = 0)
         FROM 
             lich_hen lh
         LEFT JOIN 
-            dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
+            dich_vu dv ON lh.id_dich_vu = dv.id_dich_vu
         LEFT JOIN 
             nhan_vien nv ON lh.id_nhan_vien = nv.id
         ORDER BY 
@@ -117,7 +117,7 @@ function getListCalendar($user_id = 0)
         FROM 
             lich_hen lh
         LEFT JOIN 
-            dich_vu dv ON lh.loai_lich_hen = dv.id_dich_vu
+            dich_vu dv ON lh.id_dich_vu = dv.id_dich_vu
         LEFT JOIN 
             nhan_vien nv ON lh.id_nhan_vien = nv.id
         WHERE nv.id = ". $user_id ." 

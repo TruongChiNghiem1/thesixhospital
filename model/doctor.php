@@ -2,7 +2,7 @@
     class doctor{
 
         public function connect(){
-            $connect = new mysqli("localhost","root","","a");
+            $connect = new mysqli("localhost","root","","the_six_hospital");
             if($connect){
                 return $connect;
             }

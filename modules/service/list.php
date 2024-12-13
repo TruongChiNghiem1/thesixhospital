@@ -1,5 +1,11 @@
 <?php
-$services = index(); // Giả định hàm này trả về danh sách dịch vụ
+$search = $_GET['search'] ?? '';
+$page = $_GET['page'] ?? 1;
+$limit = 12;
+
+$totalServices = countServices($search);
+$totalPages = ceil($totalServices / $limit);
+$services = index2($search, $page, $limit);
 ?>
 
 <div class="container">
@@ -7,8 +13,8 @@ $services = index(); // Giả định hàm này trả về danh sách dịch v�
         <h3>Dịch vụ bệnh viện</h3>
     </div>
     <div class="d-flex w-100 justify-content-center">
-        <form class="form-inline my-2 my-lg-0 w-50 d-flex">
-            <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 w-50 d-flex" method="GET" action="http://localhost/thesixhospital/index.php?m=service">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Tìm kiếm" aria-label="Search" value="<?php echo htmlspecialchars($search); ?>">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><span class="text-nowrap">Tìm kiếm</span></button>
         </form>
     </div>
@@ -42,9 +48,9 @@ $services = index(); // Giả định hàm này trả về danh sách dịch v�
                                 (5)
                             </div>
                             <div class="d-flex justify-content-end w-100 mt-3">
-                                <div class="d-flex justify-content-between w-75">
-                                    <p class="text-decoration-line-through"><?php echo htmlspecialchars($service['gia_goc']); ?> VNĐ</p>
-                                    <p class="text-danger pl-3"><?php echo htmlspecialchars($service['gia_giam']); ?> VNĐ</p>
+                                <div class="d-flex justify-content-between w-100">
+                                    <p class="text-decoration-line-through"><?php echo htmlspecialchars(number_format($service['gia_goc'], 0, ',', '.')); ?> VNĐ</p>
+                                    <p class="text-danger pl-3"><?php echo htmlspecialchars(number_format($service['gia_giam'], 0, ',', '.')); ?> VNĐ</p>
                                 </div>
                             </div>
                         </div>
@@ -56,16 +62,16 @@ $services = index(); // Giả định hàm này trả về danh sách dịch v�
     <div class="d-flex justify-content-end mt-2">
         <nav aria-label="...">
             <ul class="pagination">
-                <li class="page-item ">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                <li class="page-item <?php if($page <= 1) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>&search=<?php echo htmlspecialchars($search); ?>" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item " aria-current="page">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Next</a>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item <?php if($i == $page) echo 'active'; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo htmlspecialchars($search); ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if($page >= $totalPages) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo min($totalPages, $page + 1); ?>&search=<?php echo htmlspecialchars($search); ?>">Next</a>
                 </li>
             </ul>
         </nav>

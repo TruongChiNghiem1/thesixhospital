@@ -10,11 +10,6 @@ class connect
 {
     function connectDB()
     {
-
-        $conn = mysqli_connect("localhost", "root", "", "the_six_hospital");
-
-        $conn = mysqli_connect("localhost", "root", "", "a");
-
         $conn = mysqli_connect("localhost", "root", "", "the_six_hospital");
 
         return $conn;

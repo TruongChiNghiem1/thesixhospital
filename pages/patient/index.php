@@ -63,6 +63,7 @@ if (!empty($keyword)) {
                             <td>{$result['so_dien_thoai']}</td>
                             <td>
                                 <a href='index.php?page=prescribe&cate=" . $result['id_benh_nhan'] . "' class='btn btn-dark text-black'><img src='/thesixhospital/assets/images/eye.svg' alt='' style='width:20px; height: 20px'></a>
+                                <a href='index.php?page=addLich&cate=" . $result['id_benh_nhan'] . "' class='btn btn-dark text-black'><img src='/thesixhospital/assets/images/plus.svg' alt='' style='width:20px; height: 20px'></a>
                             </td>
                         </tr>
                     </tbody>";
@@ -107,6 +108,7 @@ if (!empty($keyword)) {
                         <td>{$results['so_dien_thoai']}</td>
                         <td>
                             <a href='index.php?page=prescribe&cate=" . $results['id_benh_nhan'] . "' class='btn btn-dark text-black'><img src='/thesixhospital/assets/images/eye.svg' alt='' style='width:20px; height: 20px'></a>
+                            <a href='index.php?page=addLich&cate=" . $results['id_benh_nhan'] . "' class='btn btn-dark text-black'><img src='/thesixhospital/assets/images/plus.svg' alt='' style='width:20px; height: 20px'></a>
                         </td>
                     </tr>
                 </tbody>";

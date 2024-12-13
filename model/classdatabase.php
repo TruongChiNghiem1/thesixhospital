@@ -61,7 +61,15 @@ class manage extends doctor
         $sql = "select * from benh_nhan where so_dien_thoai like '%$id%' or ten_benh_nhan like '%$id%' or email like '%$id%'";
         return $this->getdata($sql);
     }
-}
+
+   
+        public function themLichHen($id_benh_nhan, $ngay_gio, $trang_thai, $ghiChu, $loai_lich_dat) {
+            $sql = "INSERT INTO lich_hen (id_benh_nhan, ngay_gio, trang_thai, ghiChu, loai_lich_dat) VALUES ('$id_benh_nhan', '$ngay_gio', '$trang_thai','ghiChu', '$loai_lich_dat')";
+            return $this->adddata($sql);
+        }
+    }
+    
+
 
 
 

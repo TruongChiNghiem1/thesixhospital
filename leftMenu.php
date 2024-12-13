@@ -46,7 +46,10 @@
                 </li>
             <?php
             }
-            if($_SESSION['loai_nhan_vien'] == 2 || $_SESSION['loai_nhan_vien'] == 1) {
+            if($_SESSION['loai_nhan_vien']==2){
+                header('location: /thesixhospital/pages/index.php?page=dashboard');
+            }
+            if( $_SESSION['loai_nhan_vien'] == 1) {
             ?>
             <li class="w-100 mt-1 mb-1">
                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle d-flex justify-content-between align-items-center ">
@@ -127,17 +130,16 @@
                 <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                     <li class="w-100 d-flex align-items-center ms-3">
                         <img src="/thesixhospital/assets/images/service/completed-task.png" width="25px" class="me-2">
-                        <a href="#" class="nav-link px-0 color-text-menu">Danh sách dịch vụ</a>
+                        <a href="#" class="nav-link px-0 color-text-menu">vvvvvvv</a>
                     </li>
                     <li class="w-100 d-flex align-items-center ms-3">
                         <img src="/thesixhospital/assets/images/service/schedule.png" width="25px" class="me-2">
-                        <a href="#" class="nav-link px-0 color-text-menu">Lịch đặt dịch vụ</a>
+                        <a href="#" class="nav-link px-0 color-text-menu">aaaa</a>
                     </li>
                 </ul>
             </li>
             <?php
             }
-            if($_SESSION['loai_nhan_vien'] == 1) {
             ?>
             <li class="w-100 mt-1 mb-1">
                 <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle d-flex justify-content-between align-items-center ">
@@ -150,19 +152,26 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                    <?php
+                    if($_SESSION['loai_nhan_vien'] == 1) {
+                    ?>
                     <li class="w-100 d-flex align-items-center ms-3">
                         <img src="/thesixhospital/assets/images/service/completed-task.png" width="25px" class="me-2">
                         <a href="/thesixhospital/adminIndex.php?m=services&a=list" class="nav-link px-0 color-text-menu">Danh sách dịch vụ</a>
                     </li>
+                    <?php
+                    }
+                    if(in_array($_SESSION['loai_nhan_vien'], [1,2,3,4])) {
+                    ?>
                     <li class="w-100 d-flex align-items-center ms-3">
                         <img src="/thesixhospital/assets/images/service/schedule.png" width="25px" class="me-2">
                         <a href="/thesixhospital/adminIndex.php?m=services&a=list-calendar" class="nav-link px-0 color-text-menu">Lịch đặt dịch vụ</a>
                     </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
             </li>
-                <?php
-            }
-            ?>
         </ul>
 
     </div>

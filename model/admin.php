@@ -229,8 +229,7 @@
         public function insertNhanVien($codeNV, $tenNV, $emailNV, $userNV, $passNV, $phoneNV, $dateNV, $chucVuNV){
             $p = new connect();
             $conn = $p->connectDB();
-
-            $hashPass = $passNV;
+            $hashPass = password_hash($passNV, PASSWORD_DEFAULT);
 
             if($conn){
                 $query = "INSERT INTO nhan_vien (code, ho_ten, email, so_dien_thoai, ngay_sinh, loai_nhan_vien, username, password) 
@@ -266,7 +265,7 @@
             $p = new connect();
             $conn = $p->connectDB();
 
-            $hashPass = md5($passNV);
+            $hashPass = password_hash($passNV, PASSWORD_DEFAULT);
 
             if($conn){
                 $string = "UPDATE nhan_vien SET code='$codeNV', ho_ten='$tenNV', email='$emailNV', so_dien_thoai='$phoneNV', ngay_sinh='$dateNV', 
@@ -284,7 +283,7 @@
             $p = new connect();
             $conn = $p->connectDB();
 
-            $hashPass = md5($password);
+            password_verify($passNV);
 
             if ($conn) {
                 $query = "SELECT * FROM nhan_vien WHERE username = '$username' AND password = '$hashPass'";

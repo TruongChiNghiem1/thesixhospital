@@ -1,9 +1,10 @@
 <?php
 // Code by ThanhTong(2T)
-
 session_start();
 
 $id = $_SESSION['id'];
+$ten_nhan_vien = $_SESSION['ho_ten'];
+
 // echo $id;
 include_once("../controller/BSDD/cMenu.php");
 include_once("../controller/BSDD/cNhanVien.php");
@@ -173,7 +174,7 @@ if ($data) {
                         <div class="form-group">
                             <label for="idNguoiTao">ID Người Tạo</label>
                             <input type="text" class="form-control" id="idNguoiTao" name="idNguoiTao" readonly
-                                value="<?php echo $_SESSION['id']; ?>">
+                                value="<?php echo $_SESSION['ho_ten']; ?>">
                         </div>
                         <div class="form-group">
                             <label for="maThucDon">Mã Thực Đơn</label>
@@ -197,7 +198,7 @@ if ($data) {
         $maMonAn = $_POST['maMonAn'];
         $tenMonAn = $_POST['tenMonAn'];
         $chiSoDinhDuong = $_POST['chiSoDinhDuong'];
-        $idNguoiTao = $_POST['idNguoiTao'];
+        $idNguoiTao = $_SESSION['id'];
         $maThucDon = $_POST['maThucDon'];
         $ghiChu = $_POST['ghiChu'];
         // $ngayTao = date('Y-m-d H:i:s');

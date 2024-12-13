@@ -44,7 +44,7 @@
         echo "<div class='card custom-card'>"; 
         echo "<div class='text-center mt-3'>"; 
         echo "</div>";
-        echo "<div class='card-body text-center'>"; 
+        echo "<div class='card-body'>"; 
         echo "<h4 class='card-title'>Thông tin chi tiết nhân viên</h4>";
         echo "<p class='card-text'><strong>ID:</strong> " . $row["id"] . "</p>";
         echo "<p class='card-text'><strong>Mã nhân viên:</strong> " . $row["code"] . "</p>";

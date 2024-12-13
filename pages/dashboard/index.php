@@ -131,49 +131,49 @@
                         <th scope="row">1</th>
                         <td>08:00, 31/10/2024</td>
                         <td>Cuộc họp với trưởng khoa tại phòng 101.</td>
-                        <td><span class="badge badge-info">Mới</span></td>
+                        <td><span class="badge bg-info">Mới</span></td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
                         <td>14:00, 30/10/2024</td>
                         <td>Cập nhật lịch trực tuần tới.</td>
-                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                        <td><span class="badge bg-warning">Đang chờ</span></td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
                         <td>09:00, 29/10/2024</td>
                         <td>Bổ sung hồ sơ bệnh án cho bệnh nhân A.</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                        <td><span class="badge bg-success">Hoàn thành</span></td>
                     </tr>
                     <tr>
                         <th scope="row">4</th>
                         <td>11:30, 28/10/2024</td>
                         <td>Thực hiện kiểm tra sức khỏe cho nhân viên.</td>
-                        <td><span class="badge badge-info">Mới</span></td>
+                        <td><span class="badge bg-info">Mới</span></td>
                     </tr>
                     <tr>
                         <th scope="row">5</th>
                         <td>15:45, 27/10/2024</td>
                         <td>Nhắc nhở về việc cập nhật thông tin bệnh nhân.</td>
-                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                        <td><span class="badge bg-warning">Đang chờ</span></td>
                     </tr>
                     <tr>
                         <th scope="row">6</th>
                         <td>10:15, 26/10/2024</td>
                         <td>Cuộc hội thảo về các phương pháp điều trị mới.</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                        <td><span class="badge bg-success">Hoàn thành</span></td>
                     </tr>
                     <tr>
                         <th scope="row">7</th>
                         <td>09:00, 25/10/2024</td>
                         <td>Phát hành báo cáo tháng về hiệu suất làm việc.</td>
-                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                        <td><span class="badge bg-success">Hoàn thành</span></td>
                     </tr>
                     <tr>
                         <th scope="row">8</th>
                         <td>16:00, 24/10/2024</td>
                         <td>Cập nhật thông tin thuốc mới cho hệ thống.</td>
-                        <td><span class="badge badge-warning">Đang chờ</span></td>
+                        <td><span class="badge bg-warning">Đang chờ</span></td>
                     </tr>
                 </tbody>
             </table>

@@ -30,9 +30,9 @@ class manage extends doctor
         return $this->adddata($sql);
     }
 
-    public function themDonThuoc($so_luong,$ghi_chu,$id_benh_nhan,$ngay,$id_ho_so_benh_an)
+    public function themDonThuoc($so_luong, $id_thuoc,$ghi_chu,$id_benh_nhan,$ngay,$id_ho_so_benh_an)
     {
-        $sql = "insert into don_thuoc(so_luong, ghi_chu, id_benh_nhan, ngay, id_ho_so_benh_an) values('$so_luong', '$ghi_chu', '$id_benh_nhan', '$ngay', '$id_ho_so_benh_an')";
+        $sql = "insert into don_thuoc(so_luong, id_thuoc, cach_dung, id_benh_nhan, ngay, id_ho_so_benh_an) values('$so_luong', $id_thuoc, '$ghi_chu', '$id_benh_nhan', '$ngay', '$id_ho_so_benh_an')";
         return $this->adddata($sql);
     }    
 
@@ -61,7 +61,15 @@ class manage extends doctor
         $sql = "select * from benh_nhan where so_dien_thoai like '%$id%' or ten_benh_nhan like '%$id%' or email like '%$id%'";
         return $this->getdata($sql);
     }
-}
+
+   
+        public function themLichHen($id_benh_nhan, $ngay_gio, $trang_thai, $ghiChu, $loai_lich_dat) {
+            $sql = "INSERT INTO lich_hen (id_benh_nhan, ngay_gio, trang_thai, ghiChu, loai_lich_dat) VALUES ('$id_benh_nhan', '$ngay_gio', '$trang_thai','ghiChu', '$loai_lich_dat')";
+            return $this->adddata($sql);
+        }
+    }
+    
+
 
 
 

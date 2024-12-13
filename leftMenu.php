@@ -46,7 +46,10 @@
                 </li>
             <?php
             }
-            if($_SESSION['loai_nhan_vien'] == 2 || $_SESSION['loai_nhan_vien'] == 1) {
+            if($_SESSION['loai_nhan_vien']==2){
+                header('location: /thesixhospital/pages/index.php?page=dashboard');
+            }
+            if( $_SESSION['loai_nhan_vien'] == 1) {
             ?>
             <li class="w-100 mt-1 mb-1">
                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle d-flex justify-content-between align-items-center ">

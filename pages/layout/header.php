@@ -1,4 +1,9 @@
 
+<?php
+    if(!isset($_SESSION['isLoggedIn'])){
+        header("Location: ../login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +44,7 @@
                     <div class="logo">
                         <div class="row">
                             <div class="col-4">
-                                <img src="/thesixhospital/assets/images/logo.jpg" alt="Logo" class=""style="width: 90px; height: 60px;">
+                                <a href="/thesixhospital/index.php"><img src="/thesixhospital/assets/images/logo.jpg" alt="Logo" class=""style="width: 90px; height: 60px;"></a>
                             </div>
                             <div class="col-8 d-flex align-items-center justify-content-center">
                                 THE SIX HOSPITAL
@@ -50,7 +55,7 @@
                     <ul>
                         <li><a href="index.php?page=dashboard"><img src="/thesixhospital/assets/images/dashboard.svg" alt="" style="width:30px; height: 30px"> Bảng điều khiển</a></li>
                         <li><a href="index.php?page=patient"><img src="/thesixhospital/assets/images/patient.svg" alt="" style="width:30px; height: 30px"> Bệnh nhân</a></li>
-                        <li><a href="index.php?page=calender"><img src="/thesixhospital/assets/images/patient.svg" alt="" style="width:30px; height: 30px"> Lịch hẹn</a></li>
+                        <li><a href="index.php?page=calender"><img src="/thesixhospital/assets/images/calendar-check.svg" alt="" style="width:30px; height: 30px"> Lịch hẹn</a></li>
                         <li><a href="index.php?page=examination"><img src="/thesixhospital/assets/images/exam.svg" alt="" style="width:30px; height: 30px"> Khám bệnh</a></li>
                         <li><a href="index.php?page=report"><img src="/thesixhospital/assets/images/statistical.svg" alt="" style="width:30px; height: 30px"> Thống kê</a></li>
                         
@@ -63,15 +68,16 @@
                         </div>
 
                         <div class="col-md-3 d-flex justify-content-end align-items-center">
-                            <span class="me-3">Nguyễn Trường Sơn</span>
+                            <span class="me-3">Bác sĩ sức khỏe</span>
                             <div class="dropdown">
                                 <a href="#" class="dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false"><img src="/thesixhospital/assets/images/bacsi.png" class="rounded-circle border border-2" style="width:70px;height:70px;" alt=""></a>
                                 <ul class="dropdown-menu mt-5">
                                     <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
                                     <li><a class="dropdown-item" href="#">Quyền riêng tư</a></li>
                                     <li><a class="dropdown-item" href="#">Tùy chọn</a></li>
-                                    <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" name="btnOut" href="/thesixhospital/logout.php">Đăng xuất</a></li>
                                 </ul>
+
                             </div>
                         </div>    
                     </div>

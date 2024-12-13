@@ -5,6 +5,9 @@ $result = $obj->selectLich();
 ?>
 <div class="col-12">
     <h2 class="text-center pb-4">LỊCH HẸN</h2>
+    <div class="row d-fex justify-content-end me-2">
+        <a href="index.php?page=addLich" class="btn bg-primary text-white " style="width:150px">Thêm lịch</a>
+    </div>
     <table class="table table-hover table-bordered mt-2">
         <thead>
             <tr>

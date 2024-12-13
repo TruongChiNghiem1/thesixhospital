@@ -30,9 +30,9 @@ class manage extends doctor
         return $this->adddata($sql);
     }
 
-    public function themDonThuoc($so_luong,$ghi_chu,$id_benh_nhan,$ngay,$id_ho_so_benh_an)
+    public function themDonThuoc($so_luong, $id_thuoc,$ghi_chu,$id_benh_nhan,$ngay,$id_ho_so_benh_an)
     {
-        $sql = "insert into don_thuoc(so_luong, ghi_chu, id_benh_nhan, ngay, id_ho_so_benh_an) values('$so_luong', '$ghi_chu', '$id_benh_nhan', '$ngay', '$id_ho_so_benh_an')";
+        $sql = "insert into don_thuoc(so_luong, id_thuoc, cach_dung, id_benh_nhan, ngay, id_ho_so_benh_an) values('$so_luong', $id_thuoc, '$ghi_chu', '$id_benh_nhan', '$ngay', '$id_ho_so_benh_an')";
         return $this->adddata($sql);
     }    
 
